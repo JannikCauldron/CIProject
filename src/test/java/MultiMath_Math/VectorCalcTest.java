@@ -1,8 +1,10 @@
 package MultiMath_Math;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 
-import org.junit.Test;
 
 class VectorCalcTest {
 
