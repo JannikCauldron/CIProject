@@ -1,16 +1,18 @@
 package MultiMath_Math;
 
 public class Grundrechenarten {
+
+    private String sinusPattern = "^sin\\([0-9]+\\)$";
+
     public double calcSinus(String op) {
-        String sinusPattern = "^sin\\([0-9]+\\)$";
-        int num;
+        int numberOfExpression;
 
         if (op.matches(sinusPattern)) {
             String numberOnlyStr = op.replaceAll("[^0-9]", "");
-            num = Integer.parseInt(numberOnlyStr);
+            numberOfExpression = Integer.parseInt(numberOnlyStr);
         } else {
-            return 0;
+            throw new IllegalArgumentException("No valid expression: " + op);
         }
-        return Math.sin(num);
+        return Math.sin(numberOfExpression);
     }
 }
