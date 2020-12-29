@@ -5,17 +5,17 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-    private Pattern addPattern = Pattern.compile("[0-9]\\s*\\+\\s*[0-9]");
+    private static final Pattern ADD_PATTERN = Pattern.compile("\\d\\s*\\+\\s*\\d");
 
     public int operate(String operation) {
-        int result = 0;
-        Matcher addMatcher = addPattern.matcher(operation);
+        int operationResult = 0;
+        Matcher addMatcher = ADD_PATTERN.matcher(operation);
         if (addMatcher.find()) {
             String matchedOperation = addMatcher.group();
-            int matchedOperationLength = matchedOperation.length();
-            result = Integer.parseInt(matchedOperation.substring(0,1)) + Integer.parseInt(matchedOperation.substring(matchedOperationLength-1,matchedOperationLength));
+            int matchedOperationStringLength = matchedOperation.length();
+            operationResult = Integer.parseInt(matchedOperation.substring(0,1)) + Integer.parseInt(matchedOperation.substring(matchedOperationStringLength-1,matchedOperationStringLength));
         }
 
-        return result;
+        return operationResult;
     }
 }
