@@ -24,4 +24,15 @@ class CalculatorTest {
         //assert
         assertThat("simpleAddition Result", result, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void simpleAdditionWithoutSpaces() {
+        //arrange
+        String operation = "3+2";
+        int expectedResult = 5;
+        //act
+        int result = calc.operate(operation);
+        //assert
+        assertThat("simpleAdditionWithoutSpaces Result", result, CoreMatchers.equalTo(expectedResult));
+    }
 }
