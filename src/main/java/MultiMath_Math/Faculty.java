@@ -7,19 +7,19 @@ public class Faculty {
     private static final Pattern FAC_PATTERN = Pattern.compile("\\d+\\s*!");
 
     public int facultyMatch(String operation) {
-        Matcher m = FAC_PATTERN.matcher(operation);
-        int result = -1;
-        if (m.find()) {
-            String matchedString = m.group();
-            int matchedOperationStringLength = matchedString.length();
-            result = faculty(Integer.parseInt(matchedString.substring(0,1)));
+        Matcher facMatcher = FAC_PATTERN.matcher(operation);
+        int output = -1;
+        if (facMatcher.find()) {
+            String matchedString = facMatcher.group();
+            output = Integer.parseInt(matchedString.substring(0,1));
         }
-        return result;
+        return output;
     }
 
-    public int faculty(int in) {
+    public int faculty(String operation) {
+        int end = facultyMatch(operation);
         int result = 1;
-        for (int factor = 2; factor <= in; factor++) {
+        for (int factor = 2; factor <= end; factor++) {
             result *= factor;
         }
         return result;

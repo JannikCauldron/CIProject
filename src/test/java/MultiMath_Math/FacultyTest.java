@@ -20,7 +20,7 @@ public class FacultyTest {
         int expected = 120;
 
         // Act
-        int result = obj.facultyMatch(operation);
+        int result = obj.faculty(operation);
 
         // Assert
         assertThat(result, CoreMatchers.equalTo(expected));
