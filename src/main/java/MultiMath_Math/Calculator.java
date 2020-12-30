@@ -10,19 +10,24 @@ public class Calculator {
 
     public int operate(String operation) {
         int operationResult = 0;
+        //match first integer
         Matcher numbMatcher = NUMB_PATTERN.matcher(operation);
-        if (numbMatcher.find()) {
-            operationResult = Integer.parseInt(numbMatcher.group());
-            Matcher addMatcher = ADD_PATTERN.matcher(operation);
-            while (addMatcher.find()) {
-                String matchedOperation = addMatcher.group();
-                numbMatcher = NUMB_PATTERN.matcher(matchedOperation);
-                if (numbMatcher.find()) {
-                    operationResult += Integer.parseInt(numbMatcher.group());
-                }
-            }
+        operationResult = addNumb(operationResult, numbMatcher);
+        //match additions
+        Matcher addMatcher = ADD_PATTERN.matcher(operation);
+        while (addMatcher.find()) {
+            String matchedOperation = addMatcher.group();
+            numbMatcher = NUMB_PATTERN.matcher(matchedOperation);
+            operationResult = addNumb(operationResult, numbMatcher);
         }
 
         return operationResult;
+    }
+
+    private int addNumb(int result, Matcher numbMatcher) {
+        if (numbMatcher.find()) {
+            result += Integer.parseInt(numbMatcher.group());
+        }
+        return result;
     }
 }
