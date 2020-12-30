@@ -5,15 +5,22 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-    private static final Pattern ADD_PATTERN = Pattern.compile("\\d\\s*\\+\\s*\\d");
+    private static final Pattern ADD_PATTERN = Pattern.compile("\\s*\\+\\s*\\d");
+    private static final Pattern NUMB_PATTERN = Pattern.compile("\\d+");
 
     public int operate(String operation) {
         int operationResult = 0;
-        Matcher addMatcher = ADD_PATTERN.matcher(operation);
-        if (addMatcher.find()) {
-            String matchedOperation = addMatcher.group();
-            int matchedOperationStringLength = matchedOperation.length();
-            operationResult = Integer.parseInt(matchedOperation.substring(0,1)) + Integer.parseInt(matchedOperation.substring(matchedOperationStringLength-1,matchedOperationStringLength));
+        Matcher numbMatcher = NUMB_PATTERN.matcher(operation);
+        if (numbMatcher.find()) {
+            operationResult = Integer.parseInt(numbMatcher.group());
+            Matcher addMatcher = ADD_PATTERN.matcher(operation);
+            while (addMatcher.find()) {
+                String matchedOperation = addMatcher.group();
+                numbMatcher = NUMB_PATTERN.matcher(matchedOperation);
+                if (numbMatcher.find()) {
+                    operationResult += Integer.parseInt(numbMatcher.group());
+                }
+            }
         }
 
         return operationResult;

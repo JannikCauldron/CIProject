@@ -35,4 +35,15 @@ class CalculatorTest {
         //assert
         assertThat("simpleAdditionWithoutSpaces Result", result, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void multipleSimpleAdditions() {
+        //arrange
+        String operation = "3 + 2 + 8";
+        int expectedResult = 13;
+        //act
+        int result = calc.operate(operation);
+        //assert
+        assertThat("multipleSimpleAdditions Result", result, CoreMatchers.equalTo(expectedResult));
+    }
 }
