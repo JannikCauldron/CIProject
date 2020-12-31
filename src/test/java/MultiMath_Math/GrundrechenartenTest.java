@@ -28,4 +28,15 @@ public class GrundrechenartenTest {
         // Assert
         MatcherAssert.assertThat(result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void sinusWithSpacesBetweenParentheses() throws Exception {
+        // Arrange
+        String op = "sin(  5        )";
+        double expected = Math.sin(5);
+        // Act
+        double result = obj.calcSinus(op);
+        // Assert
+        assertThat(result, CoreMatchers.equalTo(expected));
+    }
 }
