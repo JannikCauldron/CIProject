@@ -62,4 +62,16 @@ public class GrundrechenartenTest {
         // Assert
         assertTrue(resultMessage.contains(expectedMsg));
     }
+
+    @Test
+    public void sinusWithOneZero() throws Exception {
+        // Arrange
+        String number = "0";
+        String op = "sin(" + number +  "    )";
+        double expected = Math.sin(Integer.parseInt(number));
+        // Act
+        double result = obj.calcSinus(op);
+        // Assert
+        assertThat(result, CoreMatchers.equalTo(expected));
+    }
 }

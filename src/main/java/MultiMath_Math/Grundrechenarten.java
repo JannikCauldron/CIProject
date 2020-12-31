@@ -2,7 +2,7 @@ package MultiMath_Math;
 
 public class Grundrechenarten {
 
-    private String sinusPattern = "^sin\\(\\s*[1-9]+\\s*\\)$";
+    private String sinusPattern = "^sin\\(\\s*[1-9]+\\s*\\)$|^sin\\(\\s*0\\s*\\)";
 
     public double calcSinus(String op) {
         int numberOfExpression;
