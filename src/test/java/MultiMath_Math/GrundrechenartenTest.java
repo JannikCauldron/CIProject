@@ -53,14 +53,13 @@ public class GrundrechenartenTest {
         // Arrange
         String number = "01";
         String op = "sin(  " + number +  "      )";
-        Exception expected = assertThrows(IllegalArgumentException.class, () -> {
-            obj.calcSinus(op);
-        });
         String expectedMsg = "No valid expression: " + op;
         // Act
-        //double result = obj.calcSinus(op);
-        String actualMsg = expected.getMessage();
+        Exception result = assertThrows(IllegalArgumentException.class, () -> {
+            obj.calcSinus(op);
+        });
+        String resultMessage = result.getMessage();
         // Assert
-        assertTrue(actualMsg.contains(expectedMsg));
+        assertTrue(resultMessage.contains(expectedMsg));
     }
 }
