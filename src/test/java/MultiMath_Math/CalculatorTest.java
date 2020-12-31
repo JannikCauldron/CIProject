@@ -22,7 +22,7 @@ class CalculatorTest {
         //act
         int result = calc.operate(operation);
         //assert
-        assertThat("simpleAddition Result", result, CoreMatchers.equalTo(expectedResult));
+        assertThat("result of simple addition '" + operation + "' is wrong", result, CoreMatchers.equalTo(expectedResult));
     }
 
     @Test
@@ -33,7 +33,7 @@ class CalculatorTest {
         //act
         int result = calc.operate(operation);
         //assert
-        assertThat("simpleAdditionWithoutSpaces Result", result, CoreMatchers.equalTo(expectedResult));
+        assertThat("result of simple addition without spaces '" + operation + "' is wrong", result, CoreMatchers.equalTo(expectedResult));
     }
 
     @Test
@@ -44,17 +44,17 @@ class CalculatorTest {
         //act
         int result = calc.operate(operation);
         //assert
-        assertThat("multipleSimpleAdditions Result", result, CoreMatchers.equalTo(expectedResult));
+        assertThat("result of multiple simple additions '" + operation + "' is wrong", result, CoreMatchers.equalTo(expectedResult));
     }
 
     @Test
-    void simpleAdditionWithBiggerNumbers() {
+    void simpleAdditionWithLargerNumbers() {
         //arrange
         String operation = "13 + 12";
         int expectedResult = 25;
         //act
         int result = calc.operate(operation);
         //assert
-        assertThat("simpleAdditionWithBiggerNumbers Result", result, CoreMatchers.equalTo(expectedResult));
+        assertThat("result of simple addition with larger numbers '" + operation + "' is wrong", result, CoreMatchers.equalTo(expectedResult));
     }
 }
