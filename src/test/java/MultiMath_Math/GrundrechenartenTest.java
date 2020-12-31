@@ -1,6 +1,7 @@
 package MultiMath_Math;
 
 import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
 
 import static org.junit.Assert.assertThat;
@@ -25,6 +26,6 @@ public class GrundrechenartenTest {
         // Act
         double result = obj.calcSinus(op);
         // Assert
-        assertThat("wrong sinus", result, CoreMatchers.equalTo(expected));
+        MatcherAssert.assertThat(result, CoreMatchers.equalTo(expected));
     }
 }
