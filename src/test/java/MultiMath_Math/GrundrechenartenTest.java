@@ -4,7 +4,6 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
 
-import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Rule;
@@ -45,7 +44,7 @@ public class GrundrechenartenTest {
         // Act
         double result = obj.calcSinus(op);
         // Assert
-        assertThat(result, CoreMatchers.equalTo(expected));
+        MatcherAssert.assertThat(result, CoreMatchers.equalTo(expected));
     }
 
     @Test
@@ -55,9 +54,7 @@ public class GrundrechenartenTest {
         String op = "sin(  " + number +  "      )";
         String expectedMsg = "No valid expression: " + op;
         // Act
-        Exception result = assertThrows(IllegalArgumentException.class, () -> {
-            obj.calcSinus(op);
-        });
+        Exception result = assertThrows(IllegalArgumentException.class, () -> obj.calcSinus(op));
         String resultMessage = result.getMessage();
         // Assert
         assertTrue(resultMessage.contains(expectedMsg));
@@ -72,6 +69,6 @@ public class GrundrechenartenTest {
         // Act
         double result = obj.calcSinus(op);
         // Assert
-        assertThat(result, CoreMatchers.equalTo(expected));
+        MatcherAssert.assertThat(result, CoreMatchers.equalTo(expected));
     }
 }
