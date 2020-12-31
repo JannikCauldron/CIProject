@@ -46,4 +46,15 @@ class CalculatorTest {
         //assert
         assertThat("multipleSimpleAdditions Result", result, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void simpleAdditionWithBiggerNumbers() {
+        //arrange
+        String operation = "13 + 12";
+        int expectedResult = 25;
+        //act
+        int result = calc.operate(operation);
+        //assert
+        assertThat("simpleAdditionWithBiggerNumbers Result", result, CoreMatchers.equalTo(expectedResult));
+    }
 }

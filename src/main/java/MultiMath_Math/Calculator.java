@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-    private static final Pattern ADD_PATTERN = Pattern.compile("\\s*\\+\\s*\\d");
+    private static final Pattern ADD_PATTERN = Pattern.compile("\\s*\\+\\s*\\d+");
     private static final Pattern NUMB_PATTERN = Pattern.compile("\\d+");
 
     public int operate(String operation) {
