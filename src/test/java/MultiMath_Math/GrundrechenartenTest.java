@@ -21,8 +21,9 @@ public class GrundrechenartenTest {
     @Test
     public void sinusWithIntegerTest() throws Exception {
         // Arrange
-        String op = "sin(5)";
-        double expected = Math.sin(5);
+        String number = "5";
+        String op = "sin(" + number + ")";
+        double expected = Math.sin(Integer.parseInt(number));
         // Act
         double result = obj.calcSinus(op);
         // Assert
@@ -32,8 +33,9 @@ public class GrundrechenartenTest {
     @Test
     public void sinusWithSpacesBetweenParentheses() throws Exception {
         // Arrange
-        String op = "sin(  5        )";
-        double expected = Math.sin(5);
+        String number = "5";
+        String op = "sin(  " + number +  "      )";
+        double expected = Math.sin(Integer.parseInt(number));
         // Act
         double result = obj.calcSinus(op);
         // Assert
