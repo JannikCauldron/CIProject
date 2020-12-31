@@ -1,15 +1,18 @@
 package MultiMath_Math;
 
 public class Cosinus {
+
+    public static final String COSINUS_PATTERN = "^cos\\([\\d]\\)$";
+    public static final String REPLACE_PATTERN = "[\\D]";
+
     public double calcCosinus(String op) {
-        String pattern = "^cos\\([\\d]\\)$";
         int result;
-        if (op.matches(pattern)) {
-            String numberOnlyStr = op.replaceAll("[\\D]", "");
+        if (op.matches(COSINUS_PATTERN)) {
+            String numberOnlyStr = op.replaceAll(REPLACE_PATTERN, "");
             result = Integer.parseInt(numberOnlyStr);
             return Math.cos(result);
         } else {
-            throw new IllegalArgumentException("wrong expression");
+            throw new IllegalArgumentException("Error in cosinus expression");
         }
     }
 }
