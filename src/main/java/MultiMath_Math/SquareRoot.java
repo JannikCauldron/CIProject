@@ -8,7 +8,7 @@ public class SquareRoot {
             String numberString = inputString.replaceAll("[^0-9]", "");
             inputNumber = Integer.parseInt(numberString);
         } else {
-            return Double.NaN;
+            throw new IllegalArgumentException("no valid root expression: " + inputString);
         }
         return Math.sqrt(inputNumber);
     }

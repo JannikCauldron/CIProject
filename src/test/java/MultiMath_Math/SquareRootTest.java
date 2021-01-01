@@ -40,10 +40,12 @@ public class SquareRootTest {
     @Test void rootWithNegative() throws Exception {
         // Arrange
         String operation = "sqrt(-3)";
-        double expected = Math.sqrt(-3);
+        Exception expected = assertThrows(IllegalArgumentException.class, () -> {squareRoot.rooted(operation);});
+        String expectedMessage = "no valid root expression: " + operation;
         // Act
-        double result = squareRoot.rooted(operation);
+        //double result = squareRoot.rooted(operation);
+        String actualMessage = expected.getMessage();
         // Assert
-        assertThat("no root of negative number", result, CoreMatchers.equalTo(expected));
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 }
