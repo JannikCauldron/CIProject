@@ -24,4 +24,15 @@ public class PowerTest {
         //Assert
         assertThat("wrong power", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void powerWithoutSpace() {
+        // Arrange
+        String operation = "3^2";
+        double expected = 9;
+        // Act
+        double result = pow.exponentiate(operation);
+        // Assert
+        assertThat("wrong power without spaces", result, CoreMatchers.equalTo(expected));
+    }
 }
