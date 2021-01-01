@@ -1,9 +1,9 @@
 package MultiMath_Math;
 
 import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
-import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -23,7 +23,7 @@ public class SquareRootTest {
         // Act
         double result = squareRoot.rooted(operation);
         // Assert
-        assertThat("wrong root", result, CoreMatchers.equalTo(expected));
+        MatcherAssert.assertThat("wrong root", result, CoreMatchers.equalTo(expected));
     }
 
     @Test
@@ -34,14 +34,14 @@ public class SquareRootTest {
         // Act
         double result = squareRoot.rooted(operation);
         // Assert
-        assertThat("wrong root with space", result, CoreMatchers.equalTo(expected));
+        MatcherAssert.assertThat("wrong root with space", result, CoreMatchers.equalTo(expected));
     }
 
     @Test
     public void rootWithNegative() throws Exception {
         // Arrange
         String operation = "sqrt(-3)";
-        Exception expected = assertThrows(IllegalArgumentException.class, () -> {squareRoot.rooted(operation);});
+        Exception expected = assertThrows(IllegalArgumentException.class, () -> squareRoot.rooted(operation));
         String expectedMessage = "no valid root expression: " + operation;
         // Act
         String actualMessage = expected.getMessage();
@@ -55,7 +55,7 @@ public class SquareRootTest {
         String operation = "sqrt(07)";
         String expectedMessage = "no valid root expression: " + operation;
         // Act
-        Exception result = assertThrows(IllegalArgumentException.class, () -> {squareRoot.rooted(operation);});
+        Exception result = assertThrows(IllegalArgumentException.class, () -> squareRoot.rooted(operation));
         String resultMessage = result.getMessage();
         // Assert
         assertTrue(resultMessage.contentEquals(expectedMessage));
@@ -69,6 +69,6 @@ public class SquareRootTest {
         // Act
         double result = squareRoot.rooted(operation);
         // Assert
-        assertThat("wrong root", result, CoreMatchers.equalTo(expected));
+        MatcherAssert.assertThat("wrong root", result, CoreMatchers.equalTo(expected));
     }
 }

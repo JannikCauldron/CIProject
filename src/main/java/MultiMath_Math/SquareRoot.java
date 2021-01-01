@@ -1,10 +1,10 @@
 package MultiMath_Math;
 
 public class SquareRoot {
-    private String sqrtPattern = "sqrt\\(\\s*[1-9]+\\s*\\)|sqrt\\(\\s*0+\\s*\\)";
+    private final String SQRT_PATTERN = "sqrt\\(\\s*[1-9]+\\s*\\)|sqrt\\(\\s*0+\\s*\\)";
     public double rooted(String inputString) {
         int inputNumber;
-        if (inputString.matches(sqrtPattern)) {
+        if (inputString.matches(SQRT_PATTERN)) {
             String numberString = inputString.replaceAll("[^0-9]", "");
             inputNumber = Integer.parseInt(numberString);
         } else {
