@@ -1,39 +1,36 @@
 package MultiMath_Math;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class SquareRoot {
 
     private final String SQRT_PATTERN = "sqrt\\(\\s*[1-9][0-9]+(\\.[0-9]+)?\\s*\\)|sqrt\\(\\s*[0-9](\\.[0-9]+)?\\s*\\)";
-    private final String FIRST_PATTERN = "sqrt\\(\\s*[1-9][0-9]+|sqrt\\(\\s*[0-9]";
-    private final String LAST_PATTERN = "(\\.[0-9]+)?\\s*\\)";
-    public double rooted(String inputString) {
-        double inputNumber;
+
+    public double rooted(String operation) {
+
+        double number;
         int indexOfDot;
-        String subString1 = "";
-        String subString2 = "";
-        int inputStringLength = inputString.length();
+        int operationStringLength = operation.length();
+        String stringBeforeDot;
+        String stringAfterDot;
 
-        if (inputString.matches(SQRT_PATTERN)) {
-            if (inputString.contains(".")) {
-                indexOfDot = inputString.indexOf('.');
+        if (operation.matches(SQRT_PATTERN)) {
+            if (operation.contains(".")) {
+                indexOfDot = operation.indexOf('.');
 
-                subString1 = inputString.substring(0, indexOfDot);
-                subString2 = inputString.substring(indexOfDot+1, inputStringLength);
+                stringBeforeDot = operation.substring(0, indexOfDot);
+                stringAfterDot = operation.substring(indexOfDot+1, operationStringLength);
 
-                String numberString1 = subString1.replaceAll("[^0-9]", "");
-                String numberString2 = subString2.replaceAll("[^0-9]", "");
+                String numberStringBeforeDot = stringBeforeDot.replaceAll("[^0-9]", "");
+                String numberStringAfterDot = stringAfterDot.replaceAll("[^0-9]", "");
 
-                String numberString = numberString1 + "." + numberString2;
-                inputNumber = Double.parseDouble(numberString);
+                String completeNumberString = numberStringBeforeDot + "." + numberStringAfterDot;
+                number = Double.parseDouble(completeNumberString);
             } else {
-                String numberString = inputString.replaceAll("[^0-9]", "");
-                inputNumber = Double.parseDouble(numberString);
+                String numberString = operation.replaceAll("[^0-9]", "");
+                number = Double.parseDouble(numberString);
             }
         } else {
-            throw new IllegalArgumentException("no valid root expression: " + inputString);
+            throw new IllegalArgumentException("no valid root expression: " + operation);
         }
-        return Math.sqrt(inputNumber);
+        return Math.sqrt(number);
     }
 }

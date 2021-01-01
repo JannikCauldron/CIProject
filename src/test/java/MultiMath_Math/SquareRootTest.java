@@ -27,7 +27,7 @@ public class SquareRootTest {
     }
 
     @Test
-    public void rootWithSpace() throws Exception {
+    public void rootWithSpaceTest() throws Exception {
         // Arrange
         String operation = "sqrt(   9  )";
         double expected = Math.sqrt(9);
@@ -38,7 +38,7 @@ public class SquareRootTest {
     }
 
     @Test
-    public void rootWithNegative() throws Exception {
+    public void rootWithNegativeTest() throws Exception {
         // Arrange
         String operation = "sqrt(-3)";
         Exception expected = assertThrows(IllegalArgumentException.class, () -> squareRoot.rooted(operation));
@@ -50,7 +50,7 @@ public class SquareRootTest {
     }
 
     @Test
-    public void rootWithLeadingZero() throws Exception {
+    public void rootWithLeadingZeroTest() throws Exception {
         // Arrange
         String operation = "sqrt(07)";
         String expectedMessage = "no valid root expression: " + operation;
@@ -62,7 +62,7 @@ public class SquareRootTest {
     }
 
     @Test
-    public void rootWithOnlyZero() throws Exception {
+    public void rootWithOnlyZeroTest() throws Exception {
         // Arrange
         String operation = "sqrt(0)";
         double expected = Math.sqrt(0);
@@ -73,7 +73,7 @@ public class SquareRootTest {
     }
 
     @Test
-    public void rootWithDecimal() throws Exception {
+    public void rootWithDecimalTest() throws Exception {
         // Arrange
         String operation = "sqrt(0.25)";
         double expected = Math.sqrt(0.25);
