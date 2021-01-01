@@ -36,4 +36,14 @@ public class SquareRootTest {
         // Assert
         assertThat("wrong root with space", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test void rootWithNegative() throws Exception {
+        // Arrange
+        String operation = "sqrt(-3)";
+        double expected = Math.sqrt(-3);
+        // Act
+        double result = squareRoot.rooted(operation);
+        // Assert
+        assertThat("no root of negative number", result, CoreMatchers.equalTo(expected));
+    }
 }

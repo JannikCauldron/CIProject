@@ -8,7 +8,7 @@ public class SquareRoot {
             String numberString = inputString.replaceAll("[^0-9]", "");
             inputNumber = Integer.parseInt(numberString);
         } else {
-            return 0;
+            return Double.NaN;
         }
         return Math.sqrt(inputNumber);
     }
