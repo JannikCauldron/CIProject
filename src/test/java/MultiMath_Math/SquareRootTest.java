@@ -71,4 +71,15 @@ public class SquareRootTest {
         // Assert
         MatcherAssert.assertThat("wrong root", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void rootWithDecimal() throws Exception {
+        // Arrange
+        String operation = "sqrt(0.25)";
+        double expected = Math.sqrt(0.25);
+        // Act
+        double result = squareRoot.rooted(operation);
+        // Assert
+        MatcherAssert.assertThat("wrong root of decimal", result, CoreMatchers.equalTo(expected));
+    }
 }
