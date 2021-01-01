@@ -6,14 +6,14 @@ public class Power {
 
     private final Pattern POW_PATTERN = Pattern.compile("[0-9]+\\s*\\^\\s*[0-9]+");
 
-    public double exponentiate(String expo) {
+    public double exponentiate(String operation) {
         double result = 0;
-        Matcher mat = POW_PATTERN.matcher(expo);
-        if (mat.find()) {
-            String matchedOp = mat.group();
-            int matchedOperationLength = matchedOp.length();
-            int powerChar = expo.indexOf("^");
-            result = Math.pow(Double.parseDouble(matchedOp.substring(0,powerChar)), Double.parseDouble(matchedOp.substring(matchedOperationLength-powerChar,matchedOperationLength)));
+        Matcher patternMatcher = POW_PATTERN.matcher(operation);
+        if (patternMatcher.find()) {
+            String matchedOperation = patternMatcher.group();
+            int matchedOperationStringLength = matchedOperation.length();
+            int powerCharIndex = operation.indexOf("^");
+            result = Math.pow(Double.parseDouble(matchedOperation.substring(0,powerCharIndex)), Double.parseDouble(matchedOperation.substring(matchedOperationStringLength-powerCharIndex,matchedOperationStringLength)));
         }
         return result;
     }

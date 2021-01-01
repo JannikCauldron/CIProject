@@ -24,7 +24,7 @@ public class PowerTest {
     }
 
     @Test
-    public void powerWithoutSpaceTest() {
+    public void powerWithoutSpaceTest() throws Exception {
         // Arrange
         String operation = "3^2";
         double expected = 9;
@@ -35,13 +35,13 @@ public class PowerTest {
     }
 
     @Test
-    public void powerMoreThanOneDigitTest() {
+    public void powerMoreThanOneDigitTest() throws Exception {
         // Arrange
         String operation = "11 ^ 10";
         double expected = 25937424601L;
         // Act
         double result = pow.exponentiate(operation);
         // Assert
-        assertThat("wrong power for more than one digit numbers", result, CoreMatchers.equalTo(expected));
+        assertThat("wrong power for numbers bigger than one digit", result, CoreMatchers.equalTo(expected));
     }
 }
