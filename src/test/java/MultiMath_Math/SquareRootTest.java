@@ -44,21 +44,20 @@ public class SquareRootTest {
         Exception expected = assertThrows(IllegalArgumentException.class, () -> {squareRoot.rooted(operation);});
         String expectedMessage = "no valid root expression: " + operation;
         // Act
-        //double result = squareRoot.rooted(operation);
         String actualMessage = expected.getMessage();
         // Assert
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertTrue(actualMessage.contentEquals(expectedMessage));
     }
 
     @Test
     public void rootWithLeadingZero() throws Exception {
         // Arrange
         String operation = "sqrt(07)";
-        Exception expected = assertThrows(IllegalArgumentException.class, () -> {squareRoot.rooted(operation);});
         String expectedMessage = "no valid root expression: " + operation;
         // Act
-        String actualMessage = expected.getMessage();
+        Exception result = assertThrows(IllegalArgumentException.class, () -> {squareRoot.rooted(operation);});
+        String resultMessage = result.getMessage();
         // Assert
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertTrue(resultMessage.contentEquals(expectedMessage));
     }
 }
