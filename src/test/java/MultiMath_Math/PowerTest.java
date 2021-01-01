@@ -2,6 +2,7 @@ package MultiMath_Math;
 import org.hamcrest.CoreMatchers;
 import static org.junit.Assert.assertThat;
 
+import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,5 +57,16 @@ public class PowerTest {
         double result = pow.exponentiate(operation);
         // Assert
         MatcherAssert.assertThat("wrong power for numbers with different length", result, CoreMatchers.equalTo(expected));
+    }
+
+    @Test
+    public void powerOfNegativeTest() throws Exception {
+        // Arrange
+        String operation = "-3^3";
+        double expected = -27;
+        // Act
+        double result = pow.exponentiate(operation);
+        // Assert
+        MatcherAssert.assertThat("wrong power for negative numbers", result, CoreMatchers.equalTo(expected));
     }
 }

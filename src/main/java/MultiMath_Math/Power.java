@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 public class Power {
 
-    private final Pattern POW_PATTERN = Pattern.compile("[0-9]+\\s*\\^\\s*[0-9]+");
+    private final Pattern POW_PATTERN = Pattern.compile("[-$0-9]+\\s*\\^\\s*[0-9]+");
 
     public double exponentiate(String operation) {
         double result = 0;
