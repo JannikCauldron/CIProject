@@ -33,4 +33,15 @@ public class PowerTest {
         // Assert
         assertThat("wrong power without spaces", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void powerMoreThanOneDigitTest() {
+        // Arrange
+        String operation = "11 ^ 10";
+        double expected = 25937424601L;
+        // Act
+        double result = pow.exponentiate(operation);
+        // Assert
+        assertThat("wrong power for more than one digit numbers", result, CoreMatchers.equalTo(expected));
+    }
 }
