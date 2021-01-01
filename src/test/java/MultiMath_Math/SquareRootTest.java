@@ -60,4 +60,15 @@ public class SquareRootTest {
         // Assert
         assertTrue(resultMessage.contentEquals(expectedMessage));
     }
+
+    @Test
+    public void rootWithOnlyZero() throws Exception {
+        // Arrange
+        String operation = "sqrt(0)";
+        double expected = Math.sqrt(0);
+        // Act
+        double result = squareRoot.rooted(operation);
+        // Assert
+        assertThat("wrong root", result, CoreMatchers.equalTo(expected));
+    }
 }
