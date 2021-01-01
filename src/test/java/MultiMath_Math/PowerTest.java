@@ -1,8 +1,6 @@
 package MultiMath_Math;
 import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
 import static org.junit.Assert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -26,7 +24,7 @@ public class PowerTest {
     }
 
     @Test
-    public void powerWithoutSpace() {
+    public void powerWithoutSpaceTest() {
         // Arrange
         String operation = "3^2";
         double expected = 9;
