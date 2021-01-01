@@ -44,4 +44,15 @@ public class PowerTest {
         // Assert
         assertThat("wrong power for numbers bigger than one digit", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void powerNumbersDifferentLengthTest() throws Exception {
+        // Arrange
+        String operation = "11^2";
+        double expected = 121;
+        // Act
+        double result = pow.exponentiate(operation);
+        // Assert
+        assertThat("wrong power for numbers with different length", result, CoreMatchers.equalTo(expected));
+    }
 }

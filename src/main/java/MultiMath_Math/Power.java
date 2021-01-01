@@ -13,7 +13,8 @@ public class Power {
             String matchedOperation = patternMatcher.group();
             int matchedOperationStringLength = matchedOperation.length();
             int powerCharIndex = operation.indexOf("^");
-            result = Math.pow(Double.parseDouble(matchedOperation.substring(0,powerCharIndex)), Double.parseDouble(matchedOperation.substring(matchedOperationStringLength-powerCharIndex,matchedOperationStringLength)));
+            int restOfString = matchedOperationStringLength - powerCharIndex;
+            result = Math.pow(Double.parseDouble(matchedOperation.substring(0,powerCharIndex)), Double.parseDouble(matchedOperation.substring(matchedOperationStringLength-restOfString+1,matchedOperationStringLength)));
         }
         return result;
     }
