@@ -25,4 +25,15 @@ public class SquareRootTest {
         // Assert
         assertThat("wrong root", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void rootWithSpace() throws Exception {
+        // Arrange
+        String operation = "sqrt(   9  )";
+        double expected = Math.sqrt(9);
+        // Act
+        double result = squareRoot.rooted(operation);
+        // Assert
+        assertThat("wrong root with space", result, CoreMatchers.equalTo(expected));
+    }
 }
