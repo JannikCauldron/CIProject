@@ -1,6 +1,8 @@
 package MultiMath_Math;
 import org.hamcrest.CoreMatchers;
 import static org.junit.Assert.assertThat;
+
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -20,7 +22,7 @@ public class PowerTest {
         //Act
         double result = pow.exponentiate(operation);
         //Assert
-        assertThat("wrong power", result, CoreMatchers.equalTo(expected));
+        MatcherAssert.assertThat("wrong power", result, CoreMatchers.equalTo(expected));
     }
 
     @Test
@@ -31,7 +33,7 @@ public class PowerTest {
         // Act
         double result = pow.exponentiate(operation);
         // Assert
-        assertThat("wrong power without spaces", result, CoreMatchers.equalTo(expected));
+        MatcherAssert.assertThat("wrong power without spaces", result, CoreMatchers.equalTo(expected));
     }
 
     @Test
@@ -42,7 +44,7 @@ public class PowerTest {
         // Act
         double result = pow.exponentiate(operation);
         // Assert
-        assertThat("wrong power for numbers bigger than one digit", result, CoreMatchers.equalTo(expected));
+        MatcherAssert.assertThat("wrong power for numbers bigger than one digit", result, CoreMatchers.equalTo(expected));
     }
 
     @Test
@@ -53,6 +55,6 @@ public class PowerTest {
         // Act
         double result = pow.exponentiate(operation);
         // Assert
-        assertThat("wrong power for numbers with different length", result, CoreMatchers.equalTo(expected));
+        MatcherAssert.assertThat("wrong power for numbers with different length", result, CoreMatchers.equalTo(expected));
     }
 }

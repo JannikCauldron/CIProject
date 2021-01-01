@@ -12,9 +12,9 @@ public class Power {
         if (patternMatcher.find()) {
             String matchedOperation = patternMatcher.group();
             int matchedOperationStringLength = matchedOperation.length();
-            int powerCharIndex = operation.indexOf("^");
-            int restOfString = matchedOperationStringLength - powerCharIndex;
-            result = Math.pow(Double.parseDouble(matchedOperation.substring(0,powerCharIndex)), Double.parseDouble(matchedOperation.substring(matchedOperationStringLength-restOfString+1,matchedOperationStringLength)));
+            int indexOfPowerChar = operation.indexOf("^");
+            int stringAfterPowerChar = matchedOperationStringLength - indexOfPowerChar;
+            result = Math.pow(Double.parseDouble(matchedOperation.substring(0,indexOfPowerChar)), Double.parseDouble(matchedOperation.substring(matchedOperationStringLength-stringAfterPowerChar+1,matchedOperationStringLength)));
         }
         return result;
     }
