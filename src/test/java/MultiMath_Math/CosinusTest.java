@@ -5,6 +5,8 @@ import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class CosinusTest {
     Cosinus obj;
 
@@ -47,5 +49,20 @@ public class CosinusTest {
         double result = obj.calcCosinus(op);
         // Assert
         MatcherAssert.assertThat(result, CoreMatchers.equalTo(expected));
+    }
+
+    @Test
+    public void cosinusWrongExpressionTest() {
+        // Arrange
+        String number = "1a";
+        String op = "cos(    " + number + "    )";
+        String expectedMsg = "Error in cosinus expression";
+        // Act
+        Exception result = assertThrows(IllegalArgumentException.class, () -> {
+            obj.calcCosinus(op);
+        });
+        String resultMsg = result.getMessage();
+        // Assert
+        assertTrue(resultMsg.contentEquals(expectedMsg));
     }
 }
