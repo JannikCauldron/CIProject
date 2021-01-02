@@ -5,11 +5,11 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-    private static final Pattern ADD_PATTERN = Pattern.compile("\\s*\\+\\s*\\d+");
-    private static final Pattern NUMB_PATTERN = Pattern.compile("\\d+");
+    private static final Pattern ADD_PATTERN = Pattern.compile("\\s*\\+\\s*\\d+(\\.\\d+)*");
+    private static final Pattern NUMB_PATTERN = Pattern.compile("\\d+(\\.\\d+)*");
 
-    public int operate(String operation) {
-        int operationResult = 0;
+    public double operate(String operation) {
+        double operationResult = 0.0;
         //match first integer
         Matcher numbMatcher = NUMB_PATTERN.matcher(operation);
         operationResult = addNumb(operationResult, numbMatcher);
@@ -24,9 +24,9 @@ public class Calculator {
         return operationResult;
     }
 
-    private int addNumb(int result, Matcher numbMatcher) {
+    private double addNumb(double result, Matcher numbMatcher) {
         if (numbMatcher.find()) {
-            result += Integer.parseInt(numbMatcher.group());
+            result += Double.parseDouble(numbMatcher.group());
         }
         return result;
     }

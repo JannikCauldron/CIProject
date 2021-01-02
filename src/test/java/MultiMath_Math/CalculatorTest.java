@@ -18,9 +18,9 @@ class CalculatorTest {
     void simpleAddition() {
         //arrange
         String operation = "3 + 2";
-        int expectedResult = 5;
+        double expectedResult = 5;
         //act
-        int result = calc.operate(operation);
+        double result = calc.operate(operation);
         //assert
         assertThat("result of simple addition '" + operation + "' is wrong", result, CoreMatchers.equalTo(expectedResult));
     }
@@ -29,9 +29,9 @@ class CalculatorTest {
     void simpleAdditionWithoutSpaces() {
         //arrange
         String operation = "3+2";
-        int expectedResult = 5;
+        double expectedResult = 5;
         //act
-        int result = calc.operate(operation);
+        double result = calc.operate(operation);
         //assert
         assertThat("result of simple addition without spaces '" + operation + "' is wrong", result, CoreMatchers.equalTo(expectedResult));
     }
@@ -40,9 +40,9 @@ class CalculatorTest {
     void multipleSimpleAdditions() {
         //arrange
         String operation = "3 + 2 + 8";
-        int expectedResult = 13;
+        double expectedResult = 13;
         //act
-        int result = calc.operate(operation);
+        double result = calc.operate(operation);
         //assert
         assertThat("result of multiple simple additions '" + operation + "' is wrong", result, CoreMatchers.equalTo(expectedResult));
     }
@@ -51,9 +51,20 @@ class CalculatorTest {
     void simpleAdditionWithLargerNumbers() {
         //arrange
         String operation = "13 + 12";
-        int expectedResult = 25;
+        double expectedResult = 25;
         //act
-        int result = calc.operate(operation);
+        double result = calc.operate(operation);
+        //assert
+        assertThat("result of simple addition with larger numbers '" + operation + "' is wrong", result, CoreMatchers.equalTo(expectedResult));
+    }
+
+    @Test
+    void simpleAdditionWithDoubles() {
+        //arrange
+        String operation = "5.7 + 24.2";
+        double expectedResult = 29.9;
+        //act
+        double result = calc.operate(operation);
         //assert
         assertThat("result of simple addition with larger numbers '" + operation + "' is wrong", result, CoreMatchers.equalTo(expectedResult));
     }
