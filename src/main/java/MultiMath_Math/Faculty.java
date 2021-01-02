@@ -7,10 +7,11 @@ public class Faculty {
     private static final Pattern FAC_PATTERN = Pattern.compile("\\d+\\s*!");
     public static final int FAC_BASE_RESULT = 1;
     public static final int FIRST_ACTIVE_FACTOR = 2;
+    public static final int INVALID_VALUE_FOR_TESTS = -1;
 
     public int facultyMatch(String operation) {
         Matcher facMatcher = FAC_PATTERN.matcher(operation);
-        int output = -1;
+        int output = INVALID_VALUE_FOR_TESTS;
         if (facMatcher.find()) {
             String matchedString = facMatcher.group();
             output = Integer.parseInt(matchedString.substring(0,1));
