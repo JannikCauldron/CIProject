@@ -1,5 +1,6 @@
-package MultiMath_Math;
+package MultiMath_Math.BasicOperations;
 
+import MultiMath_Math.BasicOperations.Cosinus;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
