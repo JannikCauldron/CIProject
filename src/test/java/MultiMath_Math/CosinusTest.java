@@ -36,4 +36,16 @@ public class CosinusTest {
         // Assert
         MatcherAssert.assertThat(result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void cosinusWithSpacesBetweenParenthesesTest() {
+        // Arrange
+        String number = "15";
+        String op = "cos(    " + number + "    )";
+        double expected = Math.cos(Integer.parseInt(number));
+        // Act
+        double result = obj.calcCosinus(op);
+        // Assert
+        MatcherAssert.assertThat(result, CoreMatchers.equalTo(expected));
+    }
 }
