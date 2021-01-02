@@ -7,12 +7,16 @@ public class Cosinus {
 
     public double calcCosinus(String op) {
         int result;
-        if (op.matches(COSINUS_PATTERN)) {
+        if (isMatch(op)) {
             String numberOnlyStr = op.replaceAll(REPLACE_PATTERN, "");
             result = Integer.parseInt(numberOnlyStr);
             return Math.cos(result);
         } else {
             throw new IllegalArgumentException("Error in cosinus expression");
         }
+    }
+
+    private boolean isMatch(String op) {
+        return op.matches(COSINUS_PATTERN);
     }
 }
