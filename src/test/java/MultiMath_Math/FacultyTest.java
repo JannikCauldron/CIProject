@@ -38,4 +38,17 @@ public class FacultyTest {
         // Assert
         assertThat(result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    void faculty1Test() {
+        // Arrange
+        String operation = "1!";
+        int expected = 1;
+
+        // Act
+        int result = obj.faculty(operation);
+
+        // Assert
+        assertThat(result, CoreMatchers.equalTo(expected));
+    }
 }
