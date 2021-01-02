@@ -51,4 +51,17 @@ public class FacultyTest {
         // Assert
         assertThat(result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    void facultyMultiDigitTest() {
+        // Arrange
+        String operation = "10!";
+        int expected = 3628800;
+
+        // Act
+        int result = obj.faculty(operation);
+
+        // Assert
+        assertThat(result, CoreMatchers.equalTo(expected));
+    }
 }

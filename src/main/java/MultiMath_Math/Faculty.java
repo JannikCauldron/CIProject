@@ -14,7 +14,7 @@ public class Faculty {
         int output = INVALID_VALUE_FOR_TESTS;
         if (facMatcher.find()) {
             String matchedString = facMatcher.group();
-            output = Integer.parseInt(matchedString.substring(0,1));
+            output = Integer.parseInt(matchedString.substring(0,matchedString.length() - 1));
         }
         return output;
     }
