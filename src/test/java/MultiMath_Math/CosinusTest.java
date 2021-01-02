@@ -58,9 +58,7 @@ public class CosinusTest {
         String op = "cos(    " + number + "    )";
         String expectedMsg = "Error in cosinus expression";
         // Act
-        Exception result = assertThrows(IllegalArgumentException.class, () -> {
-            obj.calcCosinus(op);
-        });
+        Exception result = assertThrows(IllegalArgumentException.class, () -> obj.calcCosinus(op));
         String resultMsg = result.getMessage();
         // Assert
         assertTrue(resultMsg.contentEquals(expectedMsg));
