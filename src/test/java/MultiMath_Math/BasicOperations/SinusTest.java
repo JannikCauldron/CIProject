@@ -1,26 +1,20 @@
-package MultiMath_Math;
+package MultiMath_Math.BasicOperations;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
-import org.junit.Assert;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.rules.ExpectedException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
-public class GrundrechenartenTest {
-    Grundrechenarten obj;
+public class SinusTest {
+    Sinus obj;
 
     @BeforeEach
     void setUp() throws Exception {
-        obj = new Grundrechenarten();
+        obj = new Sinus();
     }
 
     @Test

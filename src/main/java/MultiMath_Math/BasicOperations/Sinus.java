@@ -1,6 +1,6 @@
-package MultiMath_Math;
+package MultiMath_Math.BasicOperations;
 
-public class Grundrechenarten {
+public class Sinus {
 
     private String sinusPattern = "^sin\\(\\s*[1-9]+\\s*\\)$|^sin\\(\\s*0\\s*\\)";
 
