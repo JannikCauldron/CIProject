@@ -1,5 +1,6 @@
-package MultiMath_Math;
+package MultiMath_Math.BasicOperations;
 
+import MultiMath_Math.BasicOperations.Faculty;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
