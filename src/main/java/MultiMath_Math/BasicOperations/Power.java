@@ -1,4 +1,4 @@
-package MultiMath_Math;
+package MultiMath_Math.BasicOperations;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
