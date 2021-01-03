@@ -18,17 +18,22 @@ public class Multiplication {
     public static double multiply(double[] factors) {
         double product = 1;
         String productString;
+
         for (double factor : factors) {
             product *= factor;
         }
 
-        // round product to 4 decimals
+        productString = getRoundedValue(product);
+
+        return Double.parseDouble(productString);
+    }
+
+    private static String getRoundedValue(double product) {
+        String productString;
         DecimalFormat df = new DecimalFormat("#.####");
         df.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
         df.setRoundingMode(RoundingMode.HALF_UP);
         productString = df.format(product);
-
-        return Double.parseDouble(productString);
-
+        return productString;
     }
 }
