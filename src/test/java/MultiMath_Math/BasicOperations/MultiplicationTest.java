@@ -72,4 +72,15 @@ public class MultiplicationTest {
         // Assert
         MatcherAssert.assertThat("Wrong product (with spaces)", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void multiplicationMultipleIntegerWithSpaceTest() throws Exception {
+        // Arrange
+        String operation = " 10  *   5  *2* 5";
+        int expected = 500;
+        // Act
+        int result = mul.parseMultiplication(operation);
+        // Assert
+        MatcherAssert.assertThat("Wrong product (multiple values)", result, CoreMatchers.equalTo(expected));
+    }
 }
