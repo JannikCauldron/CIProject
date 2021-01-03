@@ -49,17 +49,27 @@ public class Multiplication {
 
         if (patternMatcher.find()) {
             String matchedOperation = patternMatcher.group();
-            matchedOperation = matchedOperation.replaceAll("\\s+","");
-            String[] splitOperationString = matchedOperation.split("\\*");
-
-            int[] splitOperationValues = new int[splitOperationString.length];
-            for(int i = 0; i<splitOperationString.length;i++){
-                splitOperationValues[i] = Integer.parseInt(splitOperationString[i]);
-            }
-
+            String[] splitOperationString = splitOperation(matchedOperation);
+            int[] splitOperationValues = convertToValue(splitOperationString);
             result = multiply(splitOperationValues);
         }
         return result;
+    }
 
+    private int[] convertToValue(String[] splitOperation) {
+        int[] splitOperationValues = new int[splitOperation.length];
+        for (int i = 0; i < splitOperation.length; i++) {
+            splitOperationValues[i] = Integer.parseInt(splitOperation[i]);
+        }
+        return splitOperationValues;
+    }
+
+    private String[] splitOperation(String matchedOperation) {
+        matchedOperation = removeWhitespace(matchedOperation);
+        return matchedOperation.split("\\*");
+    }
+
+    private String removeWhitespace(String operation) {
+        return operation.replaceAll("\\s+", "");
     }
 }
