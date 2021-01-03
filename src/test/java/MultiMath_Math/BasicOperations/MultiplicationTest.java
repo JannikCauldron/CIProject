@@ -2,10 +2,17 @@ package MultiMath_Math.BasicOperations;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class MultiplicationTest {
 
+    Multiplication mul;
+
+    @BeforeEach
+    void setUp() throws Exception {
+        mul = new Multiplication();
+    }
 
     @Test
     public void integerMultiplicationTest() throws Exception {
@@ -44,5 +51,15 @@ public class MultiplicationTest {
         MatcherAssert.assertThat("Integer Multiplication Test:", resultArray, CoreMatchers.equalTo(expectedProductArray));
     }
 
+    @Test
+    public void multiplicationTwoIntegerWithoutSpaceTest() throws Exception {
+        // Arrange
+        String operation = "3*2";
+        int expected = 6;
+        // Act
+        int result = mul.parseMultiplication(operation);
+        // Assert
+        MatcherAssert.assertThat("Wrong product (without spaces)", result, CoreMatchers.equalTo(expected));
+    }
 
 }
