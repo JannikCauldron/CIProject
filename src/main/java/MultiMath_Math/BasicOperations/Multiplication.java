@@ -11,7 +11,7 @@ public class Multiplication {
 
 
     private final Pattern MUL_PATTERN_INT = Pattern.compile("([-0-9]+\\s*\\*\\s*)+[0-9]+");
-    private final Pattern MUL_PATTERN_DOUBLE = Pattern.compile("([0-9]{1,13}(\\.[0-9]+)?\\s*\\*\\s*)+[0-9]{1,13}(\\.[0-9]+)?\\s*");
+    private final Pattern MUL_PATTERN_DOUBLE = Pattern.compile("([-0-9]{1,13}(\\.[0-9]+)?\\s*\\*\\s*)+[-0-9]{1,13}(\\.[0-9]+)?\\s*");
 
     public static int multiply(int... factors) {
         int product = 1;

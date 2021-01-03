@@ -87,12 +87,17 @@ public class MultiplicationTest {
     @Test
     public void multiplicationDoubleTest() throws Exception {
         // Arrange
-        String operation = "10.2 * 3  ";
-        double expected = 30.6;
+        String[] operationArray = {"10.2 * 3  ", "-3 * 1.1", "2.3 * -1.1" };
+        double[] expected = {30.6, -3.3, -2.53};
+        int ArrayLength = operationArray.length;
+        double[] resultArray = new double[ArrayLength];
         // Act
-        double result = mul.parseDoubleMultiplication(operation);
+        for (int i = 0; i < ArrayLength; i++) {
+            resultArray[i] = mul.parseDoubleMultiplication(operationArray[i]);
+        }
         // Assert
-        MatcherAssert.assertThat("Wrong product (double values)", result, CoreMatchers.equalTo(expected));
+        MatcherAssert.assertThat("Wrong product (double values)", resultArray, CoreMatchers.equalTo(expected));
     }
+
 
 }
