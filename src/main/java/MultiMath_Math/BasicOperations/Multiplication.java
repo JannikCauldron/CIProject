@@ -10,8 +10,8 @@ import java.util.regex.Pattern;
 public class Multiplication {
 
 
-    private final Pattern MUL_PATTERN_INT = Pattern.compile("([-$0-9]+\\s*\\*\\s*)+[0-9]+");
-    //private final Pattern MUL_PATTERN_DOUBLE = Pattern.compile("[-$0-9]+(\\.[-$0-9]*)?\\s*\\*\\s*[-$0-9]+(\\.[-$0-9]*)?");
+    private final Pattern MUL_PATTERN_INT = Pattern.compile("([-0-9]+\\s*\\*\\s*)+[0-9]+");
+    private final Pattern MUL_PATTERN_DOUBLE = Pattern.compile("([0-9]{1,13}(\\.[0-9]+)?\\s*\\*\\s*)+[0-9]{1,13}(\\.[0-9]+)?\\s*");
 
     public static int multiply(int... factors) {
         int product = 1;
@@ -43,20 +43,41 @@ public class Multiplication {
         return productString;
     }
 
-    public int parseMultiplication(String operation) {
+    public int parseIntMultiplication(String operation) {
         int result = 0;
         Matcher patternMatcher = MUL_PATTERN_INT.matcher(operation);
 
         if (patternMatcher.find()) {
             String matchedOperation = patternMatcher.group();
             String[] splitOperationString = splitOperation(matchedOperation);
-            int[] splitOperationValues = convertToValue(splitOperationString);
+            int[] splitOperationValues = convertToIntValue(splitOperationString);
             result = multiply(splitOperationValues);
         }
         return result;
     }
 
-    private int[] convertToValue(String[] splitOperation) {
+    public double parseDoubleMultiplication(String operation) {
+        double result = -1.0d;
+        Matcher patternMatcher = MUL_PATTERN_DOUBLE.matcher(operation);
+
+        if (patternMatcher.find()) {
+            String matchedOperation = patternMatcher.group();
+            String[] splitOperationString = splitOperation(matchedOperation);
+            double[] splitOperationValues = convertToDoubleValue(splitOperationString);
+            result = multiply(splitOperationValues);
+        }
+        return result;
+    }
+
+    private double[] convertToDoubleValue(String[] splitOperation) {
+        double[] splitOperationValues = new double[splitOperation.length];
+        for (int i = 0; i < splitOperation.length; i++) {
+            splitOperationValues[i] = Double.parseDouble(splitOperation[i]);
+        }
+        return splitOperationValues;
+    }
+
+    private int[] convertToIntValue(String[] splitOperation) {
         int[] splitOperationValues = new int[splitOperation.length];
         for (int i = 0; i < splitOperation.length; i++) {
             splitOperationValues[i] = Integer.parseInt(splitOperation[i]);

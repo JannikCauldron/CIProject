@@ -57,7 +57,7 @@ public class MultiplicationTest {
         String operation = "3*2";
         int expected = 6;
         // Act
-        int result = mul.parseMultiplication(operation);
+        int result = mul.parseIntMultiplication(operation);
         // Assert
         MatcherAssert.assertThat("Wrong product (without spaces)", result, CoreMatchers.equalTo(expected));
     }
@@ -68,7 +68,7 @@ public class MultiplicationTest {
         String operation = " 10  *   5   ";
         int expected = 50;
         // Act
-        int result = mul.parseMultiplication(operation);
+        int result = mul.parseIntMultiplication(operation);
         // Assert
         MatcherAssert.assertThat("Wrong product (with spaces)", result, CoreMatchers.equalTo(expected));
     }
@@ -79,8 +79,20 @@ public class MultiplicationTest {
         String operation = " 10  *   5  *2* 5";
         int expected = 500;
         // Act
-        int result = mul.parseMultiplication(operation);
+        int result = mul.parseIntMultiplication(operation);
         // Assert
         MatcherAssert.assertThat("Wrong product (multiple values)", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void multiplicationDoubleTest() throws Exception {
+        // Arrange
+        String operation = "10.2 * 3  ";
+        double expected = 30.6;
+        // Act
+        double result = mul.parseDoubleMultiplication(operation);
+        // Assert
+        MatcherAssert.assertThat("Wrong product (double values)", result, CoreMatchers.equalTo(expected));
+    }
+
 }
