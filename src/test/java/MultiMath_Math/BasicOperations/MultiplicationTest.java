@@ -25,5 +25,26 @@ public class MultiplicationTest {
         MatcherAssert.assertThat("Integer Multiplication Test:", resultArray, CoreMatchers.equalTo(expectedProductArray));
     }
 
+    @Test
+    public void doubleMultiplicationTest() throws Exception {
+        // Arrange
+        double[][] factorsArray = {{3d, 5d},         // integer range
+                {2d, 3d, 3d, 7d, 11d, 31d, 151d, 332d},    // above integer range
+                {3.01d, 123.0d, 5.08d},                 // double with decimal places (round decimals 4)
+                {0.01d, 0.3d},                       // double with only decimals (round decimals 4)
+                {0.001d, 0.03d}};                    // double with product rounds to 0.0000 (round decimals 4)
+        double[] expectedProductArray = {15d, 2153971512d, 1880.7684d, 0.003d, 0.0000d};
+        // Act
+        int ArrayLength = factorsArray.length;
+        double[] resultArray = new double[ArrayLength];
+        for (int i = 0; i < ArrayLength; i++) {
+            resultArray[i] = Multiplication.multiply(factorsArray[i]);
+        }
+        // Assert
+        MatcherAssert.assertThat("Integer Multiplication Test:", resultArray, CoreMatchers.equalTo(expectedProductArray));
+    }
+
+
+
 
 }
