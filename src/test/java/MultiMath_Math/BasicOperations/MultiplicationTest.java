@@ -48,7 +48,7 @@ public class MultiplicationTest {
             resultArray[i] = Multiplication.multiply(factorsArray[i]);
         }
         // Assert
-        MatcherAssert.assertThat("Integer Multiplication Test:", resultArray, CoreMatchers.equalTo(expectedProductArray));
+        MatcherAssert.assertThat("Double Multiplication Test:", resultArray, CoreMatchers.equalTo(expectedProductArray));
     }
 
     @Test
@@ -72,5 +72,4 @@ public class MultiplicationTest {
         // Assert
         MatcherAssert.assertThat("Wrong product (with spaces)", result, CoreMatchers.equalTo(expected));
     }
-
 }
