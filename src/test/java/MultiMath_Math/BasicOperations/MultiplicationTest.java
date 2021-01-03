@@ -87,8 +87,8 @@ public class MultiplicationTest {
     @Test
     public void multiplicationDoubleTest() throws Exception {
         // Arrange
-        String[] operationArray = {"10.2 * 3  ", "-3 * 1.1", "2.3 * -1.1" };
-        double[] expected = {30.6, -3.3, -2.53};
+        String[] operationArray = {"10.2 * 3  ", "-3 * 1.1", "2.3 * -1.1", "2.2 * -3.3 * -5 * -1"};
+        double[] expected = {30.6, -3.3, -2.53, -36.3};
         int ArrayLength = operationArray.length;
         double[] resultArray = new double[ArrayLength];
         // Act
