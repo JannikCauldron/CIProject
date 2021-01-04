@@ -23,4 +23,15 @@ public class ModuloTest {
         // Assert
         assertThat("wrong modulo", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void moduloWithoutSpaceTest() {
+        // Arrange
+        String operation = "3%2";
+        double expected = 1;
+        // Act
+        double result = modulo.moduloOp(operation);
+        // Assert
+        assertThat("wrong modulo with spaces", result, CoreMatchers.equalTo(expected));
+    }
 }
