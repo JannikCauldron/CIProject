@@ -35,4 +35,15 @@ class SubtractionTest {
         //assert
         assertThat("multipleSimpleSubtraction went wrong", actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void multipleSimpleSubtractionWithMissingSpaces() {
+        //arrange
+        String operation = "17 -8- 5";
+        int expectedResult = 4;
+        //act
+        int actualResult = sub.operate(operation);
+        //assert
+        assertThat("multipleSimpleSubtractionWithMissingSpaces went wrong", actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }

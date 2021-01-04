@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Subtraction {
-    public Pattern subtractionPattern = Pattern.compile(" - \\d+");
+    public Pattern subtractionPattern = Pattern.compile("\\s*-\\s*\\d+");
     public Pattern numbPattern = Pattern.compile("\\d+");
 
     public int operate(String operation) {
