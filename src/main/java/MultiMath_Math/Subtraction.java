@@ -4,21 +4,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Subtraction {
-    public Pattern subtractionPattern = Pattern.compile("\\s*-\\s*\\d+");
-    public Pattern numbPattern = Pattern.compile("\\d+");
+    public final Pattern SUBTRACTION_PATTERN = Pattern.compile("\\s*-\\s*\\d+");
+    public final Pattern NUMB_PATTERN = Pattern.compile("\\d+");
 
     public int operate(String operation) {
         int operationResult = 0;
         //first number to result
-        Matcher numbMatcher = numbPattern.matcher(operation);
+        Matcher numbMatcher = NUMB_PATTERN.matcher(operation);
         if (numbMatcher.find()) {
             operationResult = Integer.parseInt(numbMatcher.group());
         }
         //subtract every following number
-        Matcher subMatcher = subtractionPattern.matcher(operation);
+        Matcher subMatcher = SUBTRACTION_PATTERN.matcher(operation);
         while (subMatcher.find()) {
             String nextSubMatch = subMatcher.group();
-            numbMatcher = numbPattern.matcher(nextSubMatch);
+            numbMatcher = NUMB_PATTERN.matcher(nextSubMatch);
             operationResult = subNumb(operationResult, numbMatcher);
         }
 

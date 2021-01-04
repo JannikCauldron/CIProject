@@ -22,7 +22,8 @@ class SubtractionTest {
         //act
         int actualResult = sub.operate(operation);
         //assert
-        assertThat("simpleSubtraction went wrong", actualResult, CoreMatchers.equalTo(expectedResult));
+        assertThat("simpleSubtraction went wrong - operation '" + operation + "' calculated to " + actualResult,
+                actualResult, CoreMatchers.equalTo(expectedResult));
     }
 
     @Test
@@ -33,7 +34,8 @@ class SubtractionTest {
         //act
         int actualResult = sub.operate(operation);
         //assert
-        assertThat("multipleSimpleSubtraction went wrong", actualResult, CoreMatchers.equalTo(expectedResult));
+        assertThat("multipleSimpleSubtraction went wrong - operation '" + operation + "' calculated to " + actualResult,
+                actualResult, CoreMatchers.equalTo(expectedResult));
     }
 
     @Test
@@ -44,6 +46,7 @@ class SubtractionTest {
         //act
         int actualResult = sub.operate(operation);
         //assert
-        assertThat("multipleSimpleSubtractionWithMissingSpaces went wrong", actualResult, CoreMatchers.equalTo(expectedResult));
+        assertThat("multipleSimpleSubtractionWithMissingSpaces went wrong - operation '" + operation + "' calculated to " + actualResult,
+                actualResult, CoreMatchers.equalTo(expectedResult));
     }
 }
