@@ -1,4 +1,4 @@
-package MultiMath_Math;
+package MultiMath_Math.BasicOperations;
 
 public class SquareRoot {
 

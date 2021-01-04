@@ -1,5 +1,6 @@
-package MultiMath_Math;
+package MultiMath_Math.BasicOperations;
 
+import MultiMath_Math.BasicOperations.SquareRoot;
 import org.hamcrest.CoreMatchers;
 import static org.junit.jupiter.api.Assertions.*;
 
