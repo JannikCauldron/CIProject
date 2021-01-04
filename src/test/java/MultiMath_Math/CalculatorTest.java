@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
     Calculator calc;
@@ -67,5 +68,17 @@ class CalculatorTest {
         double result = calc.operate(operation);
         //assert
         assertThat("result of simple addition with larger numbers '" + operation + "' is wrong", result, CoreMatchers.equalTo(expectedResult));
+    }
+
+    @Test
+    void simpleAdditionWithWrongOperands() {
+        //arrange
+        String operation = "3 + xy";
+        String expectedResult = "Invalid Operands for addition";
+        //act
+        Exception result = assertThrows(IllegalArgumentException.class, () -> calc.operate(operation));
+        String resultMsg = result.getMessage();
+        //assert
+        assertTrue(resultMsg.contentEquals(expectedResult));
     }
 }

@@ -7,8 +7,12 @@ public class Calculator {
 
     private static final Pattern NUMB_PATTERN = Pattern.compile("\\d+(\\.\\d+)*");
     private static final Pattern ADD_PATTERN = Pattern.compile("\\s*\\+\\s*" + NUMB_PATTERN);
+    private static final Pattern INVALID_CHAR_PATTERN = Pattern.compile("[a-zA-Z\"$§&/?#_]");
 
     public double operate(String operation) {
+        if (INVALID_CHAR_PATTERN.matcher(operation).find()) {
+            throw new IllegalArgumentException("Invalid Operands for addition");
+        }
         double operationResult = 0.0;
         //match first integer
         Matcher numbMatcher = NUMB_PATTERN.matcher(operation);
