@@ -24,4 +24,15 @@ class SubtractionTest {
         //assert
         assertThat("simpleSubtraction went wrong", actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void multipleSimpleSubtraction() {
+        //arrange
+        String operation = "17 - 8 - 5";
+        int expectedResult = 4;
+        //act
+        int actualResult = sub.operate(operation);
+        //assert
+        assertThat("multipleSimpleSubtraction went wrong", actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }
