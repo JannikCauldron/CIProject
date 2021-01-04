@@ -25,7 +25,7 @@ public class ModuloTest {
     }
 
     @Test
-    public void moduloWithoutSpaceTest() {
+    public void moduloWithoutSpaceTest() throws Exception{
         // Arrange
         String operation = "3%2";
         double expected = 1;
@@ -36,13 +36,13 @@ public class ModuloTest {
     }
 
     @Test
-    public void moduloMoreThanOneDigitTest() {
+    public void moduloMoreThanOneDigitTest() throws Exception{
         // Arrange
         String operation = "13 % 10";
         double expected = 13%10;
         // Act
         double result = modulo.moduloOp(operation);
         // Assert
-        assertThat("wrong modulo for more than one digit numbers", result, CoreMatchers.equalTo(expected));
+        assertThat("wrong modulo for numbers bigger than one digit", result, CoreMatchers.equalTo(expected));
     }
 }

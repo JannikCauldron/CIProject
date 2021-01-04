@@ -9,9 +9,9 @@ public class Modulo {
 
     public double moduloOp(String operation) {
         double result = 0;
-        Matcher modMatcher = MOD_PATTERN.matcher(operation);
-        if (modMatcher.find()) {
-            String matchedOperation = modMatcher.group();
+        Matcher patternMatcher = MOD_PATTERN.matcher(operation);
+        if (patternMatcher.find()) {
+            String matchedOperation = patternMatcher.group();
             int matchedOperationLength = matchedOperation.length();
             int moduloIndex = operation.indexOf("%");
             result = Double.parseDouble(matchedOperation.substring(0,moduloIndex)) % Double.parseDouble(matchedOperation.substring(matchedOperationLength-moduloIndex,matchedOperationLength));
