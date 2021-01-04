@@ -34,4 +34,15 @@ public class ModuloTest {
         // Assert
         assertThat("wrong modulo with spaces", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void moduloMoreThanOneDigitTest() {
+        // Arrange
+        String operation = "13 % 10";
+        double expected = 13%10;
+        // Act
+        double result = modulo.moduloOp(operation);
+        // Assert
+        assertThat("wrong modulo for more than one digit numbers", result, CoreMatchers.equalTo(expected));
+    }
 }
