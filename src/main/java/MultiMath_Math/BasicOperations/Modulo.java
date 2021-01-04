@@ -13,9 +13,9 @@ public class Modulo {
         if (patternMatcher.find()) {
             String matchedOperation = patternMatcher.group();
             int matchedOperationLength = matchedOperation.length();
-            int moduloIndex = operation.indexOf("%");
-            int restOfString = matchedOperationLength - moduloIndex;
-            result = Double.parseDouble(matchedOperation.substring(0,moduloIndex)) % Double.parseDouble(matchedOperation.substring(matchedOperationLength - restOfString + 1,matchedOperationLength));
+            int moduloCharIndex = operation.indexOf("%");
+            int stringAfterModuloChar = matchedOperationLength - moduloCharIndex;
+            result = Double.parseDouble(matchedOperation.substring(0,moduloCharIndex)) % Double.parseDouble(matchedOperation.substring(matchedOperationLength - stringAfterModuloChar + 1,matchedOperationLength));
         }
         return result;
     }

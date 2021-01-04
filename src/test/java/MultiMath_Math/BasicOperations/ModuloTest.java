@@ -1,7 +1,8 @@
 package MultiMath_Math.BasicOperations;
 
 import org.hamcrest.CoreMatchers;
-import static org.junit.Assert.assertThat;
+
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,7 @@ public class ModuloTest {
         // Act
         double result = modulo.moduloOp(operation);
         // Assert
-        assertThat("wrong modulo", result, CoreMatchers.equalTo(expected));
+        MatcherAssert.assertThat("wrong modulo", result, CoreMatchers.equalTo(expected));
     }
 
     @Test
@@ -32,7 +33,7 @@ public class ModuloTest {
         // Act
         double result = modulo.moduloOp(operation);
         // Assert
-        assertThat("wrong modulo with spaces", result, CoreMatchers.equalTo(expected));
+        MatcherAssert.assertThat("wrong modulo with spaces", result, CoreMatchers.equalTo(expected));
     }
 
     @Test
@@ -43,7 +44,7 @@ public class ModuloTest {
         // Act
         double result = modulo.moduloOp(operation);
         // Assert
-        assertThat("wrong modulo for numbers bigger than one digit", result, CoreMatchers.equalTo(expected));
+        MatcherAssert.assertThat("wrong modulo for numbers bigger than one digit", result, CoreMatchers.equalTo(expected));
     }
 
     @Test
@@ -54,6 +55,6 @@ public class ModuloTest {
         // Act
         double result = modulo.moduloOp(operation);
         // Assert
-        assertThat("wrong modulo for numbers with different length", result, CoreMatchers.equalTo(expected));
+        MatcherAssert.assertThat("wrong modulo for numbers with different length", result, CoreMatchers.equalTo(expected));
     }
 }
