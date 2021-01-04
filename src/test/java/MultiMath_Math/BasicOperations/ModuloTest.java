@@ -45,4 +45,15 @@ public class ModuloTest {
         // Assert
         assertThat("wrong modulo for numbers bigger than one digit", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void moduloNumbersDifferentLengthTest() throws Exception{
+        // Arrange
+        String operation = "10%3";
+        double expected = 10%3;
+        // Act
+        double result = modulo.moduloOp(operation);
+        // Assert
+        assertThat("wrong modulo for numbers with different length", result, CoreMatchers.equalTo(expected));
+    }
 }
