@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SubtractionTest {
     Subtraction sub;
@@ -60,5 +61,17 @@ class SubtractionTest {
         //assert
         assertThat("multipleSimpleSubtractionWithMissingSpaces went wrong - operation '" + operation + "' calculated to " + actualResult,
                 actualResult, CoreMatchers.equalTo(expectedResult));
+    }
+
+    @Test
+    void simpleSubtractionWithWrongOperands() {
+        //arrange
+        String operation = "53.8 - 5$";
+        String expectedResult = "Invalid Operands for subtraction";
+        //act
+        Exception result = assertThrows(IllegalArgumentException.class, () -> sub.operate(operation));
+        String actualResultMsg = result.getMessage();
+        //assert
+        assertTrue(actualResultMsg.contentEquals(expectedResult));
     }
 }

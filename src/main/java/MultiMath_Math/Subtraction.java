@@ -6,8 +6,12 @@ import java.util.regex.Pattern;
 public class Subtraction {
     public final Pattern NUMB_PATTERN = Pattern.compile("\\d+(\\.\\d+)*");
     public final Pattern SUBTRACTION_PATTERN = Pattern.compile("\\s*-\\s*" + NUMB_PATTERN);
+    public final Pattern INVALID_CHAR_PATTERN = Pattern.compile("\\$");
 
     public double operate(String operation) {
+        if (INVALID_CHAR_PATTERN.matcher(operation).find()) {
+            throw new IllegalArgumentException("Invalid Operands for subtraction");
+        }
         double operationResult = 0;
         //first number to result
         Matcher numbMatcher = NUMB_PATTERN.matcher(operation);
