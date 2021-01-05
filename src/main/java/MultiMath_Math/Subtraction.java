@@ -4,15 +4,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Subtraction {
-    public final Pattern SUBTRACTION_PATTERN = Pattern.compile("\\s*-\\s*\\d+");
-    public final Pattern NUMB_PATTERN = Pattern.compile("\\d+");
+    public final Pattern SUBTRACTION_PATTERN = Pattern.compile("\\s*-\\s*\\d+(\\.\\d+)*");
+    public final Pattern NUMB_PATTERN = Pattern.compile("\\d+(\\.\\d+)*");
 
-    public int operate(String operation) {
-        int operationResult = 0;
+    public double operate(String operation) {
+        double operationResult = 0;
         //first number to result
         Matcher numbMatcher = NUMB_PATTERN.matcher(operation);
         if (numbMatcher.find()) {
-            operationResult = Integer.parseInt(numbMatcher.group());
+            operationResult = Double.parseDouble(numbMatcher.group());
         }
         //subtract every following number
         Matcher subMatcher = SUBTRACTION_PATTERN.matcher(operation);
@@ -25,9 +25,9 @@ public class Subtraction {
         return operationResult;
     }
 
-    private int subNumb(int result, Matcher numbMatcher) {
+    private double subNumb(double result, Matcher numbMatcher) {
         if (numbMatcher.find()) {
-            result -= Integer.parseInt(numbMatcher.group());
+            result -= Double.parseDouble(numbMatcher.group());
         }
         return result;
     }

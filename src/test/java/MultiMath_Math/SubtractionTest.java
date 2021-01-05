@@ -18,9 +18,9 @@ class SubtractionTest {
     void simpleSubtraction() {
         //arrange
         String operation = "17 - 8";
-        int expectedResult = 9;
+        double expectedResult = 9;
         //act
-        int actualResult = sub.operate(operation);
+        double actualResult = sub.operate(operation);
         //assert
         assertThat("simpleSubtraction went wrong - operation '" + operation + "' calculated to " + actualResult,
                 actualResult, CoreMatchers.equalTo(expectedResult));
@@ -30,9 +30,9 @@ class SubtractionTest {
     void multipleSimpleSubtraction() {
         //arrange
         String operation = "17 - 8 - 5";
-        int expectedResult = 4;
+        double expectedResult = 4;
         //act
-        int actualResult = sub.operate(operation);
+        double actualResult = sub.operate(operation);
         //assert
         assertThat("multipleSimpleSubtraction went wrong - operation '" + operation + "' calculated to " + actualResult,
                 actualResult, CoreMatchers.equalTo(expectedResult));
@@ -42,9 +42,21 @@ class SubtractionTest {
     void multipleSimpleSubtractionWithMissingSpaces() {
         //arrange
         String operation = "17 -8- 5";
-        int expectedResult = 4;
+        double expectedResult = 4;
         //act
-        int actualResult = sub.operate(operation);
+        double actualResult = sub.operate(operation);
+        //assert
+        assertThat("multipleSimpleSubtractionWithMissingSpaces went wrong - operation '" + operation + "' calculated to " + actualResult,
+                actualResult, CoreMatchers.equalTo(expectedResult));
+    }
+
+    @Test
+    void simpleSubtractionWithDoubles() {
+        //arrange
+        String operation = "53.8 - 24.9";
+        double expectedResult = 28.9;
+        //act
+        double actualResult = sub.operate(operation);
         //assert
         assertThat("multipleSimpleSubtractionWithMissingSpaces went wrong - operation '" + operation + "' calculated to " + actualResult,
                 actualResult, CoreMatchers.equalTo(expectedResult));
