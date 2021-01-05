@@ -4,8 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Subtraction {
-    public final Pattern SUBTRACTION_PATTERN = Pattern.compile("\\s*-\\s*\\d+(\\.\\d+)*");
     public final Pattern NUMB_PATTERN = Pattern.compile("\\d+(\\.\\d+)*");
+    public final Pattern SUBTRACTION_PATTERN = Pattern.compile("\\s*-\\s*" + NUMB_PATTERN);
 
     public double operate(String operation) {
         double operationResult = 0;
