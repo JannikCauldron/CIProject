@@ -1,0 +1,71 @@
+package MultiMath_Math.BasicOperations;
+import MultiMath_Math.BasicOperations.Power;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+
+public class PowerTest {
+    Power power;
+
+    @BeforeEach
+    void setUp() throws Exception {
+        power = new Power();
+    }
+
+    @Test
+
+    public void exponentiateTest() throws Exception {
+        //Arrange
+        String operation = "3 ^ 2";
+        double expected = Math.pow(3, 2);
+        //Act
+        double result = power.exponentiate(operation);
+        //Assert
+        MatcherAssert.assertThat("wrong power", result, CoreMatchers.equalTo(expected));
+    }
+
+    @Test
+    public void powerWithoutSpaceTest() throws Exception {
+        // Arrange
+        String operation = "3^2";
+        double expected = 9;
+        // Act
+        double result = power.exponentiate(operation);
+        // Assert
+        MatcherAssert.assertThat("wrong power without spaces", result, CoreMatchers.equalTo(expected));
+    }
+
+    @Test
+    public void powerMoreThanOneDigitTest() throws Exception {
+        // Arrange
+        String operation = "11 ^ 10";
+        double expected = 25937424601L;
+        // Act
+        double result = power.exponentiate(operation);
+        // Assert
+        MatcherAssert.assertThat("wrong power for numbers bigger than one digit", result, CoreMatchers.equalTo(expected));
+    }
+
+    @Test
+    public void powerNumbersDifferentLengthTest() throws Exception {
+        // Arrange
+        String operation = "11^2";
+        double expected = 121;
+        // Act
+        double result = power.exponentiate(operation);
+        // Assert
+        MatcherAssert.assertThat("wrong power for numbers with different length", result, CoreMatchers.equalTo(expected));
+    }
+
+    @Test
+    public void powerOfNegativeTest() throws Exception {
+        // Arrange
+        String operation = "-3^3";
+        double expected = -27;
+        // Act
+        double result = power.exponentiate(operation);
+        // Assert
+        MatcherAssert.assertThat("wrong power for negative numbers", result, CoreMatchers.equalTo(expected));
+    }
+}
