@@ -1,9 +1,9 @@
-package MultiMath_Math;
+package MultiMath_Math.BasicOperations;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Calculator {
+public class Addition {
 
     private static final Pattern NUMB_PATTERN = Pattern.compile("\\d+(\\.\\d+)*");
     private static final Pattern ADD_PATTERN = Pattern.compile("\\s*\\+\\s*" + NUMB_PATTERN);

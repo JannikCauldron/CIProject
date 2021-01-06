@@ -1,4 +1,4 @@
-package MultiMath_Math;
+package MultiMath_Math.BasicOperations;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-class CalculatorTest {
-    Calculator calc;
+class AdditionTest {
+    Addition calc;
 
     @BeforeEach
     void setUp() throws Exception {
-        calc = new Calculator();
+        calc = new Addition();
     }
 
     @Test
