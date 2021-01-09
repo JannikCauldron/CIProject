@@ -15,10 +15,13 @@ public class Faculty {
         return output;
     }
 
-    public int faculty(String operation) {
+    public int faculty(String operation) throws Exception {
         int input = facultyMatch(operation);
-        int result = FACULTY_BASE_RESULT;
-        for (int factor = FIRST_ACTIVE_FACTOR; factor <= input; factor++) result *= factor;
-        return result;
+        long result = FACULTY_BASE_RESULT;
+        for (long factor = FIRST_ACTIVE_FACTOR; factor <= input; factor++) {
+            if (factor * result > Integer.MAX_VALUE) throw new Exception("Overflow!");
+            result *= factor;
+        }
+        return (int)result;
     }
 }
