@@ -2,13 +2,13 @@ package MultiMath_Math.BasicOperations;
 
 public class Sinus {
 
-    private String sinusPattern = "^sin\\(\\s*[1-9]+\\s*\\)$|^sin\\(\\s*0\\s*\\)";
+    private String sinusPattern = "^sin\\(\\s*[-1-9]+\\s*\\)$|^sin\\(\\s*0\\s*\\)";
 
     public double calcSinus(String op) {
         int numberOfExpression;
         double result;
         if (op.matches(sinusPattern)) {
-            String numberOnlyStr = op.replaceAll("[^0-9]", "");
+            String numberOnlyStr = op.replaceAll("[a-z\\(\\)\\s]", "");
             numberOfExpression = Integer.parseInt(numberOnlyStr);
         } else {
             throw new IllegalArgumentException("No valid expression: " + op);
