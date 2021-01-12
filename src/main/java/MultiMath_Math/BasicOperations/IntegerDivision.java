@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 
 public class IntegerDivision {
 
-    private Pattern DIV_PATTERN = Pattern.compile("div\\([0-9],[0-9]\\)");
+    private Pattern DIV_PATTERN = Pattern.compile("div\\s*\\(\\s*[0-9]\\s*,\\s*[0-9]\\s*\\)");
 
     public int div(String operation) {
         int result = 0;

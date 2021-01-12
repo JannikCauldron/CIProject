@@ -23,4 +23,15 @@ public class IntegerDivisionTest {
         //Assert
         MatcherAssert.assertThat("wrong integer division", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void intDivisionWithSpaceTest() throws Exception {
+        //Arrange
+        String operation = "div ( 7  , 3    )";
+        int expected = 2;
+        //Act
+        int result = 7 / 3;
+        //Assert
+        MatcherAssert.assertThat("wrong integer division with space", result, CoreMatchers.equalTo(expected));
+    }
 }
