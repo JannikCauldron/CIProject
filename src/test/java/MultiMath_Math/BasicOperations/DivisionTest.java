@@ -1,8 +1,12 @@
 package MultiMath_Math.BasicOperations;
 
+import MultiMath_Math.BasicExceptions.DividedByZeroException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class DivisionTest {
@@ -30,7 +34,6 @@ public class DivisionTest {
     @Test
     public void integerDivisionTest() throws Exception {
         // Arrange
-        // Arrange
         int[][] divArray = {{5, 2},         // round up
                 {50, 2, 5, 5},                 // no rounding necessary
                 {12, 11},                      // round down
@@ -45,6 +48,23 @@ public class DivisionTest {
         }
         // Assert
         MatcherAssert.assertThat("Integer Division Test:", resultArray, CoreMatchers.equalTo(expectedQuotientArray));
+    }
+
+    @Test
+    public void whenDividedByZeroExceptionThrown_thenAssertionSucceeds() throws DividedByZeroException {
+        // Arrange
+        int dividend = 10;
+        int divisor = 0;
+        String expectedMessage = "You can't divide by 0! Divisor: 0";
+        String resultMessage = "";
+        DividedByZeroException exception;
+        // Act
+        exception = assertThrows(DividedByZeroException.class, () -> {
+            Division.divide(dividend, divisor);
+        });
+        resultMessage = exception.getMessage();
+        // Assert
+        assertTrue(resultMessage.contains(expectedMessage));
     }
 
 
