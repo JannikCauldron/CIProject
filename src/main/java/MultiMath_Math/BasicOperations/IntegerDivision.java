@@ -5,11 +5,11 @@ import java.util.regex.Matcher;
 
 public class IntegerDivision {
 
-    private final Pattern DIV_PATTERN = Pattern.compile("div\\s*\\(\\s*[0-9]\\s*,\\s*[0-9]\\s*\\)");
+    private final Pattern INTDIV_PATTERN = Pattern.compile("div\\s*\\(\\s*[0-9]\\s*,\\s*[0-9]\\s*\\)");
 
     public int div(String operation) {
         int result = 0;
-        Matcher divMatcher = DIV_PATTERN.matcher(operation);
+        Matcher divMatcher = INTDIV_PATTERN.matcher(operation);
         if (divMatcher.find()) {
             String matchedOperation = divMatcher.group();
             result = Integer.parseInt(matchedOperation.substring(4,5)) / Integer.parseInt(matchedOperation.substring(6,7));
