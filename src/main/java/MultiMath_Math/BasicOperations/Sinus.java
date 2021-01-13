@@ -2,14 +2,14 @@ package MultiMath_Math.BasicOperations;
 
 public class Sinus {
 
-    private String SINUS_PATTERN = "^sin\\(\\s*[-1-9][0-9]*\\s*\\)$|^sin\\(\\s*0\\s*\\)";
+    private static final String SINUS_PATTERN = "^sin\\(\\s*[-1-9][0-9]*\\s*\\)$|^sin\\(\\s*0\\s*\\)";
+    private static final String SINUS_REPLACE_PATTERN = "[a-z\\(\\)\\s]";
 
     public double calcSinus(String op) {
-        int numberOfExpression;
         double result;
+        int numberOfExpression;
         if (matchSinus(op)) {
-            String numberOnlyStr = extractNumberOfSinusExpression(op);
-            numberOfExpression = Integer.parseInt(numberOnlyStr);
+            numberOfExpression = extractNumberOfSinusExpression(op);
         } else {
             throw new IllegalArgumentException("No valid expression: " + op);
         }
@@ -17,9 +17,11 @@ public class Sinus {
         return result;
     }
 
-    private String extractNumberOfSinusExpression(String op) {
-        String numberOnlyStr = op.replaceAll("[a-z\\(\\)\\s]", "");
-        return numberOnlyStr;
+    private int extractNumberOfSinusExpression(String op) {
+        int numberOfExpression;
+        String numberOnlyStr = op.replaceAll(SINUS_REPLACE_PATTERN, "");
+        numberOfExpression = Integer.parseInt(numberOnlyStr);
+        return numberOfExpression;
     }
 
     private boolean matchSinus(String op) {
