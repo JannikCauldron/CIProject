@@ -7,10 +7,8 @@ public class Cosinus {
     public static final String REPLACE_PATTERN = "\\D";
 
     public double calcCosinus(String op) {
-        int numberOfSinusExpression;
         if (matchCosinusExpression(op)) {
-            numberOfSinusExpression = extractNumberOfCosinusExpression(op);
-            return Math.cos(numberOfSinusExpression);
+            return Math.cos(extractNumberOfCosinusExpression(op));
         } else {
             throw new IllegalArgumentException("Error in cosinus expression");
         }
@@ -18,8 +16,7 @@ public class Cosinus {
 
     private int extractNumberOfCosinusExpression(String op) {
         String numberOnlyStr = op.replaceAll(REPLACE_PATTERN, "");
-        int numberOfExpression = Integer.parseInt(numberOnlyStr);
-        return numberOfExpression;
+        return Integer.parseInt(numberOnlyStr);
     }
 
     private boolean matchCosinusExpression(String op) {
