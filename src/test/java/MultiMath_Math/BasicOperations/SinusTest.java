@@ -77,4 +77,16 @@ public class SinusTest {
         // Assert
         MatcherAssert.assertThat(result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void sinusWithTennerArgumentTest() throws Exception {
+        // Arrange
+        String number = "10";
+        String op = "sin(" + number +  ")";
+        double expected = Math.sin(Integer.parseInt(number));
+        // Act
+        double result = obj.calcSinus(op);
+        // Assert
+        MatcherAssert.assertThat(result, CoreMatchers.equalTo(expected));
+    }
 }

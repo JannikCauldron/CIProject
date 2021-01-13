@@ -2,7 +2,7 @@ package MultiMath_Math.BasicOperations;
 
 public class Sinus {
 
-    private String SINUS_PATTERN = "^sin\\(\\s*[-1-9]+\\s*\\)$|^sin\\(\\s*0\\s*\\)";
+    private String SINUS_PATTERN = "^sin\\(\\s*[-1-9][0-9]*\\s*\\)$|^sin\\(\\s*0\\s*\\)";
 
     public double calcSinus(String op) {
         int numberOfExpression;
