@@ -3,7 +3,7 @@ package MultiMath_Math.BasicOperations;
 
 public class Cosinus {
 
-    public static final String COSINUS_PATTERN = "^cos\\(\\s*\\d+\\s*\\)$";
+    public static final String COSINUS_PATTERN = "^cos\\(\\s*-{0,1}\\d+\\s*\\)$";
     public static final String REPLACE_PATTERN = "\\D";
 
     public double calcCosinus(String op) {

@@ -64,4 +64,16 @@ public class CosinusTest {
         // Assert
         assertTrue(resultMsg.contentEquals(expectedMsg));
     }
+
+    @Test
+    public void cosinusWithNegativDigitExpressionTest() {
+        // Arrange
+        String number = "-10";
+        String op = "cos(" + number + ")";
+        double expected = Math.cos(Integer.parseInt(number));
+        // Act
+        double result = obj.calcCosinus(op);
+        // Assert
+        MatcherAssert.assertThat(result, CoreMatchers.equalTo(expected));
+    }
 }
