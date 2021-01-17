@@ -51,17 +51,15 @@ public class DivisionTest {
     }
 
     @Test
-    public void whenDividedByZeroExceptionThrown_thenAssertionSucceeds() throws DividedByZeroException {
+    public void whenDividedByZeroExceptionThrown_thenAssertionSucceeds() {
         // Arrange
         int dividend = 10;
         int divisor = 0;
         String expectedMessage = "You can't divide by 0! Divisor: 0";
-        String resultMessage = "";
+        String resultMessage;
         DividedByZeroException exception;
         // Act
-        exception = assertThrows(DividedByZeroException.class, () -> {
-            Division.divide(dividend, divisor);
-        });
+        exception = assertThrows(DividedByZeroException.class, () -> Division.divide(dividend, divisor));
         resultMessage = exception.getMessage();
         // Assert
         assertTrue(resultMessage.contains(expectedMessage));

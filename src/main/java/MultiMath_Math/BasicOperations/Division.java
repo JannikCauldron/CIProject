@@ -108,7 +108,7 @@ public class Division {
 
     private static String[] splitOperation(String matchedOperation) {
         matchedOperation = removeWhitespace(matchedOperation);
-        return matchedOperation.split("\\/");
+        return matchedOperation.split("/");
     }
 
     private static String removeWhitespace(String matchedOperation) {
