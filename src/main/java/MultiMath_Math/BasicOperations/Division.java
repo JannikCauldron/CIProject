@@ -14,7 +14,8 @@ public class Division {
 
     private static final String DOUBLE_DECIMAL_FORMAT = "#.####";
     private static final String INT_DECIMAL_FORMAT = "#";
-    private static final Pattern DIV_PATTERN_INT = Pattern.compile("([-0-9]+\\s*\\/\\s*)+[-0-9]+");
+    private static final Pattern DIV_PATTERN_INT = Pattern.compile("([-0-9]+\\s*/\\s*)+[-0-9]+");
+    private static final Pattern DIV_PATTERN_DOUBLE = Pattern.compile("([-0-9]{1,13}(\\.[0-9]+)?\\s*/\\s*)+[-0-9]{1,13}(\\.[-0-9]+)?\\s*");
 
     @SuppressWarnings("UnnecessaryLocalVariable")
     public static double divide(double... divValues) throws DividedByZeroException {
@@ -74,6 +75,29 @@ public class Division {
         return result;
     }
 
+
+    public static double parseDoubleDivision(String operation) throws DividedByZeroException {
+        double result = 0;
+        Matcher patternMatcher = DIV_PATTERN_DOUBLE.matcher(operation);
+
+        if (patternMatcher.find()) {
+            String matchedOperation = patternMatcher.group();
+            String[] splitOperationString = splitOperation(matchedOperation);
+            double[] splitOperationValues = convertToDoubleValue(splitOperationString);
+            result = divide(splitOperationValues);
+        }
+
+        return result;
+    }
+
+    private static double[] convertToDoubleValue(String[] splitOperationString) {
+        double[] splitOperationValues = new double[splitOperationString.length];
+        for (int i = 0; i < splitOperationString.length; i++) {
+            splitOperationValues[i] = Double.parseDouble(splitOperationString[i]);
+        }
+        return splitOperationValues;
+    }
+
     private static int[] convertToIntValue(String[] splitOperationString) {
         int[] splitOperationValues = new int[splitOperationString.length];
         for (int i = 0; i < splitOperationString.length; i++) {
@@ -90,4 +114,5 @@ public class Division {
     private static String removeWhitespace(String matchedOperation) {
         return matchedOperation.replaceAll("\\s+", "");
     }
+
 }

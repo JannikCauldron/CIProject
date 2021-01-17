@@ -79,7 +79,20 @@ public class DivisionTest {
         }
         // Assert
         MatcherAssert.assertThat("Division Parsing Error", results, CoreMatchers.equalTo(expected));
+    }
 
+    @Test
+    public void divisionDoubleParsingTest() throws Exception {
+        // Arrange
+        String[] operations = {"1.2/3", "0.3 / 10", " 10 /0.5/  0.1"};
+        double[] expected = {0.4d, 0.03d, 200.0d};
+        double[] results = new double[expected.length];
+        // Act
+        for (int i = 0; i < operations.length; i++) {
+            results[i] = Division.parseDoubleDivision(operations[i]);
+        }
+        // Assert
+        MatcherAssert.assertThat("Division Parsing Error", results, CoreMatchers.equalTo(expected));
     }
 
 
