@@ -31,7 +31,6 @@ public class NumerologyTest {
             results[i] = Numerology.isOdd(operations[i]);
         }
         // Assert
-        MatcherAssert.assertThat("Is Even Test", results, CoreMatchers.equalTo(expected));
+        MatcherAssert.assertThat("Is Odd Test", results, CoreMatchers.equalTo(expected));
     }
-
 }
