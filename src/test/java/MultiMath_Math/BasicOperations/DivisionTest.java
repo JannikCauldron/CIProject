@@ -13,7 +13,7 @@ public class DivisionTest {
 
 
     @Test
-    public void doubleMultiplicationTest() throws Exception {
+    public void doubleDivisionTest() throws Exception {
         // Arrange
         double[][] divArray = {{5d, 2d},         // with decimals
                 {50d, 2d, 5d, 5d},               // without decimals
