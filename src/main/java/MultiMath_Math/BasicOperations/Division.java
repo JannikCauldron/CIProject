@@ -6,12 +6,15 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Division {
 
     private static final String DOUBLE_DECIMAL_FORMAT = "#.####";
     private static final String INT_DECIMAL_FORMAT = "#";
+    private static final Pattern DIV_PATTERN_INT = Pattern.compile("([-0-9]+\\s*\\/\\s*)+[-0-9]+");
 
     @SuppressWarnings("UnnecessaryLocalVariable")
     public static double divide(double... divValues) throws DividedByZeroException {
@@ -57,4 +60,34 @@ public class Division {
         return number == 0.0d;
     }
 
+    public static int parseIntDivision(String operation) throws DividedByZeroException {
+        int result = 0;
+        Matcher patternMatcher = DIV_PATTERN_INT.matcher(operation);
+
+        if (patternMatcher.find()) {
+            String matchedOperation = patternMatcher.group();
+            String[] splitOperationString = splitOperation(matchedOperation);
+            int[] splitOperationValues = convertToIntValue(splitOperationString);
+            result = divide(splitOperationValues);
+        }
+
+        return result;
+    }
+
+    private static int[] convertToIntValue(String[] splitOperationString) {
+        int[] splitOperationValues = new int[splitOperationString.length];
+        for (int i = 0; i < splitOperationString.length; i++) {
+            splitOperationValues[i] = Integer.parseInt(splitOperationString[i]);
+        }
+        return splitOperationValues;
+    }
+
+    private static String[] splitOperation(String matchedOperation) {
+        matchedOperation = removeWhitespace(matchedOperation);
+        return matchedOperation.split("\\/");
+    }
+
+    private static String removeWhitespace(String matchedOperation) {
+        return matchedOperation.replaceAll("\\s+", "");
+    }
 }

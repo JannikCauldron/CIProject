@@ -67,5 +67,20 @@ public class DivisionTest {
         assertTrue(resultMessage.contains(expectedMessage));
     }
 
+    @Test
+    public void divisionIntegerParsingTest() throws Exception {
+        // Arrange
+        String[] operations = {"6/3", "20 / 10", " 100 /10/  9"};
+        int[] expected = {2, 2, 1};
+        int[] results = new int[expected.length];
+        // Act
+        for (int i = 0; i < operations.length; i++) {
+            results[i] = Division.parseIntDivision(operations[i]);
+        }
+        // Assert
+        MatcherAssert.assertThat("Division Parsing Error", results, CoreMatchers.equalTo(expected));
+
+    }
+
 
 }
