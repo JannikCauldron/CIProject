@@ -20,4 +20,18 @@ public class NumerologyTest {
         MatcherAssert.assertThat("Is Even Test", results, CoreMatchers.equalTo(expected));
     }
 
+    @Test
+    public void isOddTest() {
+        // Arrange
+        int[] operations = {0, 1, 2, 3, 11, 12, 999998};
+        boolean[] expected = {false, true, false, true, true, false, false};
+        boolean[] results = new boolean[expected.length];
+        // Act
+        for (int i = 0; i < expected.length; i++) {
+            results[i] = Numerology.isOdd(operations[i]);
+        }
+        // Assert
+        MatcherAssert.assertThat("Is Even Test", results, CoreMatchers.equalTo(expected));
+    }
+
 }
