@@ -17,6 +17,15 @@ public class DecimalToBinary {
         }
 
         Matcher decToBinMatcher = DECIMAL_TO_BINARY_PATTERN.matcher(operation);
+        result = matchPattern(result, decToBinMatcher);
+
+        Matcher negDecToBinMatcher = NEGATIVE_DECIMAL_TO_BINARY_PATTERN.matcher(operation);
+        result = matchPattern(result, negDecToBinMatcher);
+
+        return result;
+    }
+
+    private String matchPattern(String result, Matcher decToBinMatcher) {
         if (decToBinMatcher.find()) {
             Matcher numbMatcher = NUMB_PATTERN.matcher(decToBinMatcher.group());
             if (numbMatcher.find()) {
@@ -24,62 +33,40 @@ public class DecimalToBinary {
                 //check necessary amount of bits
                 int bitAmountCounter = getBitAmount(decimalNumber);
                 //build the binary number
-                result = buildBinaryNumber(result, decimalNumber, bitAmountCounter);
+                if (decToBinMatcher.pattern() == DECIMAL_TO_BINARY_PATTERN) {
+                    result = buildBinaryNumber(result, decimalNumber, bitAmountCounter, true);
+                } else if (decToBinMatcher.pattern() == NEGATIVE_DECIMAL_TO_BINARY_PATTERN) {
+                    result = buildBinaryNumber(result, decimalNumber, bitAmountCounter, false);
+                }
             }
         }
-
-        Matcher negDecToBinMatcher = NEGATIVE_DECIMAL_TO_BINARY_PATTERN.matcher(operation);
-        if (negDecToBinMatcher.find()) {
-            Matcher numbMatcher = NUMB_PATTERN.matcher(negDecToBinMatcher.group());
-            if (numbMatcher.find()) {
-                int decimalNumber = Integer.parseInt(numbMatcher.group());
-                //check necessary amount of bits
-                int bitAmountCounter = getBitAmount(decimalNumber);
-                //build the binary number
-                result = buildNegativeBinaryNumber(result, decimalNumber, bitAmountCounter);
-            }
-        }
-
         return result;
     }
 
-    private String buildBinaryNumber(String result, int decimalNumber, int bitAmountCounter) {
+    private String buildBinaryNumber(String result, int decimalNumber, int bitAmountCounter, boolean isPositive) {
         StringBuilder resultStr = new StringBuilder(result);
-        for (int i = bitAmountCounter; i > 0; i--) {
-            if (i == 1) {
-                if (decimalNumber == 1) {
-                    resultStr.append("1");
-                } else {
-                    resultStr.append("0");
-                }
-            } else {
-                if ((decimalNumber / (int)Math.pow(2.0, i - 1)) == 1) {
-                    resultStr.append("1");
-                    decimalNumber -= (int)Math.pow(2.0, i - 1);
-                } else {
-                    resultStr.append("0");
-                }
-            }
+        if (isPositive) {
+            resultStr.append("0");
+        } else {
+            resultStr.append("1");
         }
-        return resultStr.toString();
-    }
-
-    private String buildNegativeBinaryNumber(String result, int decimalNumber, int bitAmountCounter) {
-        StringBuilder resultStr = new StringBuilder(result);
-        resultStr.append("1");
         for (int i = bitAmountCounter; i > 0; i--) {
             if (i == 1) {
                 if (decimalNumber == 1) {
-                    resultStr.append("0");
+                    if (isPositive) resultStr.append("1");
+                    else resultStr.append("0");
                 } else {
-                    resultStr.append("1");
+                    if (isPositive) resultStr.append("0");
+                    else resultStr.append("1");
                 }
             } else {
                 if ((decimalNumber / (int)Math.pow(2.0, i - 1)) == 1) {
-                    resultStr.append("0");
+                    if (isPositive) resultStr.append("1");
+                    else resultStr.append("0");
                     decimalNumber -= (int)Math.pow(2.0, i - 1);
                 } else {
-                    resultStr.append("1");
+                    if (isPositive) resultStr.append("0");
+                    else resultStr.append("1");
                 }
             }
         }

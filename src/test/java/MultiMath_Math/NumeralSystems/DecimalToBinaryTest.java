@@ -19,7 +19,7 @@ public class DecimalToBinaryTest {
     void simpleDecimalToBinaryConversion() {
         //arrange
         String operation = "bin(2)";
-        String expectedResult = "10";
+        String expectedResult = "010";
         //act
         String actualResult = numberConverter.operate(operation);
         //assert
@@ -30,7 +30,7 @@ public class DecimalToBinaryTest {
     void biggerDecimalToBinaryConversion() {
         //arrange
         String operation = "bin(5326789)";
-        String expectedResult = "10100010100011111000101";
+        String expectedResult = "010100010100011111000101";
         //act
         String actualResult = numberConverter.operate(operation);
         //assert
