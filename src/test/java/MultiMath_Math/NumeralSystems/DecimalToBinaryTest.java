@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertThat;
 
 public class DecimalToBinaryTest {
-    DecimalToBinary conv;
+    DecimalToBinary numberConverter;
 
     @BeforeEach
     void setUp() throws Exception {
-        conv = new DecimalToBinary();
+        numberConverter = new DecimalToBinary();
     }
 
     @Test
@@ -20,7 +20,7 @@ public class DecimalToBinaryTest {
         String operation = "bin(2)";
         String expectedResult = "10";
         //act
-        String actualResult = conv.operate(operation);
+        String actualResult = numberConverter.operate(operation);
         //assert
         assertThat("Umwandlung: " + operation + " wurde fehlerhaft zu: " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
     }
@@ -31,7 +31,7 @@ public class DecimalToBinaryTest {
         String operation = "bin(5326789)";
         String expectedResult = "10100010100011111000101";
         //act
-        String actualResult = conv.operate(operation);
+        String actualResult = numberConverter.operate(operation);
         //assert
         assertThat("Umwandlung: " + operation + " wurde fehlerhaft zu: " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
     }
