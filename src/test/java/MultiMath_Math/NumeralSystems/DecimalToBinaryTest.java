@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DecimalToBinaryTest {
     DecimalToBinary numberConverter;
@@ -34,5 +35,18 @@ public class DecimalToBinaryTest {
         String actualResult = numberConverter.operate(operation);
         //assert
         assertThat("Umwandlung: " + operation + " wurde fehlerhaft zu: " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
+    }
+
+    @Test
+    void decimalToBinaryConversionWithWrongInput() {
+        //arrange
+        String operation = "bin(43fe)";
+        String expectedResult = "Invalid input for conversion";
+        //act
+        Exception result = assertThrows(IllegalArgumentException.class, () -> numberConverter.operate(operation));
+        String actualResult = result.getMessage();
+        //assert
+        assertTrue(actualResult.contentEquals(expectedResult));
+        //assertThat("Umwandlung: " + operation + " wurde fehlerhaft zu: " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
     }
 }

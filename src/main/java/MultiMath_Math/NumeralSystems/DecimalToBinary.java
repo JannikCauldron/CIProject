@@ -6,16 +6,22 @@ import java.util.regex.Pattern;
 public class DecimalToBinary {
     public Pattern numbPattern = Pattern.compile("\\d+");
     public Pattern decimalToBinaryPattern = Pattern.compile("(bin)\\(" + numbPattern + "\\)");
+    public Pattern invalidInputPattern = Pattern.compile("(bin)\\((\\d*[a-z]+)+\\)");
 
     public String operate(String operation) {
         String result = "";
+
+        if (invalidInputPattern.matcher(operation).find()) {
+            throw new IllegalArgumentException("Invalid input for conversion");
+        }
 
         Matcher decToBinMatcher = decimalToBinaryPattern.matcher(operation);
         if (decToBinMatcher.find()) {
             String match = decToBinMatcher.group();
             Matcher numbMatcher = numbPattern.matcher(match);
             if (numbMatcher.find()) {
-                int decimalNumber = Integer.parseInt(numbMatcher.group());
+                String numbMatch = numbMatcher.group();
+                int decimalNumber = Integer.parseInt(numbMatch);
                 //check necessary amount of bits
                 int bitAmountCounter = getBitAmount(decimalNumber);
                 //build the binary number
