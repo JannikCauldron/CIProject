@@ -66,9 +66,7 @@ public class TangensTest {
         String expectedMsg = "Error in tangens expression";
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            obj.calcTangens(operation);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> obj.calcTangens(operation));
         String resultMsg = exception.getMessage();
         // Assert
         assertTrue(resultMsg.contentEquals(expectedMsg));
