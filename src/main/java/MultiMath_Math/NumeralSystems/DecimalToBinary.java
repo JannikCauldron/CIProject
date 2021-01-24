@@ -4,24 +4,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DecimalToBinary {
-    public Pattern numbPattern = Pattern.compile("\\d+");
-    public Pattern decimalToBinaryPattern = Pattern.compile("(bin)\\(" + numbPattern + "\\)");
-    public Pattern invalidInputPattern = Pattern.compile("(bin)\\((\\d*[a-z]+)+\\)");
+    public final Pattern NUMB_PATTERN = Pattern.compile("\\d+");
+    public final Pattern DECIMAL_TO_BINARY_PATTERN = Pattern.compile("(bin)\\(" + NUMB_PATTERN + "\\)");
+    public final Pattern INVALID_INPUT_PATTERN = Pattern.compile("(bin)\\((\\d*[a-z]+)+\\)");
 
     public String operate(String operation) {
         String result = "";
 
-        if (invalidInputPattern.matcher(operation).find()) {
+        if (INVALID_INPUT_PATTERN.matcher(operation).find()) {
             throw new IllegalArgumentException("Invalid input for conversion");
         }
 
-        Matcher decToBinMatcher = decimalToBinaryPattern.matcher(operation);
+        Matcher decToBinMatcher = DECIMAL_TO_BINARY_PATTERN.matcher(operation);
         if (decToBinMatcher.find()) {
-            String match = decToBinMatcher.group();
-            Matcher numbMatcher = numbPattern.matcher(match);
+            Matcher numbMatcher = NUMB_PATTERN.matcher(decToBinMatcher.group());
             if (numbMatcher.find()) {
-                String numbMatch = numbMatcher.group();
-                int decimalNumber = Integer.parseInt(numbMatch);
+                int decimalNumber = Integer.parseInt(numbMatcher.group());
                 //check necessary amount of bits
                 int bitAmountCounter = getBitAmount(decimalNumber);
                 //build the binary number
@@ -32,23 +30,24 @@ public class DecimalToBinary {
     }
 
     private String buildBinaryNumber(String result, int decimalNumber, int bitAmountCounter) {
+        StringBuilder resultStr = new StringBuilder(result);
         for (int i = bitAmountCounter; i > 0; i--) {
             if (i == 1) {
                 if (decimalNumber == 1) {
-                    result += "1";
+                    resultStr.append("1");
                 } else {
-                    result += "0";
+                    resultStr.append("0");
                 }
             } else {
                 if ((decimalNumber / (int)Math.pow(2.0, i - 1)) == 1) {
-                    result += "1";
+                    resultStr.append("1");
                     decimalNumber -= (int)Math.pow(2.0, i - 1);
                 } else {
-                    result += "0";
+                    resultStr.append("0");
                 }
             }
         }
-        return result;
+        return resultStr.toString();
     }
 
     private int getBitAmount(int decimalNumber) {
