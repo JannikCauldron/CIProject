@@ -26,4 +26,18 @@ public class TangensTest {
         // Assert
         MatcherAssert.assertThat("result", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void tangensWithAnyPositiveDigitInteger() {
+        // Arrange
+        String number = "50";
+        String operation = "tan(" + number + ")";
+        double expected = Math.tan(Integer.parseInt(number));
+
+        // Act
+        double result = obj.calcTangens(operation);
+
+        // Assert
+        MatcherAssert.assertThat("result", result, CoreMatchers.equalTo(expected));
+    }
 }
