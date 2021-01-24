@@ -29,42 +29,42 @@ public class DecimalToBinary {
         return result;
     }
 
-    private String matchPattern(String result, Matcher decToBinMatcher) {
-        if (decToBinMatcher.find()) {
-            Matcher numbMatcher = NUMB_PATTERN.matcher(decToBinMatcher.group());
+    private String matchPattern(String result, Matcher decimalBinaryConversionMatcher) {
+        if (decimalBinaryConversionMatcher.find()) {
+            Matcher numbMatcher = NUMB_PATTERN.matcher(decimalBinaryConversionMatcher.group());
             if (numbMatcher.find()) {
-                int decimalNumber = Integer.parseInt(numbMatcher.group());
+                int decimalOrBinaryNumber = Integer.parseInt(numbMatcher.group());
                 //check necessary amount of bits
-                int bitAmountCounter = getBitAmount(decimalNumber);
+                int bitAmountCounter = getBitAmount(decimalOrBinaryNumber);
                 //build the binary number
-                if (decToBinMatcher.pattern() == DECIMAL_TO_BINARY_PATTERN) {
-                    result = buildBinaryNumber(result, decimalNumber, bitAmountCounter, true);
-                } else if (decToBinMatcher.pattern() == NEGATIVE_DECIMAL_TO_BINARY_PATTERN) {
-                    result = buildBinaryNumber(result, decimalNumber, bitAmountCounter, false);
-                } else if (decToBinMatcher.pattern() == BINARY_TO_DECIMAL_PATTERN) {
-                    result = buildDecimalNumber(result, decimalNumber);
+                if (decimalBinaryConversionMatcher.pattern() == DECIMAL_TO_BINARY_PATTERN) {
+                    result = buildBinaryNumber(decimalOrBinaryNumber, bitAmountCounter, true);
+                } else if (decimalBinaryConversionMatcher.pattern() == NEGATIVE_DECIMAL_TO_BINARY_PATTERN) {
+                    result = buildBinaryNumber(decimalOrBinaryNumber, bitAmountCounter, false);
+                } else if (decimalBinaryConversionMatcher.pattern() == BINARY_TO_DECIMAL_PATTERN) {
+                    result = buildDecimalNumber(decimalOrBinaryNumber);
                 }
             }
         }
         return result;
     }
 
-    private String buildDecimalNumber(String result, int decimalNumber) {
-        String binaryNumber = String.valueOf(decimalNumber);
-        int res = 0;
-        int cnt = 0;
+    private String buildDecimalNumber(int number) {
+        String binaryNumber = String.valueOf(number);
+        int decimalNumber = 0;
+        int bitIndex = 0;
         for (int i = binaryNumber.length() - 1; i >= 0; i--) {
             if (binaryNumber.charAt(i) == '1') {
-                res += (int)Math.pow(2.0, cnt);
+                decimalNumber += (int)Math.pow(2.0, bitIndex);
             }
-            cnt++;
+            bitIndex++;
         }
-        return String.valueOf(res);
+        return String.valueOf(decimalNumber);
     }
 
     //negative numbers with 1's complement method
-    private String buildBinaryNumber(String result, int decimalNumber, int bitAmountCounter, boolean isPositive) {
-        StringBuilder resultStr = new StringBuilder(result);
+    private String buildBinaryNumber(int decimalNumber, int bitAmountCounter, boolean isPositive) {
+        StringBuilder resultStr = new StringBuilder("");
         if (isPositive) {
             resultStr.append("0");
         } else {
