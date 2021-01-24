@@ -8,11 +8,18 @@ public class Tangens {
     public double calcTangens(String input) {
         int result;
 
-        if (input.matches(TANGENS_PATTERN)) {
-            String extractNumber = input.replaceAll(REPLACE_PATTERN, "");
-            result = Integer.parseInt(extractNumber);
-            return Math.tan(result);
+        if (matchTangensExpression(input)) {
+            return Math.tan(extractNumberFromTangensExpression(input));
         }
         return -1;
+    }
+
+    private double extractNumberFromTangensExpression(String input) {
+        String numberOnlyString = input.replaceAll(REPLACE_PATTERN, "");
+        return Double.parseDouble(numberOnlyString);
+    }
+
+    private boolean matchTangensExpression(String input) {
+        return input.matches(TANGENS_PATTERN);
     }
 }
