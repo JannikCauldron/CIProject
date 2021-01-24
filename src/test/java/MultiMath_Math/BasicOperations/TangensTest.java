@@ -5,6 +5,9 @@ import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class TangensTest {
     Tangens obj;
 
@@ -53,5 +56,21 @@ public class TangensTest {
 
         // Assert
         MatcherAssert.assertThat("result", result, CoreMatchers.equalTo(expected));
+    }
+
+    @Test
+    public void tangensWithDigitAndLetter() {
+        // Arrange
+        String number = "5a";
+        String operation = "tan(  " + number + "  )";
+        String expectedMsg = "Error in tangens expression";
+
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            obj.calcTangens(operation);
+        });
+        String resultMsg = exception.getMessage();
+        // Assert
+        assertTrue(resultMsg.contentEquals(expectedMsg));
     }
 }

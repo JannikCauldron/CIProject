@@ -10,8 +10,9 @@ public class Tangens {
 
         if (matchTangensExpression(input)) {
             return Math.tan(extractNumberFromTangensExpression(input));
+        } else {
+            throw new IllegalArgumentException("Error in tangens expression");
         }
-        return -1;
     }
 
     private double extractNumberFromTangensExpression(String input) {
