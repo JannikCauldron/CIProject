@@ -24,4 +24,15 @@ public class DecimalToBinaryTest {
         //assert
         assertThat("Umwandlung: " + operation + " wurde fehlerhaft zu: " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void biggerDecimalToBinaryConversion() {
+        //arrange
+        String operation = "bin(5326789)";
+        String expectedResult = "10100010100011111000101";
+        //act
+        String actualResult = conv.operate(operation);
+        //assert
+        assertThat("Umwandlung: " + operation + " wurde fehlerhaft zu: " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }
