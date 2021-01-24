@@ -47,6 +47,16 @@ public class DecimalToBinaryTest {
         String actualResult = result.getMessage();
         //assert
         assertTrue(actualResult.contentEquals(expectedResult));
-        //assertThat("Umwandlung: " + operation + " wurde fehlerhaft zu: " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
+    }
+
+    @Test
+    void negativeDecimalToBinaryConversion() {
+        //arrange
+        String operation = "bin(-23)";
+        String expectedResult = "101000";
+        //act
+        String actualResult = numberConverter.operate(operation);
+        //assert
+        assertThat("Umwandlung: " + operation + " wurde fehlerhaft zu: " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
     }
 }

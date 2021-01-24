@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class DecimalToBinary {
     public final Pattern NUMB_PATTERN = Pattern.compile("\\d+");
     public final Pattern DECIMAL_TO_BINARY_PATTERN = Pattern.compile("(bin)\\(" + NUMB_PATTERN + "\\)");
+    public final Pattern NEGATIVE_DECIMAL_TO_BINARY_PATTERN = Pattern.compile("(bin)\\(-" + NUMB_PATTERN + "\\)");
     public final Pattern INVALID_INPUT_PATTERN = Pattern.compile("(bin)\\((\\d*[a-z]+)+\\)");
 
     public String operate(String operation) {
@@ -26,6 +27,19 @@ public class DecimalToBinary {
                 result = buildBinaryNumber(result, decimalNumber, bitAmountCounter);
             }
         }
+
+        Matcher negDecToBinMatcher = NEGATIVE_DECIMAL_TO_BINARY_PATTERN.matcher(operation);
+        if (negDecToBinMatcher.find()) {
+            Matcher numbMatcher = NUMB_PATTERN.matcher(negDecToBinMatcher.group());
+            if (numbMatcher.find()) {
+                int decimalNumber = Integer.parseInt(numbMatcher.group());
+                //check necessary amount of bits
+                int bitAmountCounter = getBitAmount(decimalNumber);
+                //build the binary number
+                result = buildNegativeBinaryNumber(result, decimalNumber, bitAmountCounter);
+            }
+        }
+
         return result;
     }
 
@@ -44,6 +58,28 @@ public class DecimalToBinary {
                     decimalNumber -= (int)Math.pow(2.0, i - 1);
                 } else {
                     resultStr.append("0");
+                }
+            }
+        }
+        return resultStr.toString();
+    }
+
+    private String buildNegativeBinaryNumber(String result, int decimalNumber, int bitAmountCounter) {
+        StringBuilder resultStr = new StringBuilder(result);
+        resultStr.append("1");
+        for (int i = bitAmountCounter; i > 0; i--) {
+            if (i == 1) {
+                if (decimalNumber == 1) {
+                    resultStr.append("0");
+                } else {
+                    resultStr.append("1");
+                }
+            } else {
+                if ((decimalNumber / (int)Math.pow(2.0, i - 1)) == 1) {
+                    resultStr.append("0");
+                    decimalNumber -= (int)Math.pow(2.0, i - 1);
+                } else {
+                    resultStr.append("1");
                 }
             }
         }
