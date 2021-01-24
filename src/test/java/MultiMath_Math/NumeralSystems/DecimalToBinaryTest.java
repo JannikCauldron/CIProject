@@ -59,4 +59,15 @@ public class DecimalToBinaryTest {
         //assert
         assertThat("Umwandlung: " + operation + " wurde fehlerhaft zu: " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void simpleBinaryToDecimalConversion() {
+        //arrange
+        String operation = "dec(0110100100)";
+        String expectedResult = "420";
+        //act
+        String actualResult = numberConverter.operate(operation);
+        //assert
+        assertThat("Umwandlung: " + operation + " wurde fehlerhaft zu: " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }

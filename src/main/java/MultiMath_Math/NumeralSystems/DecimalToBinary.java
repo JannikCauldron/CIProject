@@ -7,6 +7,7 @@ public class DecimalToBinary {
     public final Pattern NUMB_PATTERN = Pattern.compile("\\d+");
     public final Pattern DECIMAL_TO_BINARY_PATTERN = Pattern.compile("(bin)\\(" + NUMB_PATTERN + "\\)");
     public final Pattern NEGATIVE_DECIMAL_TO_BINARY_PATTERN = Pattern.compile("(bin)\\(-" + NUMB_PATTERN + "\\)");
+    public final Pattern BINARY_TO_DECIMAL_PATTERN = Pattern.compile("(dec)\\([01]+\\)");
     public final Pattern INVALID_INPUT_PATTERN = Pattern.compile("(bin)\\((\\d*[a-z]+)+\\)");
 
     public String operate(String operation) {
@@ -21,6 +22,9 @@ public class DecimalToBinary {
 
         Matcher negDecToBinMatcher = NEGATIVE_DECIMAL_TO_BINARY_PATTERN.matcher(operation);
         result = matchPattern(result, negDecToBinMatcher);
+
+        Matcher binToDecMatcher = BINARY_TO_DECIMAL_PATTERN.matcher(operation);
+        result = matchPattern(result, binToDecMatcher);
 
         return result;
     }
@@ -37,12 +41,28 @@ public class DecimalToBinary {
                     result = buildBinaryNumber(result, decimalNumber, bitAmountCounter, true);
                 } else if (decToBinMatcher.pattern() == NEGATIVE_DECIMAL_TO_BINARY_PATTERN) {
                     result = buildBinaryNumber(result, decimalNumber, bitAmountCounter, false);
+                } else if (decToBinMatcher.pattern() == BINARY_TO_DECIMAL_PATTERN) {
+                    result = buildDecimalNumber(result, decimalNumber);
                 }
             }
         }
         return result;
     }
 
+    private String buildDecimalNumber(String result, int decimalNumber) {
+        String binaryNumber = String.valueOf(decimalNumber);
+        int res = 0;
+        int cnt = 0;
+        for (int i = binaryNumber.length() - 1; i >= 0; i--) {
+            if (binaryNumber.charAt(i) == '1') {
+                res += (int)Math.pow(2.0, cnt);
+            }
+            cnt++;
+        }
+        return String.valueOf(res);
+    }
+
+    //negative numbers with 1's complement method
     private String buildBinaryNumber(String result, int decimalNumber, int bitAmountCounter, boolean isPositive) {
         StringBuilder resultStr = new StringBuilder(result);
         if (isPositive) {
