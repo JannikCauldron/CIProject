@@ -18,9 +18,9 @@ public class DecimalToBinaryTest {
     void simpleDecimalToBinaryConversion() {
         //arrange
         String operation = "bin(2)";
-        int expectedResult = 10;
+        String expectedResult = "10";
         //act
-        int actualResult = conv.operate(operation);
+        String actualResult = conv.operate(operation);
         //assert
         assertThat("Umwandlung: " + operation + " wurde fehlerhaft zu: " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
     }
