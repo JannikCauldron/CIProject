@@ -2,7 +2,7 @@ package MultiMath_Math.BasicOperations;
 
 public class Tangens {
 
-    public static final String TANGENS_PATTERN = "^tan\\(\\s*-?[\\d]*\\s*\\)$";
+    public static final String TANGENS_PATTERN = "^tan\\(\\s*-?[1-9][\\d]*\\s*\\)$";
     public static final String PATTERN_TO_REPLACE = "[^-0-9]*";
     public static final String EXCEPTION_MSG_TANGENS = "Error in tangens expression";
 

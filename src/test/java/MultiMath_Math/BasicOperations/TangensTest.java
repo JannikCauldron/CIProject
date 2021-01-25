@@ -86,4 +86,19 @@ public class TangensTest {
         // Assert
         MatcherAssert.assertThat("result", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void tangensWithoutLeadingZeroInDigitExpression() {
+        // Arrange
+        String number = "05";
+        String operation = "tan(" + number + ")";
+        String expectedMsg = "Error in tangens expression";
+
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> obj.calcTangens(operation));
+        String resultMsg = exception.getMessage();
+
+        // Assert
+        assertTrue(resultMsg.contentEquals(expectedMsg));
+    }
 }
