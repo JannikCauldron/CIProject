@@ -19,10 +19,10 @@ public class CommonLogarithmTest {
     @Test
     public void log10Test() throws Exception {
         //Arrange
-        String operation = "log10(3)";
+        String operation = "logc(3)";
         double expected = Math.log10(3);
         //Act
-        double result = commonLogarithm.log10(operation);
+        double result = commonLogarithm.logc(operation);
         //Assert
         MatcherAssert.assertThat("wrong common logarithm", result, CoreMatchers.equalTo(expected));
     }
