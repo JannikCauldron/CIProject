@@ -1,11 +1,11 @@
 package MultiMath_Math.BasicOperations;
 
 public class Logarithm {
-    private String logPattern = "log\\s*\\(\\s*[1-9]+\\s*\\)|log\\s*\\(\\s*0+\\s*\\)";
+    private final String LOG_PATTERN = "log\\s*\\(\\s*[1-9]+\\s*\\)|log\\s*\\(\\s*0+\\s*\\)";
 
     public double log(String inputString) {
         double inputNumber;
-        if (inputString.matches(logPattern)) {
+        if (inputString.matches(LOG_PATTERN)) {
             String numberString = inputString.replaceAll("[^0-9]", "");
             inputNumber = Double.parseDouble(numberString);
         } else {
