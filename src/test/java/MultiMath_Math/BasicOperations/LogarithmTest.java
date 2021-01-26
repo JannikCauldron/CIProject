@@ -1,6 +1,7 @@
 package MultiMath_Math.BasicOperations;
 
 import org.hamcrest.CoreMatchers;
+import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -69,5 +70,16 @@ public class LogarithmTest {
         double result = logarithm.log(operation);
         //Assert
         MatcherAssert.assertThat("wrong logarithm", result, CoreMatchers.equalTo(expected));
+    }
+
+    @Test
+    public void logWithDecimal() throws Exception {
+        //Arrange
+        String operation = "log(0.7)";
+        double expected = Math.log(0.7);
+        //Act
+        double result = logarithm.log(operation);
+        //Assert
+        MatcherAssert.assertThat("wrong logarithm of decimal", result, CoreMatchers.equalTo(expected));
     }
 }
