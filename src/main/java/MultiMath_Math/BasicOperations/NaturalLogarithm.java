@@ -1,17 +1,17 @@
 package MultiMath_Math.BasicOperations;
 
-public class Logarithm {
+public class NaturalLogarithm {
 
-    private final String LOG_PATTERN = "log\\s*\\(\\s*[1-9][0-9]+(\\.[0-9]+)?\\s*\\)|log\\s*\\(\\s*[0-9](\\.[0-9]+)?\\s*\\)";
+    private final String LOGN_PATTERN = "logn\\s*\\(\\s*[1-9][0-9]+(\\.[0-9]+)?\\s*\\)|logn\\s*\\(\\s*[0-9](\\.[0-9]+)?\\s*\\)";
 
-    public double log(String operation) {
+    public double logn(String operation) {
         double number;
         int indexOfDot;
         String stringBeforeDot;
         String stringAfterDot;
         int operationStringLength = operation.length();
 
-        if (operation.matches(LOG_PATTERN)) {
+        if (operation.matches(LOGN_PATTERN)) {
             if (operation.contains(".")) {
                 indexOfDot = operation.indexOf('.');
 
@@ -28,7 +28,7 @@ public class Logarithm {
                 number = Double.parseDouble(completeNumberString);
             }
         } else {
-            throw new IllegalArgumentException("no valid logarithm expression: " + operation);
+            throw new IllegalArgumentException("no valid natural logarithm expression: " + operation);
         }
         return Math.log(number);
     }
