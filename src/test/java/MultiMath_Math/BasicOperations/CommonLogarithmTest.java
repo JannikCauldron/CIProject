@@ -40,7 +40,7 @@ public class CommonLogarithmTest {
     public void logcWithNegativeTest() throws Exception {
         //Arrange
         String operation = "log(-5)";
-        Exception expected = assertThrows(IllegalArgumentException.class, () -> {commonLogarithm.logc(operation);});
+        Exception expected = assertThrows(IllegalArgumentException.class, () -> commonLogarithm.logc(operation));
         String expectedMessage = "no valid common logarithm expression: " + operation;
         //Act
         String resultMessage = expected.getMessage();
@@ -52,7 +52,7 @@ public class CommonLogarithmTest {
     public void logcWithLeadingZeroTest() throws Exception {
         //Arrange
         String operation = "log(02)";
-        Exception expected = assertThrows(IllegalArgumentException.class, () -> {commonLogarithm.logc(operation);});
+        Exception expected = assertThrows(IllegalArgumentException.class, () -> commonLogarithm.logc(operation));
         String expectedMessage = "no valid common logarithm expression: " + operation;
         //Act
         String resultMessage = expected.getMessage();
