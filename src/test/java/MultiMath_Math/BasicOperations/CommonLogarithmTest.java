@@ -37,4 +37,15 @@ public class CommonLogarithmTest {
         //Assert
         MatcherAssert.assertThat("wrong common logarithm with space", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void logcWithNegativeTest() throws Exception {
+        //Arrange
+        String operation = "log(-5)";
+        double expected = Math.log10(-5);
+        //Act
+        double result = commonLogarithm.logc(operation);
+        //Assert
+        MatcherAssert.assertThat("no common logarithm of negatives", result, CoreMatchers.equalTo(expected));
+    }
 }

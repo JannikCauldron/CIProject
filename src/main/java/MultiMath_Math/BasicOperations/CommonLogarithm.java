@@ -9,7 +9,7 @@ public class CommonLogarithm {
             String numberString = inputString.replaceAll("[^0-9]", "");
             inputNumber = Double.parseDouble(numberString);
         } else {
-            return 0;
+            return Double.NaN;
         }
         return Math.log10(inputNumber);
     }
