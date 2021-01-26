@@ -5,34 +5,34 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class BracketDetect {
-    private Pattern bracketPattern = Pattern.compile("\\(.+\\)");
+    private final Pattern BRACKET_PATTERN = Pattern.compile("\\(.+\\)");
 
     public String[] detect(String operation) {
-        String result = "";
+        String bracketContent = "";
 
-        Matcher bracketMatcher = bracketPattern.matcher(operation);
-        Stack opStack = new Stack();
-        int cnt = 0;
-        while (bracketMatcher.find()) {
-            cnt++;
-            String match = bracketMatcher.group();
-            result = match.substring(1, match.length() - 1);
-
-            Matcher secondBracketMatcher = bracketPattern.matcher(result);
+        Matcher firstBracketMatcher = BRACKET_PATTERN.matcher(operation);
+        Stack operationsStack = new Stack();
+        int bracketAmount = 0;
+        if (firstBracketMatcher.find()) {
+            bracketAmount++;
+            String firstMatch = firstBracketMatcher.group();
+            bracketContent = firstMatch.substring(1, firstMatch.length() - 1);
+            //if there is a bracket inside a bracket
+            Matcher secondBracketMatcher = BRACKET_PATTERN.matcher(bracketContent);
             if (secondBracketMatcher.find()) {
-                cnt++;
+                bracketAmount++;
                 String secondMatch = secondBracketMatcher.group();
-                opStack.push(result.replace(secondMatch, ""));
-                opStack.push(secondMatch.substring(1, secondMatch.length() - 1));
+                operationsStack.push(bracketContent.replace(secondMatch, ""));
+                operationsStack.push(secondMatch.substring(1, secondMatch.length() - 1));
             } else {
-                opStack.push(result);
+                operationsStack.push(bracketContent);
             }
         }
-        String resultOperation[] = new String[cnt];
-        for (int i = 0; i < cnt; i++) {
-            resultOperation[i] = (String) opStack.pop();
+        String extractedOperations[] = new String[bracketAmount];
+        for (int i = 0; i < bracketAmount; i++) {
+            extractedOperations[i] = (String) operationsStack.pop();
         }
 
-        return resultOperation;
+        return extractedOperations;
     }
 }
