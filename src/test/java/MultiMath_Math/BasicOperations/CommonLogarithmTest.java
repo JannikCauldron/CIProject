@@ -6,9 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.nio.charset.CoderResult;
-import java.util.regex.Matcher;
-
 public class CommonLogarithmTest {
     CommonLogarithm commonLogarithm;
 
@@ -48,7 +45,7 @@ public class CommonLogarithmTest {
         //Act
         String resultMessage = expected.getMessage();
         //Assert
-        assertTrue(resultMessage.contains(expectedMessage));
+        assertTrue(resultMessage.contentEquals(expectedMessage));
     }
 
     @Test
@@ -60,7 +57,7 @@ public class CommonLogarithmTest {
         //Act
         String resultMessage = expected.getMessage();
         //Assert
-        assertTrue(resultMessage.contains(expectedMessage));
+        assertTrue(resultMessage.contentEquals(expectedMessage));
 
     }
 }
