@@ -50,4 +50,17 @@ public class CommonLogarithmTest {
         //Assert
         assertTrue(resultMessage.contains(expectedMessage));
     }
+
+    @Test
+    public void logcWithLeadingZeroTest() throws Exception {
+        //Arrange
+        String operation = "log(02)";
+        Exception expected = assertThrows(IllegalArgumentException.class, () -> {commonLogarithm.logc(operation);});
+        String expectedMessage = "no valid common logarithm expression: " + operation;
+        //Act
+        String resultMessage = expected.getMessage();
+        //Assert
+        assertTrue(resultMessage.contains(expectedMessage));
+
+    }
 }

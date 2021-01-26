@@ -1,7 +1,7 @@
 package MultiMath_Math.BasicOperations;
 
 public class CommonLogarithm {
-    private final String LOGC_PATTERN = "logc\\s*\\(\\s*[0-9]+\\s*\\)";
+    private final String LOGC_PATTERN = "logc\\s*\\(\\s*[1-9]+\\s*\\)";
 
     public double logc(String inputString) {
         double inputNumber;
