@@ -26,4 +26,15 @@ public class CommonLogarithmTest {
         //Assert
         MatcherAssert.assertThat("wrong common logarithm", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void logcWithSpaceTest() throws Exception {
+        //Arrange
+        String operation = "logc   (  7 )";
+        double expected = Math.log10(7);
+        //Act
+        double result = commonLogarithm.logc(operation);
+        //Assert
+        MatcherAssert.assertThat("wrong common logarithm with space", result, CoreMatchers.equalTo(expected));
+    }
 }
