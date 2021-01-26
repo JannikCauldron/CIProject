@@ -4,6 +4,7 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.nio.charset.CoderResult;
 import java.util.regex.Matcher;
@@ -42,10 +43,11 @@ public class CommonLogarithmTest {
     public void logcWithNegativeTest() throws Exception {
         //Arrange
         String operation = "log(-5)";
-        double expected = Math.log10(-5);
+        Exception expected = assertThrows(IllegalArgumentException.class, () -> {commonLogarithm.logc(operation);});
+        String expectedMessage = "no valid common logarithm expression: " + operation;
         //Act
-        double result = commonLogarithm.logc(operation);
+        String resultMessage = expected.getMessage();
         //Assert
-        MatcherAssert.assertThat("no common logarithm of negatives", result, CoreMatchers.equalTo(expected));
+        assertTrue(resultMessage.contains(expectedMessage));
     }
 }
