@@ -1,7 +1,6 @@
 package MultiMath_Math.BasicOperations;
 
 import org.hamcrest.CoreMatchers;
-import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,7 @@ public class LogarithmTest {
     }
 
     @Test
-    public void logWithSpace() throws Exception {
+    public void logWithSpaceTest() throws Exception {
         //Arrange
         String operation = "log   ( 5  )";
         double expected = Math.log(5);
@@ -38,7 +37,7 @@ public class LogarithmTest {
     }
 
     @Test
-    public void logWithNegative() throws Exception {
+    public void logWithNegativeTest() throws Exception {
         //Arrange
         String operation = "log(-3)";
         Exception expected = assertThrows(IllegalArgumentException.class, () -> logarithm.log(operation));
@@ -50,7 +49,7 @@ public class LogarithmTest {
     }
 
     @Test
-    public void logWithLeadingZero() throws Exception {
+    public void logWithLeadingZeroTest() throws Exception {
         //Arrange
         String operation = "log(05)";
         Exception expected = assertThrows(IllegalArgumentException.class, () -> logarithm.log(operation));
@@ -62,7 +61,7 @@ public class LogarithmTest {
     }
 
     @Test
-    public void logWithZero() throws Exception {
+    public void logWithZeroTest() throws Exception {
         //Arrange
         String operation = "log(0)";
         double expected = Math.log(0);
@@ -73,7 +72,7 @@ public class LogarithmTest {
     }
 
     @Test
-    public void logWithDecimal() throws Exception {
+    public void logWithDecimalTest() throws Exception {
         //Arrange
         String operation = "log(0.7)";
         double expected = Math.log(0.7);
