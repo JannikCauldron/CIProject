@@ -23,4 +23,15 @@ public class LogarithmTest {
         //Assert
         assertThat("wrong logaritm", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void logWithSpace() throws Exception {
+        //Arrange
+        String operation = "log   ( 5  )";
+        double expected = Math.log(5);
+        //Act
+        double result = logarithm.log(operation);
+        //Assert
+        assertThat("wrong logarithm with space", result, CoreMatchers.equalTo(expected));
+    }
 }
