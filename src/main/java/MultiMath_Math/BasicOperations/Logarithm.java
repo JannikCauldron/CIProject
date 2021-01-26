@@ -9,7 +9,7 @@ public class Logarithm {
             String numberString = inputString.replaceAll("[^0-9]", "");
             inputNumber = Double.parseDouble(numberString);
         } else {
-            return Double.NaN;
+            throw new IllegalArgumentException("no valid logarithm expression: " + inputString);
         }
         return Math.log(inputNumber);
     }

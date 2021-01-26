@@ -4,6 +4,7 @@ import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LogarithmTest {
     Logarithm logarithm;
@@ -39,10 +40,12 @@ public class LogarithmTest {
     public void logWithNegative() throws Exception {
         //Arrange
         String operation = "log(-3)";
-        double expected = Math.log(-3);
+        Exception expected = assertThrows(IllegalArgumentException.class, () -> {logarithm.log(operation);});
+        String expectedMessage = "no valid logarithm expression: " + operation;
         //Act
-        double result = logarithm.log(operation);
+        //double result = logarithm.log(operation);
+        String actualMessage = expected.getMessage();
         //Assert
-        assertThat("no logarithm of negatives", result, CoreMatchers.equalTo(expected));
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 }
