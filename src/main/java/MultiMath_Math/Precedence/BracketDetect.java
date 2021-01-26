@@ -10,26 +10,28 @@ public class BracketDetect {
     public String[] detect(String operation) {
         String bracketContent = "";
 
-        Matcher firstBracketMatcher = BRACKET_PATTERN.matcher(operation);
+        Matcher outerBracketMatcher = BRACKET_PATTERN.matcher(operation);
         Stack operationsStack = new Stack();
-        int bracketAmount = 0;
-        while (firstBracketMatcher.find()) {
+        Integer bracketAmount = 0;
+        while (outerBracketMatcher.find()) {
             bracketAmount++;
-            String firstMatch = firstBracketMatcher.group();
+            String firstMatch = outerBracketMatcher.group();
             bracketContent = firstMatch.substring(1, firstMatch.length() - 1);
 
-            Matcher tmp = BRACKET_PATTERN.matcher(bracketContent);
-            if (tmp.find()) {
-                String ersatz = tmp.group();
-                String newString = bracketContent.replace(ersatz, "");
-                operationsStack.push(newString);
+            //if there is a bracket inside the outer bracket, then cut it.
+            Matcher innerBracketMatcher = BRACKET_PATTERN.matcher(bracketContent);
+            if (innerBracketMatcher.find()) {
+                String innerBracket = innerBracketMatcher.group();
+                String stringWithoutInnerBracket = bracketContent.replace(innerBracket, "");
+                operationsStack.push(stringWithoutInnerBracket);
             } else {
                 operationsStack.push(bracketContent);
             }
-
-            firstBracketMatcher = BRACKET_PATTERN.matcher(bracketContent);
+            //copy bracketContent to search for an inner bracket again
+            outerBracketMatcher = BRACKET_PATTERN.matcher(bracketContent);
         }
-        String extractedOperations[] = new String[bracketAmount];
+        //fill the return String array
+        String[] extractedOperations = new String[bracketAmount];
         for (int i = 0; i < bracketAmount; i++) {
             extractedOperations[i] = (String) operationsStack.pop();
         }
