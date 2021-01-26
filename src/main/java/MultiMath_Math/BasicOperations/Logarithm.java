@@ -1,7 +1,7 @@
 package MultiMath_Math.BasicOperations;
 
 public class Logarithm {
-    private String logPattern = "log\\s*\\(\\s*[1-9]+\\s*\\)";
+    private String logPattern = "log\\s*\\(\\s*[1-9]+\\s*\\)|log\\s*\\(\\s*0+\\s*\\)";
 
     public double log(String inputString) {
         double inputNumber;

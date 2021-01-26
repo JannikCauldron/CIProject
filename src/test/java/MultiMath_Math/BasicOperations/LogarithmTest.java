@@ -59,4 +59,15 @@ public class LogarithmTest {
         //Assert
         assertTrue(resultMessage.contentEquals(expectedMessage));
     }
+
+    @Test
+    public void logWithZero() throws Exception {
+        //Arrange
+        String operation = "log(0)";
+        double expected = Math.log(0);
+        //Act
+        double result = logarithm.log(operation);
+        //Assert
+        assertThat("wrong logarithm", result, CoreMatchers.equalTo(expected));
+    }
 }
