@@ -35,4 +35,15 @@ public class BracketDetectTest {
         //assert
         assertThat("Erkennung von " + operation + " wurde fehlerhaft erkannt als " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void severalBracketsDetection() {
+        //arrange
+        String operation = "(34 / ((2 + 5) * 8))";
+        String[] expectedResult = new String[] {"2 + 5", " * 8", "34 / "};
+        //act
+        String[] actualResult = detector.detect(operation);
+        //assert
+        assertThat("Erkennung von " + operation + " wurde fehlerhaft erkannt als " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }
