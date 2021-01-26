@@ -43,10 +43,9 @@ public class LogarithmTest {
         Exception expected = assertThrows(IllegalArgumentException.class, () -> {logarithm.log(operation);});
         String expectedMessage = "no valid logarithm expression: " + operation;
         //Act
-        //double result = logarithm.log(operation);
-        String actualMessage = expected.getMessage();
+        String resultMessage = expected.getMessage();
         //Assert
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertTrue(resultMessage.contentEquals(expectedMessage));
     }
 
     @Test
@@ -56,8 +55,8 @@ public class LogarithmTest {
         Exception expected = assertThrows(IllegalArgumentException.class, () -> {logarithm.log(operation);});
         String expectedMessage = "no valid logarithm expression: " + operation;
         //Act
-        String actualMessage = expected.getMessage();
+        String resultMessage = expected.getMessage();
         //Assert
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertTrue(resultMessage.contentEquals(expectedMessage));
     }
 }
