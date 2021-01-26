@@ -70,4 +70,15 @@ public class CommonLogarithmTest {
         //Assert
         MatcherAssert.assertThat("wrong common logarithm", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void logcWithDecimalTest() throws Exception {
+        //Arrange
+        String operation = "logc(0.4)";
+        double expected = Math.log10(0.4);
+        //Act
+        double result = commonLogarithm.logc(operation);
+        //Assert
+        MatcherAssert.assertThat("wrong common logarithm of decimal", result, CoreMatchers.equalTo(expected));
+    }
 }
