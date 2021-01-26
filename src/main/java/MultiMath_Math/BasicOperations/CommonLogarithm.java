@@ -3,35 +3,35 @@ package MultiMath_Math.BasicOperations;
 public class CommonLogarithm {
     private final String LOGC_PATTERN = "logc\\s*\\(\\s*[1-9][0-9]+(\\.[0-9]+)?\\s*\\)|logc\\s*\\(\\s*[0-9](\\.[0-9]+)?\\s*\\)";
 
-    public double logc(String inputString) {
+    public double logc(String operation) {
 
-        double inputNumber;
+        double number;
         int indexOfDot;
-        String subString1;
-        String subString2;
-        int inputStringLength = inputString.length();
+        String stringBeforeDot;
+        String stringAfterDot;
+        int operationStringLength = operation.length();
 
-        if (inputString.matches(LOGC_PATTERN)) {
-            if (inputString.contains(".")) {
+        if (operation.matches(LOGC_PATTERN)) {
+            if (operation.contains(".")) {
 
-                indexOfDot = inputString.indexOf('.');
+                indexOfDot = operation.indexOf('.');
 
-                subString1 = inputString.substring(0, indexOfDot);
-                subString2 = inputString.substring(indexOfDot+1, inputStringLength);
+                stringBeforeDot = operation.substring(0, indexOfDot);
+                stringAfterDot = operation.substring(indexOfDot+1, operationStringLength);
 
-                String numberString1 = subString1.replaceAll("[^0-9]", "");
-                String numberString2 = subString2.replaceAll("[^0-9]", "");
-                String numberString = numberString1 + "." + numberString2;
+                String numberStringBeforeDot = stringBeforeDot.replaceAll("[^0-9]", "");
+                String numberStringAfterDot = stringAfterDot.replaceAll("[^0-9]", "");
+                String CompleteNumberString = numberStringBeforeDot + "." + numberStringAfterDot;
 
-                inputNumber = Double.parseDouble(numberString);
+                number = Double.parseDouble(CompleteNumberString);
 
             } else {
-                String numberString = inputString.replaceAll("[^0-9]", "");
-                inputNumber = Double.parseDouble(numberString);
+                String CompleteNumberString = operation.replaceAll("[^0-9]", "");
+                number = Double.parseDouble(CompleteNumberString);
             }
         } else {
-            throw new IllegalArgumentException("no valid common logarithm expression: " + inputString);
+            throw new IllegalArgumentException("no valid common logarithm expression: " + operation);
         }
-        return Math.log10(inputNumber);
+        return Math.log10(number);
     }
 }
