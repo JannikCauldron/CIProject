@@ -48,4 +48,16 @@ public class LogarithmTest {
         //Assert
         assertTrue(actualMessage.contains(expectedMessage));
     }
+
+    @Test
+    public void logWithLeadingZero() throws Exception {
+        //Arrange
+        String operation = "log(05)";
+        Exception expected = assertThrows(IllegalArgumentException.class, () -> {logarithm.log(operation);});
+        String expectedMessage = "no valid logarithm expression: " + operation;
+        //Act
+        String actualMessage = expected.getMessage();
+        //Assert
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }
