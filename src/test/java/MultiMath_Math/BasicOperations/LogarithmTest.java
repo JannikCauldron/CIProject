@@ -34,4 +34,15 @@ public class LogarithmTest {
         //Assert
         assertThat("wrong logarithm with space", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void logWithNegative() throws Exception {
+        //Arrange
+        String operation = "log(-3)";
+        double expected = Math.log(-3);
+        //Act
+        double result = logarithm.log(operation);
+        //Assert
+        assertThat("no logarithm of negatives", result, CoreMatchers.equalTo(expected));
+    }
 }
