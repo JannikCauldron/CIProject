@@ -24,7 +24,7 @@ public class BracketDetectTest {
         //act
         String actualResult = detector.detect(operation)[0];
         //assert
-        assertThat("Erkennung von " + operation + " wurde fehlerhaft erkannt als " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
+        assertThat("simpleBracketDetection:\nErkennung von " + operation + " verlief fehlerhaft zu " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class BracketDetectTest {
         //act
         String[] actualResult = detector.detect(operation);
         //assert
-        assertThat("Erkennung von " + operation + " wurde fehlerhaft erkannt als " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
+        assertThat("twoBracketsDetection:\nErkennung von " + operation + " verlief fehlerhaft zu " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
     }
 
     @Test
@@ -46,18 +46,18 @@ public class BracketDetectTest {
         //act
         String[] actualResult = detector.detect(operation);
         //assert
-        assertThat("Erkennung von " + operation + " wurde fehlerhaft erkannt als " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
+        assertThat("severalBracketsDetection:\nErkennung von " + operation + " verlief fehlerhaft zu " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
     }
 
     @Test
-    void severalBracketsWithMissingOuterBracketDetection() {
+    void bracketsWithMissingOuterBracketAndNumbersOnLeftDetection() {
         //arrange
         String operation = "12 * (2 - 7)";
         String[] expectedResult = new String[] {"2 - 7", "12 * "};
         //act
         String[] actualResult = detector.detect(operation);
         //assert
-        assertThat("Erkennung von " + operation + " wurde fehlerhaft erkannt als " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
+        assertThat("bracketsWithMissingOuterBracketAndNumbersOnLeftDetection:\nErkennung von " + operation + " verlief fehlerhaft zu " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
     }
 
     @Test
@@ -68,6 +68,6 @@ public class BracketDetectTest {
         //act
         String[] actualResult = detector.detect(operation);
         //assert
-        assertThat("Erkennung von " + operation + " wurde fehlerhaft erkannt als " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
+        assertThat("bracketsWithMissingOuterBracketAndNumbersOnRightDetection:\nErkennung von " + operation + " verlief fehlerhaft zu " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
     }
 }
