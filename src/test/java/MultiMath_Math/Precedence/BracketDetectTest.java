@@ -4,6 +4,8 @@ import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertThat;
 
 public class BracketDetectTest {
@@ -33,7 +35,7 @@ public class BracketDetectTest {
         //act
         String[] actualResult = detector.detect(operation);
         //assert
-        assertThat("Erkennung von " + operation + " wurde fehlerhaft erkannt als " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
+        assertThat("Erkennung von " + operation + " wurde fehlerhaft erkannt als " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
     }
 
     @Test
@@ -44,7 +46,7 @@ public class BracketDetectTest {
         //act
         String[] actualResult = detector.detect(operation);
         //assert
-        assertThat("Erkennung von " + operation + " wurde fehlerhaft erkannt als " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
+        assertThat("Erkennung von " + operation + " wurde fehlerhaft erkannt als " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
     }
 
     @Test
@@ -55,6 +57,6 @@ public class BracketDetectTest {
         //act
         String[] actualResult = detector.detect(operation);
         //assert
-        assertThat("Erkennung von " + operation + " wurde fehlerhaft erkannt als " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
+        assertThat("Erkennung von " + operation + " wurde fehlerhaft erkannt als " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
     }
 }
