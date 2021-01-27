@@ -18,17 +18,14 @@ public class DecimalToBinary {
             throw new IllegalArgumentException("Invalid input for conversion");
         }
 
-        Matcher decToBinMatcher = DECIMAL_TO_BINARY_PATTERN.matcher(operation);
-        result = matchPattern(result, decToBinMatcher);
-
-        Matcher negDecToBinMatcher = NEGATIVE_DECIMAL_TO_BINARY_PATTERN.matcher(operation);
-        result = matchPattern(result, negDecToBinMatcher);
-
-        Matcher binToDecMatcher = BINARY_TO_DECIMAL_PATTERN.matcher(operation);
-        result = matchPattern(result, binToDecMatcher);
-
-        Matcher negBinToDecMatcher = NEGATIVE_BINARY_TO_DECIMAL_PATTERN.matcher(operation);
-        result = matchPattern(result, negBinToDecMatcher);
+        Matcher conversionMatcher = DECIMAL_TO_BINARY_PATTERN.matcher(operation);
+        result = matchPattern(result, conversionMatcher);
+        conversionMatcher = NEGATIVE_DECIMAL_TO_BINARY_PATTERN.matcher(operation);
+        result = matchPattern(result, conversionMatcher);
+        conversionMatcher = BINARY_TO_DECIMAL_PATTERN.matcher(operation);
+        result = matchPattern(result, conversionMatcher);
+        conversionMatcher = NEGATIVE_BINARY_TO_DECIMAL_PATTERN.matcher(operation);
+        result = matchPattern(result, conversionMatcher);
 
         return result;
     }
@@ -56,59 +53,53 @@ public class DecimalToBinary {
         return result;
     }
 
-    private String buildDecimalNumber(String number) {
-        String binaryNumber = number;
+    //negative numbers with 1's complement method
+    private String buildDecimalNumber(String binaryNumber) {
         int decimalNumber = 0;
         int bitIndex = 0;
         if (binaryNumber.charAt(0) == '0') {
-            for (int i = binaryNumber.length() - 1; i >= 0; i--) {
-                if (binaryNumber.charAt(i) == '1') {
-                    decimalNumber += (int)Math.pow(2.0, bitIndex);
-                }
-                bitIndex++;
-            }
+            decimalNumber = addToDecimalNumber(binaryNumber, decimalNumber, bitIndex, '1');
             return String.valueOf(decimalNumber);
         } else {
-            for (int i = binaryNumber.length() - 1; i >= 0; i--) {
-                if (binaryNumber.charAt(i) == '0') {
-                    decimalNumber += (int)Math.pow(2.0, bitIndex);
-                }
-                bitIndex++;
-            }
+            decimalNumber = addToDecimalNumber(binaryNumber, decimalNumber, bitIndex, '0');
             return "-" + decimalNumber;
         }
     }
 
+    private int addToDecimalNumber(String binaryNumber, int decimalNumber, int bitIndex, char c) {
+        for (int i = binaryNumber.length() - 1; i >= 0; i--) {
+            if (binaryNumber.charAt(i) == c) {
+                decimalNumber += (int) Math.pow(2.0, bitIndex);
+            }
+            bitIndex++;
+        }
+        return decimalNumber;
+    }
+
     //negative numbers with 1's complement method
-    private String buildBinaryNumber(String decimalNumber, int bitAmountCounter, boolean isPositive) {
+    private String buildBinaryNumber(String number, int bitAmountCounter, boolean isPositive) {
         StringBuilder resultStr = new StringBuilder("");
-        int number = Integer.parseInt(decimalNumber);
+        int decimalNumber = Integer.parseInt(number);
         if (isPositive) {
             resultStr.append("0");
         } else {
             resultStr.append("1");
         }
+        buildBinaryNumberTail(bitAmountCounter, isPositive, resultStr, decimalNumber);
+        return resultStr.toString();
+    }
+
+    private void buildBinaryNumberTail(int bitAmountCounter, boolean isPositive, StringBuilder resultStr, int decimalNumber) {
         for (int i = bitAmountCounter; i > 0; i--) {
-            if (i == 1) {
-                if (number == 1) {
-                    if (isPositive) resultStr.append("1");
-                    else resultStr.append("0");
-                } else {
-                    if (isPositive) resultStr.append("0");
-                    else resultStr.append("1");
-                }
+            if ((decimalNumber / (int)Math.pow(2.0, i - 1)) == 1) {
+                if (isPositive) resultStr.append("1");
+                else resultStr.append("0");
+                decimalNumber -= (int)Math.pow(2.0, i - 1);
             } else {
-                if ((number / (int)Math.pow(2.0, i - 1)) == 1) {
-                    if (isPositive) resultStr.append("1");
-                    else resultStr.append("0");
-                    number -= (int)Math.pow(2.0, i - 1);
-                } else {
-                    if (isPositive) resultStr.append("0");
-                    else resultStr.append("1");
-                }
+                if (isPositive) resultStr.append("0");
+                else resultStr.append("1");
             }
         }
-        return resultStr.toString();
     }
 
     private int getBitAmount(int decimalNumber) {
