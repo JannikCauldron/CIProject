@@ -70,4 +70,15 @@ public class DecimalToBinaryTest {
         //assert
         assertThat("Umwandlung: " + operation + " wurde fehlerhaft zu: " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void negativeBinaryToDecimalConversion() {
+        //arrange
+        String operation = "dec(10101010)";
+        String expectedResult = "-85";
+        //act
+        String actualResult = numberConverter.operate(operation);
+        //assert
+        assertThat("Umwandlung: " + operation + " wurde fehlerhaft zu: " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }
