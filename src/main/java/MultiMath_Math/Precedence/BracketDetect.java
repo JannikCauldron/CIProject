@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class BracketDetect {
     private final Pattern BRACKET_PATTERN = Pattern.compile("\\(.+\\)");
-    private final Pattern MISSING_OUTER_BRACKET_PATTERN = Pattern.compile(".*" + BRACKET_PATTERN);
+    private final Pattern MISSING_OUTER_BRACKET_PATTERN = Pattern.compile(".*" + BRACKET_PATTERN + ".*");
 
     public String[] detect(String operation) {
         String bracketContent = "";
