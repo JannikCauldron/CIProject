@@ -6,17 +6,22 @@ import java.util.regex.Pattern;
 
 public class BracketDetect {
     private final Pattern BRACKET_PATTERN = Pattern.compile("\\(.+\\)");
+    private final Pattern MISSING_OUTER_BRACKET_PATTERN = Pattern.compile(".*" + BRACKET_PATTERN);
 
     public String[] detect(String operation) {
         String bracketContent = "";
 
-        Matcher outerBracketMatcher = BRACKET_PATTERN.matcher(operation);
+        Matcher outerBracketMatcher = MISSING_OUTER_BRACKET_PATTERN.matcher(operation);
         Stack operationsStack = new Stack();
         Integer bracketAmount = 0;
         while (outerBracketMatcher.find()) {
             bracketAmount++;
             String firstMatch = outerBracketMatcher.group();
-            bracketContent = firstMatch.substring(1, firstMatch.length() - 1);
+            if (firstMatch.charAt(0) == '(' && firstMatch.charAt(firstMatch.length() - 1) == ')') {
+                bracketContent = firstMatch.substring(1, firstMatch.length() - 1);
+            } else {
+                bracketContent = firstMatch;
+            }
 
             //if there is a bracket inside the outer bracket, then cut it.
             Matcher innerBracketMatcher = BRACKET_PATTERN.matcher(bracketContent);

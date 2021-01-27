@@ -46,4 +46,15 @@ public class BracketDetectTest {
         //assert
         assertThat("Erkennung von " + operation + " wurde fehlerhaft erkannt als " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void severalBracketsWithMissingOuterBracketDetection() {
+        //arrange
+        String operation = "12 * (2 - 7)";
+        String[] expectedResult = new String[] {"2 - 7", "12 * "};
+        //act
+        String[] actualResult = detector.detect(operation);
+        //assert
+        assertThat("Erkennung von " + operation + " wurde fehlerhaft erkannt als " + actualResult, actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }
