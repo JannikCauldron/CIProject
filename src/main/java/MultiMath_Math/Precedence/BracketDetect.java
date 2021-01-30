@@ -69,16 +69,19 @@ public class BracketDetect {
         for (int i = 0; i < matchedString.length(); i++) {
             formatString.append(matchedString.charAt(i));
             //insert whitespaces between numbers and operators or operators and brackets
-            if (i != matchedString.length() - 1 && (Pattern.matches(NUMBER_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i + 1))
-                    || Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches(NUMBER_PATTERN.toString(), "" + matchedString.charAt(i + 1))
-                    || Pattern.matches("\\)", "" + matchedString.charAt(i)) && Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i + 1))
-                    || Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches("\\(", "" + matchedString.charAt(i + 1)))) {
-                formatString.append(" ");
+            if (i != matchedString.length() - 1) {
+                if ((Pattern.matches(NUMBER_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i + 1))
+                        || Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches(NUMBER_PATTERN.toString(), "" + matchedString.charAt(i + 1))
+                        || Pattern.matches("\\)", "" + matchedString.charAt(i)) && Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i + 1))
+                        || Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches("\\(", "" + matchedString.charAt(i + 1)))) {
+                    formatString.append(" ");
+                }
             }
         }
         return formatString.substring(0);
     }
 
+    //get just the content of a bracket.
     private String extractBracketContent(String firstMatch) {
         String bracketContent;
         if (firstMatch.charAt(0) == '(' && firstMatch.charAt(firstMatch.length() - 1) == ')') {
@@ -93,20 +96,27 @@ public class BracketDetect {
     private Integer pushOntoOperationStackSameLevelBrackets(Integer bracketAmount, Stack reverseOrder, String matchedString) {
         //Until matchedString isn't empty, continue to cut content from it.
         while (matchedString.length() > 0) {
+            bracketAmount++;
             String bracketContent;
-            if (matchedString.contains("(") && matchedString.contains(")")) {
-                bracketContent = matchedString.substring(matchedString.indexOf('('), matchedString.indexOf(')') + 1);
-            } else {
-                bracketContent = matchedString.substring(0, 3);
-            }
+            bracketContent = getBracketOutOfMatch(matchedString);
             //Cut bracket out of matchedString
             matchedString = matchedString.replace(bracketContent, "");
             //get content of bracket
             bracketContent = extractBracketContent(bracketContent);
             reverseOrder.push(bracketContent);
-            bracketAmount++;
         }
         return bracketAmount;
+    }
+
+    //get whole bracket.
+    private String getBracketOutOfMatch(String matchedString) {
+        String bracketContent;
+        if (matchedString.contains("(") && matchedString.contains(")")) {
+            bracketContent = matchedString.substring(matchedString.indexOf('('), matchedString.indexOf(')') + 1);
+        } else {
+            bracketContent = matchedString.substring(0, 3);
+        }
+        return bracketContent;
     }
 
     //actually pushes the content of a bracket onto the Stack. Is for NESTED_BRACKET_PATTERN.
