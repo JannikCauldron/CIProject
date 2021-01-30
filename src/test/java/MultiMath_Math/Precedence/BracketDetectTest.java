@@ -50,6 +50,17 @@ public class BracketDetectTest {
     }
 
     @Test
+    void severalBracketsMixedWhitespacesDetection() {
+        //arrange
+        String operation = "( 34 /      ( (2+5)      * 8    ))";
+        String[] expectedResult = new String[] {"2 + 5", " * 8", "34 / "};
+        //act
+        String[] actualResult = detector.detect(operation);
+        //assert
+        assertThat("severalBracketsMixedWhitespacesDetection:\nErkennung von " + operation + " verlief fehlerhaft zu " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
+    }
+
+    @Test
     void bracketsWithMissingOuterBracketAndNumbersOnLeftDetection() {
         //arrange
         String operation = "12 * (2 - 7)";

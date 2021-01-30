@@ -65,10 +65,10 @@ public class BracketDetect {
         for (int i = 0; i < matchedString.length(); i++) {
             formatString.append(matchedString.charAt(i));
             //insert whitespaces between numbers and operators or operators and brackets
-            if (Pattern.matches(NUMBER_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i + 1))
+            if (i != matchedString.length() - 1 && (Pattern.matches(NUMBER_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i + 1))
             || Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches(NUMBER_PATTERN.toString(), "" + matchedString.charAt(i + 1))
-            || i != matchedString.length() - 1 && (Pattern.matches("\\)", "" + matchedString.charAt(i)) && Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i + 1)))
-            || Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches("\\(", "" + matchedString.charAt(i + 1))) {
+            || Pattern.matches("\\)", "" + matchedString.charAt(i)) && Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i + 1))
+            || Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches("\\(", "" + matchedString.charAt(i + 1)))) {
                 formatString.append(" ");
             }
         }
@@ -81,6 +81,7 @@ public class BracketDetect {
         while (outerBracketMatcher.find()) {
             bracketAmount++;
             String firstMatch = outerBracketMatcher.group();
+            firstMatch = formatString(firstMatch);
             bracketContent = extractBracketContent(firstMatch);
 
             //if there is a bracket inside the outer bracket, then cut it.
