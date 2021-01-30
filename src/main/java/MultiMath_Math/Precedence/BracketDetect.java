@@ -10,15 +10,13 @@ public class BracketDetect {
     private final Pattern TWO_BRACKETS_ON_SAME_LEVEL_PATTERN = Pattern.compile(BRACKET_PATTERN + " \\* " + BRACKET_PATTERN);
 
     public String[] detect(String operation) {
-        String bracketContent = "";
-
         Stack operationsStack = new Stack();
         Integer bracketAmount = 0;
-        Matcher outerBracketMatcher = TWO_BRACKETS_ON_SAME_LEVEL_PATTERN.matcher(operation);
-        bracketAmount = twoBracketFillOperationStack(outerBracketMatcher, operationsStack, bracketAmount);
+        Matcher bracketMatcher = TWO_BRACKETS_ON_SAME_LEVEL_PATTERN.matcher(operation);
+        bracketAmount = twoBracketFillOperationStack(bracketMatcher, operationsStack, bracketAmount);
         if (bracketAmount == 0) {
-            outerBracketMatcher = MISSING_OUTER_BRACKET_PATTERN.matcher(operation);
-            bracketAmount = fillOperationStack(outerBracketMatcher, operationsStack, bracketAmount);
+            bracketMatcher = MISSING_OUTER_BRACKET_PATTERN.matcher(operation);
+            bracketAmount = fillOperationStack(bracketMatcher, operationsStack, bracketAmount);
         }
 
         String[] extractedOperations = new String[bracketAmount];
@@ -27,25 +25,26 @@ public class BracketDetect {
         return extractedOperations;
     }
 
-    private Integer twoBracketFillOperationStack(Matcher outerBracketMatcher, Stack operationsStack, Integer bracketAmount) {
+    private Integer twoBracketFillOperationStack(Matcher bracketMatcher, Stack operationsStack, Integer bracketAmount) {
         Stack reverseOrder = new Stack();
-        if (outerBracketMatcher.find()) {
-            String inputString = outerBracketMatcher.group();
-
-            while (inputString.length() > 0) {
-                String bracketString;
-                if (inputString.contains("(") && inputString.contains(")")) {
-                    bracketString = inputString.substring(inputString.indexOf('('), inputString.indexOf(')') + 1);
+        if (bracketMatcher.find()) {
+            String matchedString = bracketMatcher.group();
+            //Until matchedString isn't empty, continue to cut content from it.
+            while (matchedString.length() > 0) {
+                String bracketContent;
+                if (matchedString.contains("(") && matchedString.contains(")")) {
+                    bracketContent = matchedString.substring(matchedString.indexOf('('), matchedString.indexOf(')') + 1);
                 } else {
-                    bracketString = inputString;
+                    bracketContent = matchedString;
                 }
-
-                inputString = inputString.replace(bracketString, "");
-                bracketString = extractBracketContent(bracketString);
-                reverseOrder.push(bracketString);
+                //Cut bracket out of matchedString
+                matchedString = matchedString.replace(bracketContent, "");
+                //get content of bracket
+                bracketContent = extractBracketContent(bracketContent);
+                reverseOrder.push(bracketContent);
                 bracketAmount++;
             }
-
+            //Get stack items in the right order
             while (!reverseOrder.empty()) {
                 operationsStack.push(reverseOrder.pop());
             }
