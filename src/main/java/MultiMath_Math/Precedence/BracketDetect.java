@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class BracketDetect {
     private final Pattern BRACKET_PATTERN = Pattern.compile("\\(.+\\)");
     private final Pattern MISSING_OUTER_BRACKET_PATTERN = Pattern.compile(".*" + BRACKET_PATTERN + ".*");
-    private final Pattern TWO_BRACKETS_ON_SAME_LEVEL_PATTERN = Pattern.compile(BRACKET_PATTERN + " \\* " + BRACKET_PATTERN);
+    private final Pattern TWO_BRACKETS_ON_SAME_LEVEL_PATTERN = Pattern.compile(BRACKET_PATTERN + "\\s*\\*\\s*" + BRACKET_PATTERN);
 
     public String[] detect(String operation) {
         Stack operationsStack = new Stack();
@@ -29,6 +29,23 @@ public class BracketDetect {
         Stack reverseOrder = new Stack();
         if (bracketMatcher.find()) {
             String matchedString = bracketMatcher.group();
+            matchedString = matchedString.replaceAll("\\s", "");
+
+            StringBuilder tmp = new StringBuilder("");
+            for (int i = 0; i < matchedString.length(); i++) {
+                if (matchedString.charAt(i) == '*') {
+                    tmp.append(" * ");
+                    continue;
+                }
+                tmp.append(matchedString.charAt(i));
+                if (Pattern.matches("[0-9]", "" + matchedString.charAt(i)) && Pattern.matches("[-\\+]", "" + matchedString.charAt(i + 1))
+                || Pattern.matches("[-\\+]", "" + matchedString.charAt(i)) && Pattern.matches("[0-9]", "" + matchedString.charAt(i + 1))) {
+                    tmp.append(" ");
+                }
+            }
+
+            matchedString = tmp.substring(0);
+
             //Until matchedString isn't empty, continue to cut content from it.
             while (matchedString.length() > 0) {
                 String bracketContent;

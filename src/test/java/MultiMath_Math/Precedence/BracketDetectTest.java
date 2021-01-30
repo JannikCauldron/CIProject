@@ -81,4 +81,15 @@ public class BracketDetectTest {
         //assert
         assertThat("twoBracketsOnSameLevelDetection:\nErkennung von " + operation + " verlief fehlerhaft zu " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void twoBracketsOnSameLevelMixedWhitespacesDetection() {
+        //arrange
+        String operation = "(2     - 7      )*    ( 4+2)";
+        String[] expectedResult = new String[] {"2 - 7", "4 + 2", " * "};
+        //act
+        String[] actualResult = detector.detect(operation);
+        //assert
+        assertThat("twoBracketsOnSameLevelMixedWhitespacesDetection:\nErkennung von " + operation + " verlief fehlerhaft zu " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }
