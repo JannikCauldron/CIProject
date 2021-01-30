@@ -6,29 +6,10 @@ public class CommonLogarithm {
     public double logc(String operation) {
 
         double number;
-        int indexOfDot;
-        String stringBeforeDot;
-        String stringAfterDot;
         int operationStringLength = operation.length();
 
         if (operation.matches(LOGC_PATTERN)) {
-            if (operation.contains(".")) {
-
-                indexOfDot = operation.indexOf('.');
-
-                stringBeforeDot = operation.substring(0, indexOfDot);
-                stringAfterDot = operation.substring(indexOfDot+1, operationStringLength);
-
-                String numberStringBeforeDot = stringBeforeDot.replaceAll("[^0-9]", "");
-                String numberStringAfterDot = stringAfterDot.replaceAll("[^0-9]", "");
-                String CompleteNumberString = numberStringBeforeDot + "." + numberStringAfterDot;
-
-                number = Double.parseDouble(CompleteNumberString);
-
-            } else {
-                String CompleteNumberString = operation.replaceAll("[^0-9]", "");
-                number = Double.parseDouble(CompleteNumberString);
-            }
+            number = DecimalFilter.getNumber(operation, operationStringLength);
         } else {
             throw new IllegalArgumentException("no valid common logarithm expression: " + operation);
         }
