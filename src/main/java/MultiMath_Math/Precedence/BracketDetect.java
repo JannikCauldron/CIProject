@@ -6,16 +6,16 @@ import java.util.regex.Pattern;
 
 public class BracketDetect {
     private final Pattern BRACKET_PATTERN = Pattern.compile("\\(.+\\)");
-    private final Pattern NESTED_BRACKET_PATTERN = Pattern.compile(".*" + BRACKET_PATTERN + ".*");
-    private final Pattern TWO_BRACKETS_ON_SAME_LEVEL_PATTERN = Pattern.compile(BRACKET_PATTERN + "\\s*\\*\\s*" + BRACKET_PATTERN);
     private final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]");
     private final Pattern OPERATOR_PATTERN = Pattern.compile("[-+/*]");
+    private final Pattern NESTED_BRACKET_PATTERN = Pattern.compile(".*" + BRACKET_PATTERN + ".*");
+    private final Pattern SEVERAL_BRACKETS_ON_SAME_LEVEL_PATTERN = Pattern.compile(BRACKET_PATTERN + "\\s*(" + OPERATOR_PATTERN + "\\s*" + BRACKET_PATTERN + ")+");
 
     public String[] detect(String operation) {
         Stack operationsStack = new Stack();
         Integer bracketAmount = 0;
 
-        Matcher bracketMatcher = TWO_BRACKETS_ON_SAME_LEVEL_PATTERN.matcher(operation);
+        Matcher bracketMatcher = SEVERAL_BRACKETS_ON_SAME_LEVEL_PATTERN.matcher(operation);
         bracketAmount = fillOperationStackSameLevelBrackets(bracketMatcher, operationsStack, bracketAmount);
         if (bracketAmount == 0) {
             bracketMatcher = NESTED_BRACKET_PATTERN.matcher(operation);
@@ -97,7 +97,7 @@ public class BracketDetect {
             if (matchedString.contains("(") && matchedString.contains(")")) {
                 bracketContent = matchedString.substring(matchedString.indexOf('('), matchedString.indexOf(')') + 1);
             } else {
-                bracketContent = matchedString;
+                bracketContent = matchedString.substring(0, 3);
             }
             //Cut bracket out of matchedString
             matchedString = matchedString.replace(bracketContent, "");

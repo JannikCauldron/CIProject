@@ -103,4 +103,15 @@ public class BracketDetectTest {
         //assert
         assertThat("twoBracketsOnSameLevelMixedWhitespacesDetection:\nErkennung von " + operation + " verlief fehlerhaft zu " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void severalBracketsOnSameLevelDetection() {
+        //arrange
+        String operation = "(34 / 7) + (9 + 0) - (22 * 76)";
+        String[] expectedResult = new String[] {"34 / 7", "9 + 0", "22 * 76", " + ", " - "};
+        //act
+        String[] actualResult = detector.detect(operation);
+        //assert
+        assertThat("severalBracketsOnSameLevelDetection:\nErkennung von " + operation + " verlief fehlerhaft zu " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }
