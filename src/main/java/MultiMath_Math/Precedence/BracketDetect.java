@@ -7,20 +7,50 @@ import java.util.regex.Pattern;
 public class BracketDetect {
     private final Pattern BRACKET_PATTERN = Pattern.compile("\\(.+\\)");
     private final Pattern MISSING_OUTER_BRACKET_PATTERN = Pattern.compile(".*" + BRACKET_PATTERN + ".*");
+    private final Pattern TWO_BRACKETS_ON_SAME_LEVEL_PATTERN = Pattern.compile(BRACKET_PATTERN + " \\* " + BRACKET_PATTERN);
 
     public String[] detect(String operation) {
         String bracketContent = "";
 
-        Matcher outerBracketMatcher = MISSING_OUTER_BRACKET_PATTERN.matcher(operation);
         Stack operationsStack = new Stack();
         Integer bracketAmount = 0;
-        
-        bracketAmount = fillOperationStack(outerBracketMatcher, operationsStack, bracketAmount);
-        
+        Matcher outerBracketMatcher = TWO_BRACKETS_ON_SAME_LEVEL_PATTERN.matcher(operation);
+        bracketAmount = twoBracketFillOperationStack(outerBracketMatcher, operationsStack, bracketAmount);
+        if (bracketAmount == 0) {
+            outerBracketMatcher = MISSING_OUTER_BRACKET_PATTERN.matcher(operation);
+            bracketAmount = fillOperationStack(outerBracketMatcher, operationsStack, bracketAmount);
+        }
+
         String[] extractedOperations = new String[bracketAmount];
         fillOperationsArray(operationsStack, bracketAmount, extractedOperations);
 
         return extractedOperations;
+    }
+
+    private Integer twoBracketFillOperationStack(Matcher outerBracketMatcher, Stack operationsStack, Integer bracketAmount) {
+        Stack reverseOrder = new Stack();
+        if (outerBracketMatcher.find()) {
+            String inputString = outerBracketMatcher.group();
+
+            while (inputString.length() > 0) {
+                String bracketString;
+                if (inputString.contains("(") && inputString.contains(")")) {
+                    bracketString = inputString.substring(inputString.indexOf('('), inputString.indexOf(')') + 1);
+                } else {
+                    bracketString = inputString;
+                }
+
+                inputString = inputString.replace(bracketString, "");
+                bracketString = extractBracketContent(bracketString);
+                reverseOrder.push(bracketString);
+                bracketAmount++;
+            }
+
+            while (!reverseOrder.empty()) {
+                operationsStack.push(reverseOrder.pop());
+            }
+        }
+        return bracketAmount;
     }
 
     //also returns bracketAmount but most importantly fills the Stack

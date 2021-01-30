@@ -70,4 +70,15 @@ public class BracketDetectTest {
         //assert
         assertThat("bracketsWithMissingOuterBracketAndNumbersOnRightDetection:\nErkennung von " + operation + " verlief fehlerhaft zu " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void twoBracketsOnSameLevelDetection() {
+        //arrange
+        String operation = "(2 - 7) * (4 + 2)";
+        String[] expectedResult = new String[] {"2 - 7", "4 + 2", " * "};
+        //act
+        String[] actualResult = detector.detect(operation);
+        //assert
+        assertThat("twoBracketsOnSameLevelDetection:\nErkennung von " + operation + " verlief fehlerhaft zu " + Arrays.toString(actualResult), actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }
