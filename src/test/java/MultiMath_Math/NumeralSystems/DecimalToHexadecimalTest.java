@@ -52,4 +52,17 @@ class DecimalToHexadecimalTest {
         //assert
         assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void convert_dec420_to_hex() {
+        //arrange
+        int decimal = 420;
+        String expectedResult = "1a4";
+
+        //act
+        String actualResult = converter.convert(decimal);
+
+        //assert
+        assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }
