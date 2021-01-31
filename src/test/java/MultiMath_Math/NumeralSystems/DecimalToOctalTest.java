@@ -18,10 +18,23 @@ class DecimalToOctalTest {
     void convert_dec7_to_oct() {
         //arrange
         int decimal = 7;
-        int expectedResult = 7;
+        String expectedResult = "7";
 
         //act
-        int actualResult = converter.convert(decimal);
+        String actualResult = converter.convert(decimal);
+
+        //assert
+        assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
+    }
+
+    @Test
+    void convert_dec14_to_oct() {
+        //arrange
+        int decimal = 14;
+        String expectedResult = "16";
+
+        //act
+        String actualResult = converter.convert(decimal);
 
         //assert
         assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
