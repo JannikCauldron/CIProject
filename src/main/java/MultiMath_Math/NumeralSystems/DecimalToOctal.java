@@ -1,14 +1,18 @@
 package MultiMath_Math.NumeralSystems;
 
 public class DecimalToOctal {
+
+    private static final char[] OCT_CHARS = {'0', '1', '2', '3', '4', '5', '6', '7'};
+    private static final String EMPTY_STRING = "";
+    private static final int OCT_BASE = 8;
+
     public String convert(int decimal) {
-        String result = "";
+        String result = EMPTY_STRING;
         int tmp;
-        char octChars[]={'0','1','2','3','4','5','6','7'};
         while(decimal > 0) {
-            tmp = decimal % 8;
-            result = octChars[tmp] + result;
-            decimal = decimal / 8;
+            tmp = decimal % OCT_BASE;
+            result = OCT_CHARS[tmp] + result;
+            decimal /= OCT_BASE;
         }
         return result;
     }
