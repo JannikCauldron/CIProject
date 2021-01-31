@@ -8,8 +8,9 @@ public class DecimalToHexadecimal {
     private static final int START_INDEX = 0;
     private static StringBuilder hex;
 
-    public String convert(int decimal) {
+    public String convert(int decimal) throws Exception {
 
+        if (decimal < 0) throw new Exception("No conversion of negative values!");
         if (decimal == 0) return "0";
 
         hex = new StringBuilder(EMPTY_STRING);
