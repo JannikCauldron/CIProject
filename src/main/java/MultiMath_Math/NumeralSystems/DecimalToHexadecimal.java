@@ -9,6 +9,9 @@ public class DecimalToHexadecimal {
     private static StringBuilder hex;
 
     public String convert(int decimal) {
+
+        if (decimal == 0) return "0";
+
         hex = new StringBuilder(EMPTY_STRING);
         int hexTmp;
         while(decimal > 0) {
