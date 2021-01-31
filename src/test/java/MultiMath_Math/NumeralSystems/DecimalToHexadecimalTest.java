@@ -39,4 +39,17 @@ class DecimalToHexadecimalTest {
         //assert
         assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void convert_dec20_to_hex() {
+        //arrange
+        int decimal = 20;
+        String expectedResult = "14";
+
+        //act
+        String actualResult = converter.convert(decimal);
+
+        //assert
+        assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }

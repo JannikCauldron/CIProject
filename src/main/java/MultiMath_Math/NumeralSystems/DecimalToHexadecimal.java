@@ -6,7 +6,12 @@ public class DecimalToHexadecimal {
 
     public String convert(int decimal) {
         String result = "";
-        result += HEXCHARS[decimal];
+        int tmp;
+        while(decimal > 0) {
+            tmp = decimal % 16;
+            result = HEXCHARS[tmp] + result;
+            decimal /= 16;
+        }
         return result;
     }
 }
