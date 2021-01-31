@@ -93,4 +93,17 @@ class DecimalToHexadecimalTest {
         // Assert
         assertTrue(actualMessage.contains(expectedMessage));
     }
+
+    @Test
+    void convert_baseValue() throws Exception {
+        //arrange
+        int decimal = 16;
+        String expectedResult = "10";
+
+        //act
+        String actualResult = converter.convert(decimal);
+
+        //assert
+        assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }
