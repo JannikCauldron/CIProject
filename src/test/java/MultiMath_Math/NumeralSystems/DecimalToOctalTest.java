@@ -39,4 +39,17 @@ class DecimalToOctalTest {
         //assert
         assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void convert_dec133337_to_oct() {
+        //arrange
+        int decimal = 133337;
+        String expectedResult = "404331";
+
+        //act
+        String actualResult = converter.convert(decimal);
+
+        //assert
+        assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }
