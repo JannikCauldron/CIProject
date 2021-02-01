@@ -7,9 +7,10 @@ public class DecimalToOctal {
     public static final int START_INDEX = 0;
     private StringBuilder oct;
 
-    public String convert(int decimal) {
+    public String convert(int decimal) throws Exception {
 
         if (decimal == 0) return "0";
+        if (decimal < 0) throw new Exception("No conversion of negative values!");
 
         oct = new StringBuilder();
         int rest;
