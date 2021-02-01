@@ -8,6 +8,9 @@ public class DecimalToOctal {
     private StringBuilder oct;
 
     public String convert(int decimal) {
+
+        if (decimal == 0) return "0";
+
         oct = new StringBuilder();
         int rest;
         while(decimal > 0) {

@@ -52,4 +52,17 @@ class DecimalToOctalTest {
         //assert
         assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void convert_dec0_to_oct() {
+        //arrange
+        int decimal = 0;
+        String expectedResult = "0";
+
+        //act
+        String actualResult = converter.convert(decimal);
+
+        //assert
+        assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }
