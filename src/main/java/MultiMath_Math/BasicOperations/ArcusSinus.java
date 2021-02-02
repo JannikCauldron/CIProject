@@ -3,7 +3,7 @@ package MultiMath_Math.BasicOperations;
 public class ArcusSinus {
 
 	private static final String PATTERN_TO_REPLACE = "\\D";
-    private static final String ARCSIN_PATTERN = "arcsin\\(\\d+\\)";
+    private static final String ARCSIN_PATTERN = "arcsin\\(\\s*\\d+\\s*\\)";
 
     public double calcArcSin(String expression) {
 

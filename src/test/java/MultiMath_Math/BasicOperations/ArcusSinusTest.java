@@ -40,4 +40,18 @@ public class ArcusSinusTest {
          // Assert
          MatcherAssert.assertThat("result", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void arcussinusWithSpacesBetweenParentheses() {
+         // Arrange
+         String number = "15";
+         String operation = "arcsin(  " + number + "  )";
+         double expected = Math.asin(Double.parseDouble(number));
+ 
+         // Act
+         double result = obj.calcArcSin(operation);
+ 
+         // Assert
+         MatcherAssert.assertThat("result", result, CoreMatchers.equalTo(expected));
+    }
 }
