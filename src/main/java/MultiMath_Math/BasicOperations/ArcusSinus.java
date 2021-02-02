@@ -6,17 +6,16 @@ public class ArcusSinus {
     private static final String ARCSIN_PATTERN = "arcsin\\(\\d+\\)";
 
     public double calcArcSin(String expression) {
-        String arcSinPattern = ARCSIN_PATTERN;
 
-        if (matchArcSinExpression(expression, arcSinPattern)) {
+        if (matchArcSinExpression(expression)) {
             return Math.asin(extractNumberFromArcSinString(expression));
         }
         
         return -1;
 	}
 
-    private boolean matchArcSinExpression(String expression, String arcSinPattern) {
-        return expression.matches(arcSinPattern);
+    private boolean matchArcSinExpression(String expression) {
+        return expression.matches(ARCSIN_PATTERN);
     }
 
     private double extractNumberFromArcSinString(String operation) {
