@@ -4,7 +4,7 @@ public class ArcusSinus {
 
 	private static final int ERROR = -1;
     private static final String PATTERN_TO_REPLACE = "\\D";
-    private static final String ARCSIN_PATTERN = "arcsin\\(\\s*\\d+\\s*\\)";
+    private static final String ARCSIN_PATTERN = "arcsin\\(\\s*-?\\d+\\s*\\)";
 
     public double processArcSinExpression(String expression) {
 

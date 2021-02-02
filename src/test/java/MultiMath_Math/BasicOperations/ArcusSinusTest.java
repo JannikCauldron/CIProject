@@ -54,4 +54,18 @@ public class ArcusSinusTest {
          // Assert
          MatcherAssert.assertThat("result", result, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void arcussinusWithAnyNegativeDigitNumber() {
+         // Arrange
+         String number = "-15";
+         String operation = "arcsin(" + number + ")";
+         double expected = Math.asin(Double.parseDouble(number));
+ 
+         // Act
+         double result = obj.processArcSinExpression(operation);
+ 
+         // Assert
+         MatcherAssert.assertThat("result", result, CoreMatchers.equalTo(expected));
+    }
 }
