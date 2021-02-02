@@ -21,7 +21,7 @@ public class ArcusSinusTest {
          double expected = Math.asin(Double.parseDouble(number));
  
          // Act
-         double result = obj.calcArcSin(operation);
+         double result = obj.processArcSinExpression(operation);
  
          // Assert
          MatcherAssert.assertThat("result", result, CoreMatchers.equalTo(expected));
@@ -35,7 +35,7 @@ public class ArcusSinusTest {
          double expected = Math.asin(Double.parseDouble(number));
  
          // Act
-         double result = obj.calcArcSin(operation);
+         double result = obj.processArcSinExpression(operation);
  
          // Assert
          MatcherAssert.assertThat("result", result, CoreMatchers.equalTo(expected));
@@ -49,7 +49,7 @@ public class ArcusSinusTest {
          double expected = Math.asin(Double.parseDouble(number));
  
          // Act
-         double result = obj.calcArcSin(operation);
+         double result = obj.processArcSinExpression(operation);
  
          // Assert
          MatcherAssert.assertThat("result", result, CoreMatchers.equalTo(expected));

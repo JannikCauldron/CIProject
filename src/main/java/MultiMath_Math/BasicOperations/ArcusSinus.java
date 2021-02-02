@@ -2,17 +2,22 @@ package MultiMath_Math.BasicOperations;
 
 public class ArcusSinus {
 
-	private static final String PATTERN_TO_REPLACE = "\\D";
+	private static final int ERROR = -1;
+    private static final String PATTERN_TO_REPLACE = "\\D";
     private static final String ARCSIN_PATTERN = "arcsin\\(\\s*\\d+\\s*\\)";
 
-    public double calcArcSin(String expression) {
+    public double processArcSinExpression(String expression) {
 
         if (matchArcSinExpression(expression)) {
-            return Math.asin(extractNumberFromArcSinString(expression));
+            return calcArcusSinus(expression);
         }
         
-        return -1;
+        return ERROR;
 	}
+
+    private double calcArcusSinus(String expression) {
+        return Math.asin(extractNumberFromArcSinString(expression));
+    }
 
     private boolean matchArcSinExpression(String expression) {
         return expression.matches(ARCSIN_PATTERN);
