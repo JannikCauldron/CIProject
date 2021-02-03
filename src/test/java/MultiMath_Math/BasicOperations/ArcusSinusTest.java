@@ -19,12 +19,12 @@ public class ArcusSinusTest {
     @Test
     public void arcussinusWithOneDigitPositiveInteger() {
          // Arrange
-         String number = "5";
-         String operation = "arcsin(" + number + ")";
-         double expected = Math.asin(Double.parseDouble(number));
+         String arcSinNumberToProcess = "5";
+         String arcSinUserInput = "arcsin(" + arcSinNumberToProcess + ")";
+         double expected = Math.asin(Double.parseDouble(arcSinNumberToProcess));
  
          // Act
-         double result = obj.processArcSinExpression(operation);
+         double result = obj.processArcSinExpression(arcSinUserInput);
  
          // Assert
          MatcherAssert.assertThat("result", result, CoreMatchers.equalTo(expected));
@@ -33,12 +33,12 @@ public class ArcusSinusTest {
     @Test
     public void arcussinusWithAnyPositiveDigitNumber() {
          // Arrange
-         String number = "15";
-         String operation = "arcsin(" + number + ")";
-         double expected = Math.asin(Double.parseDouble(number));
+         String arcSinNumberToProcess = "15";
+         String arcSinUserInput = "arcsin(" + arcSinNumberToProcess + ")";
+         double expected = Math.asin(Double.parseDouble(arcSinNumberToProcess));
  
          // Act
-         double result = obj.processArcSinExpression(operation);
+         double result = obj.processArcSinExpression(arcSinUserInput);
  
          // Assert
          MatcherAssert.assertThat("result", result, CoreMatchers.equalTo(expected));
@@ -47,12 +47,12 @@ public class ArcusSinusTest {
     @Test
     public void arcussinusWithSpacesBetweenParentheses() {
          // Arrange
-         String number = "15";
-         String operation = "arcsin(  " + number + "  )";
-         double expected = Math.asin(Double.parseDouble(number));
+         String arcSinNumberToProcess = "15";
+         String arcSinUserInput = "arcsin(  " + arcSinNumberToProcess + "  )";
+         double expected = Math.asin(Double.parseDouble(arcSinNumberToProcess));
  
          // Act
-         double result = obj.processArcSinExpression(operation);
+         double result = obj.processArcSinExpression(arcSinUserInput);
  
          // Assert
          MatcherAssert.assertThat("result", result, CoreMatchers.equalTo(expected));
@@ -61,12 +61,12 @@ public class ArcusSinusTest {
     @Test
     public void arcussinusWithAnyNegativeDigitNumber() {
          // Arrange
-         String number = "-15";
-         String operation = "arcsin(" + number + ")";
-         double expected = Math.asin(Double.parseDouble(number));
+         String arcSinNumberToProcess = "-15";
+         String arcSinUserInput = "arcsin(" + arcSinNumberToProcess + ")";
+         double expected = Math.asin(Double.parseDouble(arcSinNumberToProcess));
  
          // Act
-         double result = obj.processArcSinExpression(operation);
+         double result = obj.processArcSinExpression(arcSinUserInput);
  
          // Assert
          MatcherAssert.assertThat("result", result, CoreMatchers.equalTo(expected));
@@ -75,15 +75,15 @@ public class ArcusSinusTest {
     @Test
     public void arcussinusWithWrongExpressionToGetException() {
          // Arrange
-         String number = "5a";
-         String operation = "arcsin(" + number + ")";
-         String expectedMessage = "Mistake in arcus sinus expression";
+         String arcSinNumberToProcess = "5a";
+         String arcSinUserInput = "arcsin(" + arcSinNumberToProcess + ")";
+         String expectedExceptionMessage = "Mistake in arcus sinus expression";
  
          // Act
-         Exception exception = assertThrows(IllegalArgumentException.class, () -> obj.processArcSinExpression(operation));
-         String resultMessage = exception.getMessage();
+         Exception thrownException = assertThrows(IllegalArgumentException.class, () -> obj.processArcSinExpression(arcSinUserInput));
+         String resultExceptionMessage = thrownException.getMessage();
  
          // Assert
-         assertTrue(resultMessage.contains(expectedMessage));
+         assertTrue(resultExceptionMessage.contains(expectedExceptionMessage));
     }
 }

@@ -2,7 +2,9 @@ package MultiMath_Math.BasicOperations;
 
 public class ArcusSinus {
 
-    private static final int ERROR = -1;
+    private static final String EXCEPTION_MESSAGE_FOR_WRONG_INPUT = "Mistake in arcus sinus expression";
+    private static final IllegalArgumentException EXCEPTION_FOR_WRONG_USER_INPUT = new IllegalArgumentException(
+            EXCEPTION_MESSAGE_FOR_WRONG_INPUT);
     private static final String PATTERN_TO_REPLACE = "\\D";
     private static final String ARCSIN_PATTERN = "arcsin\\(\\s*-?\\d+\\s*\\)";
 
@@ -11,8 +13,8 @@ public class ArcusSinus {
         if (matchArcSinExpression(arcSinExpression)) {
             return calcArcusSinus(arcSinExpression);
         } else {
-            
-            throw new IllegalArgumentException("Mistake in arcus sinus expression");
+
+            throw EXCEPTION_FOR_WRONG_USER_INPUT;
         }
 
     }
