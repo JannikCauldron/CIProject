@@ -1,5 +1,8 @@
 package MultiMath_Math.BasicOperations;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
@@ -67,5 +70,20 @@ public class ArcusSinusTest {
  
          // Assert
          MatcherAssert.assertThat("result", result, CoreMatchers.equalTo(expected));
+    }
+
+    @Test
+    public void arcussinusWithWrongExpressionToGetException() {
+         // Arrange
+         String number = "5a";
+         String operation = "arcsin(" + number + ")";
+         String expectedMessage = "Mistake in arcus sinus expression";
+ 
+         // Act
+         Exception exception = assertThrows(IllegalArgumentException.class, () -> obj.processArcSinExpression(operation));
+         String resultMessage = exception.getMessage();
+ 
+         // Assert
+         assertTrue(resultMessage.contains(expectedMessage));
     }
 }

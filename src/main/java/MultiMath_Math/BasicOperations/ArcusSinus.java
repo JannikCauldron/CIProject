@@ -10,9 +10,11 @@ public class ArcusSinus {
 
         if (matchArcSinExpression(arcSinExpression)) {
             return calcArcusSinus(arcSinExpression);
+        } else {
+            
+            throw new IllegalArgumentException("Mistake in arcus sinus expression");
         }
 
-        return ERROR;
     }
 
     private double calcArcusSinus(String arcSinValue) {
