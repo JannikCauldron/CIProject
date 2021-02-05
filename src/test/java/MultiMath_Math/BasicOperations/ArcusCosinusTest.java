@@ -16,14 +16,14 @@ public class ArcusCosinusTest {
     @Test
     public void arcusCosinusWithOnePositiveDigitInExpression() throws Exception {
         // Arrange
-        String num = "5";
-        String op = "arccos(" + num + ")";
-        double expect = Math.acos(Double.parseDouble(num));
+        String arcusCosinusNumberInExpression = "5";
+        String arcusCosinusUserInput = "arccos(" + arcusCosinusNumberInExpression + ")";
+        double expectedResult = Math.acos(Double.parseDouble(arcusCosinusNumberInExpression));
 
         // Act
-        double res = obj.calcArcCos(op);
+        double actualResult = obj.processArcusCosinusExpression(arcusCosinusUserInput);
 
         // Assert
-        MatcherAssert.assertThat("result", res, CoreMatchers.equalTo(expect));
+        MatcherAssert.assertThat("result", actualResult, CoreMatchers.equalTo(expectedResult));
     }
 }

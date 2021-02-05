@@ -2,11 +2,22 @@ package MultiMath_Math.BasicOperations;
 
 public class ArcusCosinus {
 
-	public double calcArcCos(String op) throws Exception {
-		if (op.matches("arccos\\(\\d\\)")) {
-            return Math.acos(Double.parseDouble(op.replaceAll("\\D", "")));
+    private static final String ARCUS_COSINUS_PATTERN = "arccos\\(\\d\\)";
+    private static final String ARCUS_COSINUS_REPLACE_PATTERN = "\\D";
+
+    public double processArcusCosinusExpression(String arcusCosinusInputString) throws Exception {
+        if (matchArcusCosinusExpression(arcusCosinusInputString)) {
+            return calculateArcusCosinus(arcusCosinusInputString);
         }
         return -1;
-	}
+    }
+
+    private double calculateArcusCosinus(String arcusCosinusInputString) {
+        return Math.acos(Double.parseDouble(arcusCosinusInputString.replaceAll(ARCUS_COSINUS_REPLACE_PATTERN, "")));
+    }
+
+    private boolean matchArcusCosinusExpression(String arcusCosinusInputString) {
+        return arcusCosinusInputString.matches(ARCUS_COSINUS_PATTERN);
+    }
 
 }
