@@ -2,7 +2,7 @@ package MultiMath_Math.BasicOperations;
 
 public class ArcusCosinus {
 
-    private static final String ARCUS_COSINUS_PATTERN = "arccos\\(\\d\\)";
+    private static final String ARCUS_COSINUS_PATTERN = "arccos\\(\\d+\\)";
     private static final String ARCUS_COSINUS_REPLACE_PATTERN = "\\D";
 
     public double processArcusCosinusExpression(String arcusCosinusInputString) throws Exception {
