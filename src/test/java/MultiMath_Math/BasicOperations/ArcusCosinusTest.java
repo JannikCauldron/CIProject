@@ -40,4 +40,20 @@ public class ArcusCosinusTest {
         // Assert
         MatcherAssert.assertThat("result", actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    public void arcusCosinusWithSpacesBetweenParentheses() throws Exception {
+        // Arrange
+        String arcusCosinusNumberInExpression = "15";
+        String arcusCosinusUserInput = "arccos(  " + arcusCosinusNumberInExpression + "  )";
+        double expectedResult = Math.acos(Double.parseDouble(arcusCosinusNumberInExpression));
+
+        // Act
+        double actualResult = obj.processArcusCosinusExpression(arcusCosinusUserInput);
+
+        // Assert
+        MatcherAssert.assertThat("result", actualResult, CoreMatchers.equalTo(expectedResult));
+    }
+
+    
 }
