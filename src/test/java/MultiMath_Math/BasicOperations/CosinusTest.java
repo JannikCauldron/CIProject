@@ -64,4 +64,29 @@ public class CosinusTest {
         // Assert
         assertTrue(resultMsg.contentEquals(expectedMsg));
     }
+
+    @Test
+    public void cosinusWithNegativDigitExpressionTest() {
+        // Arrange
+        String number = "-10";
+        String op = "cos(" + number + ")";
+        double expected = Math.cos(Integer.parseInt(number));
+        // Act
+        double result = obj.calcCosinus(op);
+        // Assert
+        MatcherAssert.assertThat(result, CoreMatchers.equalTo(expected));
+    }
+
+    @Test
+    public void cosinusWithoutLeadingZeroTest() throws IllegalArgumentException {
+        // Arrange
+        String number = "01";
+        String op = "cos(" + number +  ")";
+        String expectedMsg = "Error in cosinus expression";
+        // Act
+        Exception result = assertThrows(IllegalArgumentException.class, () -> obj.calcCosinus(op));
+        String resultMessage = result.getMessage();
+        // Assert
+        assertTrue(resultMessage.contains(expectedMsg));
+    }
 }
