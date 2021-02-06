@@ -39,4 +39,17 @@ class HexadecimalToDecimalTest {
         //assert
         assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void test_case_neutrality() {
+        //arrange
+        String hex = "C";
+        int expectedResult = 12;
+
+        //act
+        int actualResult = converter.convert(hex);
+
+        //assert
+        assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }
