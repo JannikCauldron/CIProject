@@ -63,13 +63,13 @@ public class ArcusCosinusTest {
         // Arrange
         String arcusCosinusNumberInExpression = "15a";
         String arcusCosinusUserInput = "arccos(" + arcusCosinusNumberInExpression + ")";
-        String expectedMessage = "Exception Message";
+        String expectedMessageToThrow = "There is a mistake in the arcus cosinus expression.";
 
         // Act
-        Exception myException = assertThrows(IllegalArgumentException.class, () -> obj.processArcusCosinusExpression(arcusCosinusUserInput));
-        String resMessage = myException.getMessage();
+        Exception thrownExpection = assertThrows(IllegalArgumentException.class, () -> obj.processArcusCosinusExpression(arcusCosinusUserInput));
+        String actualMessageOfThrownException = thrownExpection.getMessage();
 
         // Assert
-        MatcherAssert.assertThat("result", resMessage, CoreMatchers.equalTo(expectedMessage));
+        MatcherAssert.assertThat("result", actualMessageOfThrownException, CoreMatchers.equalTo(expectedMessageToThrow));
     }
 }
