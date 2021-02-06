@@ -17,11 +17,11 @@ class HexadecimalToDecimalTest {
     @Test
     void convert_hex7_to_dec() {
         //arrange
-        String in = "7";
+        String hex = "7";
         int expectedResult = 7;
 
         //act
-        int actualResult = converter.convert(in);
+        int actualResult = converter.convert(hex);
 
         //assert
         assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
