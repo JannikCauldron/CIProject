@@ -1,5 +1,7 @@
 package MultiMath_Math.BasicOperations;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
@@ -56,5 +58,18 @@ public class ArcusCosinusTest {
         MatcherAssert.assertThat("result", actualResult, CoreMatchers.equalTo(expectedResult));
     }
 
-    
+    @Test
+    public void arcusCosinusWithWrongExpressionToGetException() {
+        // Arrange
+        String arcusCosinusNumberInExpression = "15a";
+        String arcusCosinusUserInput = "arccos(" + arcusCosinusNumberInExpression + ")";
+        String expectedMessage = "Exception Message";
+
+        // Act
+        Exception myException = assertThrows(IllegalArgumentException.class, () -> obj.processArcusCosinusExpression(arcusCosinusUserInput));
+        String resMessage = myException.getMessage();
+
+        // Assert
+        MatcherAssert.assertThat("result", resMessage, CoreMatchers.equalTo(expectedMessage));
+    }
 }

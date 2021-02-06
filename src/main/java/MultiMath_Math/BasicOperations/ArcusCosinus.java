@@ -14,7 +14,7 @@ public class ArcusCosinus {
         if (matchArcusCosinusExpression(arcusCosinusInputString)) {
             return calculateArcusCosinus(arcusCosinusInputString);
         }
-        return -1;
+        throw new IllegalArgumentException("Exception Message");
     }
 
     private double calculateArcusCosinus(String arcusCosinusInputString) {
