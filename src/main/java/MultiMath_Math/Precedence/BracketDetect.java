@@ -6,19 +6,20 @@ import java.util.regex.Pattern;
 
 public class BracketDetect {
     private final Pattern BRACKET_PATTERN = Pattern.compile("\\(.+\\)");
-    private final Pattern MISSING_OUTER_BRACKET_PATTERN = Pattern.compile(".*" + BRACKET_PATTERN + ".*");
-    private final Pattern TWO_BRACKETS_ON_SAME_LEVEL_PATTERN = Pattern.compile(BRACKET_PATTERN + "\\s*\\*\\s*" + BRACKET_PATTERN);
     private final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]");
     private final Pattern OPERATOR_PATTERN = Pattern.compile("[-+/*]");
+    private final Pattern NESTED_BRACKET_PATTERN = Pattern.compile(".*" + BRACKET_PATTERN + ".*");
+    private final Pattern SEVERAL_BRACKETS_ON_SAME_LEVEL_PATTERN = Pattern.compile(BRACKET_PATTERN + "\\s*(" + OPERATOR_PATTERN + "\\s*" + BRACKET_PATTERN + ")+");
 
     public String[] detect(String operation) {
         Stack operationsStack = new Stack();
         Integer bracketAmount = 0;
-        Matcher bracketMatcher = TWO_BRACKETS_ON_SAME_LEVEL_PATTERN.matcher(operation);
-        bracketAmount = twoBracketFillOperationStack(bracketMatcher, operationsStack, bracketAmount);
+
+        Matcher bracketMatcher = SEVERAL_BRACKETS_ON_SAME_LEVEL_PATTERN.matcher(operation);
+        bracketAmount = fillOperationStackSameLevelBrackets(bracketMatcher, operationsStack, bracketAmount);
         if (bracketAmount == 0) {
-            bracketMatcher = MISSING_OUTER_BRACKET_PATTERN.matcher(operation);
-            bracketAmount = fillOperationStack(bracketMatcher, operationsStack, bracketAmount);
+            bracketMatcher = NESTED_BRACKET_PATTERN.matcher(operation);
+            bracketAmount = fillOperationStackNestedBrackets(bracketMatcher, operationsStack, bracketAmount);
         }
 
         String[] extractedOperations = new String[bracketAmount];
@@ -27,32 +28,35 @@ public class BracketDetect {
         return extractedOperations;
     }
 
-    private Integer twoBracketFillOperationStack(Matcher bracketMatcher, Stack operationsStack, Integer bracketAmount) {
+    private Integer fillOperationStackSameLevelBrackets(Matcher bracketMatcher, Stack operationsStack, Integer bracketAmount) {
         Stack reverseOrder = new Stack();
         if (bracketMatcher.find()) {
             String matchedString = bracketMatcher.group();
 
             matchedString = formatString(matchedString);
 
-            //Until matchedString isn't empty, continue to cut content from it.
-            while (matchedString.length() > 0) {
-                String bracketContent;
-                if (matchedString.contains("(") && matchedString.contains(")")) {
-                    bracketContent = matchedString.substring(matchedString.indexOf('('), matchedString.indexOf(')') + 1);
-                } else {
-                    bracketContent = matchedString;
-                }
-                //Cut bracket out of matchedString
-                matchedString = matchedString.replace(bracketContent, "");
-                //get content of bracket
-                bracketContent = extractBracketContent(bracketContent);
-                reverseOrder.push(bracketContent);
-                bracketAmount++;
-            }
+            bracketAmount = pushOntoOperationStackSameLevelBrackets(bracketAmount, reverseOrder, matchedString);
             //Get stack items in the right order
             while (!reverseOrder.empty()) {
                 operationsStack.push(reverseOrder.pop());
             }
+        }
+        return bracketAmount;
+    }
+
+    //also returns bracketAmount but most importantly fills the Stack
+    private Integer fillOperationStackNestedBrackets(Matcher outerBracketMatcher, Stack operationsStack, Integer bracketAmount) {
+        String bracketContent;
+        while (outerBracketMatcher.find()) {
+            bracketAmount++;
+            String firstMatch = outerBracketMatcher.group();
+            bracketContent = extractBracketContent(formatString(firstMatch));
+
+            //if there is a bracket inside the outer bracket, then cut it.
+            Matcher innerBracketMatcher = BRACKET_PATTERN.matcher(bracketContent);
+            pushOntoOperationStackNestedBrackets(operationsStack, bracketContent, innerBracketMatcher);
+            //copy bracketContent to search for an inner bracket again
+            outerBracketMatcher = BRACKET_PATTERN.matcher(bracketContent);
         }
         return bracketAmount;
     }
@@ -65,33 +69,19 @@ public class BracketDetect {
         for (int i = 0; i < matchedString.length(); i++) {
             formatString.append(matchedString.charAt(i));
             //insert whitespaces between numbers and operators or operators and brackets
-            if (Pattern.matches(NUMBER_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i + 1))
-            || Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches(NUMBER_PATTERN.toString(), "" + matchedString.charAt(i + 1))
-            || i != matchedString.length() - 1 && (Pattern.matches("\\)", "" + matchedString.charAt(i)) && Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i + 1)))
-            || Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches("\\(", "" + matchedString.charAt(i + 1))) {
-                formatString.append(" ");
+            if (i != matchedString.length() - 1) {
+                if ((Pattern.matches(NUMBER_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i + 1))
+                        || Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches(NUMBER_PATTERN.toString(), "" + matchedString.charAt(i + 1))
+                        || Pattern.matches("\\)", "" + matchedString.charAt(i)) && Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i + 1))
+                        || Pattern.matches(OPERATOR_PATTERN.toString(), "" + matchedString.charAt(i)) && Pattern.matches("\\(", "" + matchedString.charAt(i + 1)))) {
+                    formatString.append(" ");
+                }
             }
         }
         return formatString.substring(0);
     }
 
-    //also returns bracketAmount but most importantly fills the Stack
-    private Integer fillOperationStack(Matcher outerBracketMatcher, Stack operationsStack, Integer bracketAmount) {
-        String bracketContent;
-        while (outerBracketMatcher.find()) {
-            bracketAmount++;
-            String firstMatch = outerBracketMatcher.group();
-            bracketContent = extractBracketContent(firstMatch);
-
-            //if there is a bracket inside the outer bracket, then cut it.
-            Matcher innerBracketMatcher = BRACKET_PATTERN.matcher(bracketContent);
-            pushOntoOperationStack(operationsStack, bracketContent, innerBracketMatcher);
-            //copy bracketContent to search for an inner bracket again
-            outerBracketMatcher = BRACKET_PATTERN.matcher(bracketContent);
-        }
-        return bracketAmount;
-    }
-
+    //get just the content of a bracket.
     private String extractBracketContent(String firstMatch) {
         String bracketContent;
         if (firstMatch.charAt(0) == '(' && firstMatch.charAt(firstMatch.length() - 1) == ')') {
@@ -102,8 +92,35 @@ public class BracketDetect {
         return bracketContent;
     }
 
-    //actually pushes the content of a bracket onto the Stack
-    private void pushOntoOperationStack(Stack operationsStack, String bracketContent, Matcher innerBracketMatcher) {
+    //actually pushes the content of a bracket onto the Stack. Is for TWO_BRACKETS_ON_SAME_LEVEL_PATTERN.
+    private Integer pushOntoOperationStackSameLevelBrackets(Integer bracketAmount, Stack reverseOrder, String matchedString) {
+        //Until matchedString isn't empty, continue to cut content from it.
+        while (matchedString.length() > 0) {
+            bracketAmount++;
+            String bracketContent;
+            bracketContent = getBracketOutOfMatch(matchedString);
+            //Cut bracket out of matchedString
+            matchedString = matchedString.replace(bracketContent, "");
+            //get content of bracket
+            bracketContent = extractBracketContent(bracketContent);
+            reverseOrder.push(bracketContent);
+        }
+        return bracketAmount;
+    }
+
+    //get whole bracket.
+    private String getBracketOutOfMatch(String matchedString) {
+        String bracketContent;
+        if (matchedString.contains("(") && matchedString.contains(")")) {
+            bracketContent = matchedString.substring(matchedString.indexOf('('), matchedString.indexOf(')') + 1);
+        } else {
+            bracketContent = matchedString.substring(0, 3);
+        }
+        return bracketContent;
+    }
+
+    //actually pushes the content of a bracket onto the Stack. Is for NESTED_BRACKET_PATTERN.
+    private void pushOntoOperationStackNestedBrackets(Stack operationsStack, String bracketContent, Matcher innerBracketMatcher) {
         if (innerBracketMatcher.find()) {
             String innerBracket = innerBracketMatcher.group();
             String stringWithoutInnerBracket = bracketContent.replace(innerBracket, "");
