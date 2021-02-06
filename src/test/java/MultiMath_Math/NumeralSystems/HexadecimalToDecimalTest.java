@@ -65,4 +65,17 @@ class HexadecimalToDecimalTest {
         //assert
         assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void convert_hex1f4a9_to_dec() {
+        //arrange
+        String hex = "1f4a9";
+        int expectedResult = 128169;
+
+        //act
+        int actualResult = converter.convert(hex);
+
+        //assert
+        assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }
