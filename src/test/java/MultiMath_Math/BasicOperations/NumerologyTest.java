@@ -21,20 +21,6 @@ public class NumerologyTest {
     }
 
     @Test
-    public void isOddTest() {
-        // Arrange
-        int[] operations = {0, 1, 2, 3, 11, 12, 999998};
-        boolean[] expected = {false, true, false, true, true, false, false};
-        boolean[] results = new boolean[expected.length];
-        // Act
-        for (int i = 0; i < expected.length; i++) {
-            results[i] = Numerology.isOdd(operations[i]);
-        }
-        // Assert
-        MatcherAssert.assertThat("Is Odd Test", results, CoreMatchers.equalTo(expected));
-    }
-
-    @Test
     public void isPrimeTest(){
         // Arrange
         int[] operations = {17, 7, 23, 13, 19, 109, 90, 69, 77, 108};
@@ -47,4 +33,5 @@ public class NumerologyTest {
         // Assert
         MatcherAssert.assertThat("Is Prime Digit Test", results, CoreMatchers.equalTo(expected));
     }
+
 }
