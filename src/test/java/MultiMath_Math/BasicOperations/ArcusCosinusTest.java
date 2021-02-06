@@ -45,7 +45,8 @@ public class ArcusCosinusTest {
     public void arcusCosinusWithSpacesBetweenParentheses() throws Exception {
         // Arrange
         String arcusCosinusNumberInExpression = "15";
-        String arcusCosinusUserInput = "arccos(  " + arcusCosinusNumberInExpression + "  )";
+        String spacesInExpression = "    ";
+        String arcusCosinusUserInput = "arccos(" + spacesInExpression + arcusCosinusNumberInExpression + spacesInExpression + ")";
         double expectedResult = Math.acos(Double.parseDouble(arcusCosinusNumberInExpression));
 
         // Act
