@@ -20,4 +20,18 @@ public class NumerologyTest {
         MatcherAssert.assertThat("Is Even Test", results, CoreMatchers.equalTo(expected));
     }
 
+    @Test
+    public void isPrimeTest(){
+        // Arrange
+        int[] operations = {17, 7, 23, 13, 19, 109, 90, 69, 77, 108};
+        boolean[] expected = {true, true, true, true, true, true, false, false, false, false};
+        boolean[] results = new boolean[expected.length];
+        // Act
+        for (int i = 0; i < expected.length; i++) {
+            results[i] = Numerology.isPrime(operations[i]);
+        }
+        // Assert
+        MatcherAssert.assertThat("Is Prime Digit Test", results, CoreMatchers.equalTo(expected));
+    }
+
 }
