@@ -52,4 +52,17 @@ class HexadecimalToDecimalTest {
         //assert
         assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void convert_hex10_to_dec() {
+        //arrange
+        String hex = "10";
+        int expectedResult = 16;
+
+        //act
+        int actualResult = converter.convert(hex);
+
+        //assert
+        assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }

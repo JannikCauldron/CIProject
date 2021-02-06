@@ -6,6 +6,10 @@ public class HexadecimalToDecimal {
 
     public int convert(String hex) {
         hex = hex.toLowerCase();
-        return HEX_CHARS.indexOf(hex);
+        int result = 0;
+        for(int i = 0; i < hex.length(); i++) {
+            result = 16 * result + HEX_CHARS.indexOf(hex.charAt(i));
+        }
+        return result;
     }
 }
