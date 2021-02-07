@@ -82,7 +82,7 @@ class HexadecimalToDecimalTest {
     }
 
     @Test
-    void convert_invalidValue() throws Exception {
+    void convert_invalidValue() {
         //arrange
         String hex = "0123EinTest4567";
         String expectedMessage = "Input was no hexadecimal String!";

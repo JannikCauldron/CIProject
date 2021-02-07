@@ -4,10 +4,12 @@ public class HexadecimalToDecimal {
 
     private static final String HEX_CHARS = "0123456789abcdef";
     private static final int HEX_BASE = 16;
+    private static final String HEXADECIMAL_PATTERN = "^[a-f0-9]+";
+    private static final String NO_HEXADECIMAL_EXCEPTION_MSG = "Input was no hexadecimal String!";
 
     public int convert(String hex) throws Exception {
         hex = hex.toLowerCase();
-        if (!hex.matches("^[a-f0-9]+")) throw new Exception("Input was no hexadecimal String!");
+        if (!hex.matches(HEXADECIMAL_PATTERN)) throw new Exception(NO_HEXADECIMAL_EXCEPTION_MSG);
         return calculateDec_CharByChar(hex);
     }
 
