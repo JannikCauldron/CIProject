@@ -5,8 +5,9 @@ public class HexadecimalToDecimal {
     private static final String HEX_CHARS = "0123456789abcdef";
     private static final int HEX_BASE = 16;
 
-    public int convert(String hex) {
+    public int convert(String hex) throws Exception {
         hex = hex.toLowerCase();
+        if (!hex.matches("^[a-f0-9]+")) throw new Exception("Input was no hexadecimal String!");
         return calculateDec_CharByChar(hex);
     }
 
