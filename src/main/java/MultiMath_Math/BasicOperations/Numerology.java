@@ -7,6 +7,8 @@ public class Numerology {
 
     private final String PATTERN_INT = "\\s*[-0-9]+\\s*";
     private final String PATTERN_DOUBLE = "\\s*[-0-9]{1,13}.{1}[0-9]+\\s*";
+    private final Pattern NUM_EVEN_PATTERN_INT = Pattern.compile("even\\(" + PATTERN_INT + "\\)\\s*");
+    private final Pattern NUM_EVEN_PATTERN_DOUBLE = Pattern.compile("even\\(" + PATTERN_DOUBLE + "\\)\\s*");
     private final Pattern NUM_PRIME_PATTERN_INT = Pattern.compile("isPrime\\(" + PATTERN_INT + "\\)\\s*");
     private final Pattern NUM_PRIME_PATTERN_DOUBLE = Pattern.compile("isPrime\\(" + PATTERN_DOUBLE + "\\)\\s*");
 
@@ -50,6 +52,40 @@ public class Numerology {
 
             int intValue = Integer.valueOf(matchedOperation);
             return isPrime(intValue);
+        }
+        return false;
+    }
+
+    public boolean isEvenParser(String operation) {
+
+        Matcher patternMatcher = NUM_EVEN_PATTERN_DOUBLE.matcher(operation);
+        if (patternMatcher.find()) {
+            String matchedOperation = patternMatcher.group();
+
+            matchedOperation = matchedOperation.replaceAll("\\s+", "");
+
+            int posBrackedOpen = matchedOperation.indexOf("(");
+            int posBrackedClosed = matchedOperation.indexOf(")");
+            matchedOperation = matchedOperation.substring(posBrackedOpen + 1, posBrackedClosed);
+
+            double doubleValue = Double.valueOf(matchedOperation);
+
+            if (0.0 == (doubleValue % 1.0) ) {
+                return isEven((int) doubleValue);
+            }
+        }
+        patternMatcher = NUM_EVEN_PATTERN_INT.matcher(operation);
+        if (patternMatcher.find()) {
+            String matchedOperation = patternMatcher.group();
+
+            matchedOperation = matchedOperation.replaceAll("\\s+", "");
+
+            int posBrackedOpen = matchedOperation.indexOf("(");
+            int posBrackedClosed = matchedOperation.indexOf(")");
+            matchedOperation = matchedOperation.substring(posBrackedOpen + 1, posBrackedClosed);
+
+            int intValue = Integer.valueOf(matchedOperation);
+            return isEven(intValue);
         }
         return false;
     }

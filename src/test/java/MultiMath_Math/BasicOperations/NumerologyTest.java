@@ -56,4 +56,18 @@ public class NumerologyTest {
         MatcherAssert.assertThat("Is Prime Digit Parser Test", results, CoreMatchers.equalTo(expected));
     }
 
+    @Test
+    public void isEvenParserIntegerDoubleTest() {
+        // Arrange
+        String[] operations = {"even(0)", "even( 1)", "even(2 )", "even( 3 )", "even(4.0)"};
+        boolean[] expected = {true, false, true, false, true};
+        boolean[] results = new boolean[expected.length];
+        // Act
+        for (int i = 0; i < expected.length; i++) {
+            results[i] = num.isEvenParser(operations[i]);
+        }
+        // Assert
+        MatcherAssert.assertThat("Is Even Parser Test", results, CoreMatchers.equalTo(expected));
+    }
+
 }
