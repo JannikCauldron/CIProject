@@ -102,4 +102,18 @@ public class NumerologyTest {
         assertTrue(resultMessage.contains(expectedMessage));
     }
 
+    @Test
+    public void negateIntegerParserTest() throws ProcessDecimalPlacesException {
+        // Arrange
+        String[] operations = {"negate(1)", "negate(-1)"};
+        int[] expected = {-1, 1};
+        int[] results = new int[expected.length];
+        // Act
+        for (int i = 0; i < expected.length; i++) {
+            results[i] = num.negateIntegerParser(operations[i]);
+        }
+        // Assert
+        MatcherAssert.assertThat("Negate Numbers Integer Parser Test", results, CoreMatchers.equalTo(expected));
+    }
+
 }
