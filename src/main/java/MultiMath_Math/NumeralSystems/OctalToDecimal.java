@@ -7,9 +7,12 @@ public class OctalToDecimal {
 
     public int convert(int oct) {
         int decimal = 0;
-        decimal += (oct % DIVISION_MODULO_DIVISOR) * Math.pow(OCTAL_BASE, 0);
-        oct /= DIVISION_MODULO_DIVISOR;
-        if (oct != 0) decimal += oct * Math.pow(OCTAL_BASE, 1);
+        int i = 0;
+        while (oct != 0) {
+            decimal += (oct % DIVISION_MODULO_DIVISOR) * Math.pow(OCTAL_BASE, i);
+            oct /= DIVISION_MODULO_DIVISOR;
+            i++;
+        }
         return decimal;
     }
 }
