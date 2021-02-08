@@ -201,7 +201,7 @@ public class NumerologyTest {
     }
 
     @Test
-    public void lcmParserTest() {
+    public void lcmParserTest() throws ProcessDecimalPlacesException {
         // Arrange
         String[] operations = {"lcm(100,50)", "lcm(23,998)", "lcm(42, 921)"};
         int[] expected = {100, 22954, 12894};
@@ -212,5 +212,19 @@ public class NumerologyTest {
         }
         // Assert
         MatcherAssert.assertThat("Greatest Common Divisor Test ", results, CoreMatchers.equalTo(expected));
+    }
+
+    @Test
+    public void whenInLcmParserTestCannotProcessDoubleExceptionThrown_thenAssertionSucceeds() {
+        // Arrange
+        String operation = "lcm(10.1, 5.0)";
+        String expectedMessage = "You can't operate this function with decimal places! Values: 10.1,5.0";
+        String resultMessage;
+        ProcessDecimalPlacesException exception;
+        // Act
+        exception = assertThrows(ProcessDecimalPlacesException.class, () -> num.lcmParser(operation));
+        resultMessage = exception.getMessage();
+        // Assert
+        assertTrue(resultMessage.contains(expectedMessage));
     }
 }

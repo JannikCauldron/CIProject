@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 public class Numerology {
 
     public static final String DECIMAL_PLACES_EXCEPTION_TEXT = "You can't operate this function with decimal places! Number: ";
+    public static final String DECIMAL_PLACES_EXCEPTION_MULTIPLE_VALUES_TEXT = "You can't operate this function with decimal places! Values: ";
     public static final String INVALID_DECIMAL_PLACES_EXCEPTION_TEXT = "You can't operate this function with invalid decimal places! Number: ";
     private final String PATTERN_INT = "\\s*[-0-9]+\\s*";
     private final String PATTERN_DOUBLE = "\\s*[-0-9]{1,13}.{1}[0-9]{1,13}\\s*";
@@ -186,8 +187,7 @@ public class Numerology {
     }
 
 
-    public int lcmParser(String operation) {
-        int result = 1;
+    public int lcmParser(String operation) throws ProcessDecimalPlacesException {
         Matcher patternMatcher = NUM_LCM_PATTERN_INT.matcher(operation);
         if (patternMatcher.find()) {
             String matchedOperation = patternMatcher.group();
@@ -197,8 +197,10 @@ public class Numerology {
             int[] intValues = Format.format2Integer(splitOperationString);
 
             return lcm(intValues[0], intValues[1]);
+        } else {
+            String valueInOperation = Format.getValueBetweenBrackets(operation);
+            throw new ProcessDecimalPlacesException(DECIMAL_PLACES_EXCEPTION_MULTIPLE_VALUES_TEXT + valueInOperation);
         }
-        return result;
     }
 
     public static int lcm(int number1, int number2) {
