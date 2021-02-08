@@ -26,4 +26,17 @@ class OctalToDecimalTest {
         //assert
         assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
     }
+
+    @Test
+    void convertoct10_to_dec() {
+        //arrange
+        int oct = 10;
+        int expectedResult = 8;
+
+        //act
+        int actualResult = converter.convert(oct);
+
+        //assert
+        assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
+    }
 }
