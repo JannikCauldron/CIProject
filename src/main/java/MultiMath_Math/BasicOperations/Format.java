@@ -1,5 +1,7 @@
 package MultiMath_Math.BasicOperations;
 
+import java.util.List;
+
 public class Format {
 
 
@@ -25,5 +27,16 @@ public class Format {
         operation = removeWhitespace(operation);
         operation = returnNumberStringInBrackets(operation);
         return operation;
+    }
+
+    public static int[] convertToIntArray(List<Integer> values) {
+        int[] results = new int[values.size()];
+        int i = 0;
+        for (Integer value :
+                values) {
+            results[i] = value;
+            i++;
+        }
+        return results;
     }
 }

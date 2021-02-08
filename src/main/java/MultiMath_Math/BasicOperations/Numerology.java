@@ -152,18 +152,7 @@ public class Numerology {
         }
         if (number > 1) factors.add(number);
 
-        return convertToIntArray(factors);
-    }
-
-    private int[] convertToIntArray(List<Integer> values) {
-        int[] results = new int[values.size()];
-        int i = 0;
-        for (Integer value :
-                values) {
-            results[i] = value;
-            i++;
-        }
-        return results;
+        return Format.convertToIntArray(factors);
     }
 
 
