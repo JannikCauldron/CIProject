@@ -5,8 +5,10 @@ import java.util.regex.Pattern;
 
 public class Numerology {
 
-    private final Pattern NUM_PRIME_PATTERN_INT = Pattern.compile("isPrime\\(\\s*[-0-9]+\\s*\\)\\s*");
-    private final Pattern NUM_PRIME_PATTERN_DOUBLE = Pattern.compile("isPrime\\(\\s*[-0-9]{1,13}.{1}[0-9]{1,13}\\s*\\)\\s*");
+    private final String PATTERN_INT = "\\s*[-0-9]+\\s*";
+    private final String PATTERN_DOUBLE = "\\s*[-0-9]{1,13}.{1}[0-9]+\\s*";
+    private final Pattern NUM_PRIME_PATTERN_INT = Pattern.compile("isPrime\\(" + PATTERN_INT + "\\)\\s*");
+    private final Pattern NUM_PRIME_PATTERN_DOUBLE = Pattern.compile("isPrime\\(" + PATTERN_DOUBLE + "\\)\\s*");
 
     public static boolean isEven(int number) {
         return number % 2 == 0;
