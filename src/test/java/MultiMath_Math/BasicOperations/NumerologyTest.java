@@ -116,4 +116,17 @@ public class NumerologyTest {
         MatcherAssert.assertThat("Negate Numbers Integer Parser Test", results, CoreMatchers.equalTo(expected));
     }
 
+    @Test
+    public void whenInNegateIntegerParserCannotProcessDoubleExceptionThrown_thenAssertionSucceeds() {
+        // Arrange
+        String operation = "negate(1.1)";
+        String expectedMessage = "You can't operate this function with decimal places! Number: 1.1";
+        String resultMessage;
+        ProcessDecimalPlacesException exception;
+        // Act
+        exception = assertThrows(ProcessDecimalPlacesException.class, () -> num.negateIntegerParser(operation));
+        resultMessage = exception.getMessage();
+        // Assert
+        assertTrue(resultMessage.contains(expectedMessage));
+    }
 }
