@@ -47,7 +47,7 @@ public class NumerologyTest {
     }
 
     @Test
-    public void isPrimeParserIntegerDoubleTest() {
+    public void isPrimeParserIntegerDoubleTest() throws ProcessDecimalPlacesException {
         // Arrange
         String[] operations = {"isPrime(1)", "isPrime( 1 )", "isPrime(3.0)"};
         boolean[] expected = {false, false, true};
@@ -83,6 +83,20 @@ public class NumerologyTest {
         ProcessDecimalPlacesException exception;
         // Act
         exception = assertThrows(ProcessDecimalPlacesException.class, () -> num.isEvenParser(operation));
+        resultMessage = exception.getMessage();
+        // Assert
+        assertTrue(resultMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void whenInIsPrimeCannotProcessDoubleExceptionThrown_thenAssertionSucceeds() {
+        // Arrange
+        String operation = "isPrime(3.1)";
+        String expectedMessage = "You can't operate this function with decimal places! Number: 3.1";
+        String resultMessage;
+        ProcessDecimalPlacesException exception;
+        // Act
+        exception = assertThrows(ProcessDecimalPlacesException.class, () -> num.isPrimeParser(operation));
         resultMessage = exception.getMessage();
         // Assert
         assertTrue(resultMessage.contains(expectedMessage));

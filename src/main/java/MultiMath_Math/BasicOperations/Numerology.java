@@ -25,7 +25,7 @@ public class Numerology {
         return bigInt.isProbablePrime(100);
     }
 
-    public boolean isPrimeParser(String operation) {
+    public boolean isPrimeParser(String operation) throws ProcessDecimalPlacesException {
 
         Matcher patternMatcher = NUM_PRIME_PATTERN_DOUBLE.matcher(operation);
         if (patternMatcher.find()) {
@@ -34,9 +34,11 @@ public class Numerology {
             matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
 
             double doubleValue = Format.getDoubleValue(matchedOperation);
-            if (0.0 == (doubleValue % 1.0)) {
-                return isPrime((int) doubleValue);
+            if (0.0 != (doubleValue % 1.0)) {
+                throw new ProcessDecimalPlacesException(DECIMAL_PLACES_EXCEPTION_TEXT + doubleValue);
             }
+            return isPrime((int) doubleValue);
+
         }
         patternMatcher = NUM_PRIME_PATTERN_INT.matcher(operation);
         if (patternMatcher.find()) {
