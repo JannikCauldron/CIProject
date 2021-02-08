@@ -17,11 +17,11 @@ class OctalToDecimalTest {
     @Test
     void convert_oct7_to_dec() {
         //arrange
-        String in = "7";
+        int oct = 7;
         int expectedResult = 7;
 
         //act
-        int actualResult = converter.convert(in);
+        int actualResult = converter.convert(oct);
 
         //assert
         assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
