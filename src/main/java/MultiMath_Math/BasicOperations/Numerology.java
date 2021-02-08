@@ -14,6 +14,7 @@ public class Numerology {
     public static final String INVALID_DECIMAL_PLACES_EXCEPTION_TEXT = "You can't operate this function with invalid decimal places! Number: ";
     private final String PATTERN_INT = "\\s*[-0-9]+\\s*";
     private final String PATTERN_DOUBLE = "\\s*[-0-9]{1,13}.{1}[0-9]{1,13}\\s*";
+    private final Pattern NUM_GCD_PATTERN_INT = Pattern.compile("gcd\\(" + PATTERN_INT + "\\s*,\\s*" + PATTERN_INT + "\\)\\s*");
     private final Pattern NUM_PRIMFACTORIZATION_PATTERN_INT = Pattern.compile("primefactorization\\(" + PATTERN_INT + "\\)\\s*");
     private final Pattern NUM_NEGATE_PATTERN_INT = Pattern.compile("negate\\(" + PATTERN_INT + "\\)\\s*");
     private final Pattern NUM_NEGATE_PATTERN_DOUBLE = Pattern.compile("negate\\(" + PATTERN_DOUBLE + "\\)\\s*");
@@ -153,6 +154,37 @@ public class Numerology {
         if (number > 1) factors.add(number);
 
         return Format.convertToIntArray(factors);
+    }
+
+    public int gcdParser(String operation) {
+        int result = 1;
+        Matcher patternMatcher = NUM_GCD_PATTERN_INT.matcher(operation);
+        if (patternMatcher.find()) {
+            String matchedOperation = patternMatcher.group();
+
+            matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
+            String[] splitOperationString = matchedOperation.split( ",");
+
+            int[] intValues = new int[splitOperationString.length];
+            for (int i = 0; i < splitOperationString.length; i++) {
+                intValues[i] = Format.getIntValue(splitOperationString[i]);
+            }
+
+            result = gcd(intValues[0], intValues[1]);
+        }
+        return result;
+    }
+
+    private int gcd(int a, int b) {
+        if (a == 0)
+            return b;
+        while (b != 0) {
+            if (a > b)
+                a = a - b;
+            else
+                b = b - a;
+        }
+        return a;
     }
 
 

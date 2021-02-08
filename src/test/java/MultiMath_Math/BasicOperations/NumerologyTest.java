@@ -171,4 +171,18 @@ public class NumerologyTest {
         // Assert
         assertTrue(resultMessage.contains(expectedMessage));
     }
+
+    @Test
+    public void gcdParserTest() {
+        // Arrange
+        String[] operations = {"gcd(100,50)", "gcd(23,998)", "gcd(42, 921)"};
+        int[] expected = {50, 1, 3};
+        int[] results = new int[expected.length];
+        // Act
+        for (int i = 0; i < expected.length; i++) {
+            results[i] = num.gcdParser(operations[i]);
+        }
+        // Assert
+        MatcherAssert.assertThat("Greatest Common Divisor Test ", results, CoreMatchers.equalTo(expected));
+    }
 }
