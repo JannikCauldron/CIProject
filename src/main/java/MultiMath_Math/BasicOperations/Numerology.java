@@ -93,7 +93,7 @@ public class Numerology {
             matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
 
             int intValue = Format.getIntValue(matchedOperation);
-            return (-1) * intValue;
+            return negate(intValue);
         } else {
             String valueInOperation = Format.getValueBetweenBrackets(operation);
             throw new ProcessDecimalPlacesException(DECIMAL_PLACES_EXCEPTION_TEXT + valueInOperation);
@@ -109,9 +109,20 @@ public class Numerology {
             matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
 
             double doubleValue = Format.getDoubleValue(matchedOperation);
-            return (-1) * doubleValue;
+            return negate(doubleValue);
         } else {
             return 0.0;
         }
     }
+
+    public static int negate(int intValue) {
+        return -1 * intValue;
+    }
+
+    private double negate(double doubleValue) {
+        return -1.0 * doubleValue;
+    }
+
+
+
 }
