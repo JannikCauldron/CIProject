@@ -156,7 +156,7 @@ public class Numerology {
         return Format.convertToIntArray(factors);
     }
 
-    public int gcdParser(String operation) {
+    public int gcdParser(String operation) throws ProcessDecimalPlacesException {
         int result = 1;
         Matcher patternMatcher = NUM_GCD_PATTERN_INT.matcher(operation);
         if (patternMatcher.find()) {
@@ -167,6 +167,9 @@ public class Numerology {
             int[] intValues = Format.format2Integer(splitOperationString);
 
             result = gcd(intValues[0], intValues[1]);
+        } else {
+            String valueInOperation = Format.getValueBetweenBrackets(operation);
+            throw new ProcessDecimalPlacesException(DECIMAL_PLACES_EXCEPTION_TEXT + valueInOperation);
         }
         return result;
     }

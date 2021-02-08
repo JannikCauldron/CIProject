@@ -173,7 +173,7 @@ public class NumerologyTest {
     }
 
     @Test
-    public void gcdParserTest() {
+    public void gcdParserTest() throws ProcessDecimalPlacesException {
         // Arrange
         String[] operations = {"gcd(100,50)", "gcd(23,998)", "gcd(42, 921)"};
         int[] expected = {50, 1, 3};
@@ -184,5 +184,19 @@ public class NumerologyTest {
         }
         // Assert
         MatcherAssert.assertThat("Greatest Common Divisor Test ", results, CoreMatchers.equalTo(expected));
+    }
+
+    @Test
+    public void whenInGcdParserTestCannotProcessDoubleExceptionThrown_thenAssertionSucceeds() {
+        // Arrange
+        String operation = "gcd(10.1)";
+        String expectedMessage = "You can't operate this function with decimal places! Number: 10.1";
+        String resultMessage;
+        ProcessDecimalPlacesException exception;
+        // Act
+        exception = assertThrows(ProcessDecimalPlacesException.class, () -> num.gcdParser(operation));
+        resultMessage = exception.getMessage();
+        // Assert
+        assertTrue(resultMessage.contains(expectedMessage));
     }
 }
