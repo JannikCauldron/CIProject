@@ -143,4 +143,18 @@ public class NumerologyTest {
         // Assert
         MatcherAssert.assertThat("Negate Numbers Double Parser Test", results, CoreMatchers.equalTo(expected));
     }
+
+    @Test
+    public void primefactorizationParserTest() {
+        // Arrange
+        String[] operations = {"primefactorization(100)", "primefactorization(23)"};
+        int[][] expected = {{2, 2, 5, 5}, {23}};
+        int[][] results = new int[expected.length][];
+        // Act
+        for (int i = 0; i < expected.length; i++) {
+            results[i] = num.primefactorizationParser(operations[i]);
+        }
+        // Assert
+        MatcherAssert.assertThat("Primefactorization Test", results, CoreMatchers.equalTo(expected));
+    }
 }
