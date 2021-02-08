@@ -27,30 +27,20 @@ public class Numerology {
         if (patternMatcher.find()) {
             String matchedOperation = patternMatcher.group();
 
-            matchedOperation = matchedOperation.replaceAll("\\s+", "");
+            matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
 
-            int posBrackedOpen = matchedOperation.indexOf("(");
-            int posBrackedClosed = matchedOperation.indexOf(")");
-            matchedOperation = matchedOperation.substring(posBrackedOpen + 1, posBrackedClosed);
-
-            double doubleValue = Double.valueOf(matchedOperation);
+            double doubleValue = Format.getDoubleValue(matchedOperation);
             if (0.0 == (doubleValue % 1.0) ) {
                 return isPrime((int) doubleValue);
             }
-
-
         }
         patternMatcher = NUM_PRIME_PATTERN_INT.matcher(operation);
         if (patternMatcher.find()) {
             String matchedOperation = patternMatcher.group();
 
-            matchedOperation = matchedOperation.replaceAll("\\s+", "");
+            matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
 
-            int posBrackedOpen = matchedOperation.indexOf("(");
-            int posBrackedClosed = matchedOperation.indexOf(")");
-            matchedOperation = matchedOperation.substring(posBrackedOpen + 1, posBrackedClosed);
-
-            int intValue = Integer.valueOf(matchedOperation);
+            int intValue = Format.getIntValue(matchedOperation);
             return isPrime(intValue);
         }
         return false;
@@ -62,14 +52,9 @@ public class Numerology {
         if (patternMatcher.find()) {
             String matchedOperation = patternMatcher.group();
 
-            matchedOperation = matchedOperation.replaceAll("\\s+", "");
+            matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
 
-            int posBrackedOpen = matchedOperation.indexOf("(");
-            int posBrackedClosed = matchedOperation.indexOf(")");
-            matchedOperation = matchedOperation.substring(posBrackedOpen + 1, posBrackedClosed);
-
-            double doubleValue = Double.valueOf(matchedOperation);
-
+            double doubleValue = Format.getDoubleValue(matchedOperation);
             if (0.0 == (doubleValue % 1.0) ) {
                 return isEven((int) doubleValue);
             }
@@ -78,15 +63,14 @@ public class Numerology {
         if (patternMatcher.find()) {
             String matchedOperation = patternMatcher.group();
 
-            matchedOperation = matchedOperation.replaceAll("\\s+", "");
+            matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
 
-            int posBrackedOpen = matchedOperation.indexOf("(");
-            int posBrackedClosed = matchedOperation.indexOf(")");
-            matchedOperation = matchedOperation.substring(posBrackedOpen + 1, posBrackedClosed);
-
-            int intValue = Integer.valueOf(matchedOperation);
+            int intValue = Format.getIntValue(matchedOperation);
             return isEven(intValue);
         }
         return false;
+
+
+
     }
 }
