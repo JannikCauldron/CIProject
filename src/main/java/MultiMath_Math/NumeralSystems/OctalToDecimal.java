@@ -8,6 +8,7 @@ public class OctalToDecimal {
 
     public int convert(int oct) throws Exception {
         if (oct < 0) throw new Exception(NEGATIVE_VALUE_EXCEPTION_MESSAGE);
+        if (!Integer.toString(oct).matches("^[0-7]+")) throw new Exception("Not an octal number!");
         return calculateDecimalByOct(oct);
     }
 

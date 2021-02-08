@@ -67,4 +67,17 @@ class OctalToDecimalTest {
         // Assert
         assertTrue(actualMessage.contains(expectedMessage));
     }
+
+    @Test
+    void convert_nonOctalNumber() {
+        //arrange
+        int oct = 123456789;
+        String expectedMessage = "Not an octal number!";
+
+        //act
+        String actualMessage = assertThrows(Exception.class, () -> converter.convert(oct)).getMessage();
+
+        // Assert
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }
