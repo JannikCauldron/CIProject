@@ -199,4 +199,18 @@ public class NumerologyTest {
         // Assert
         assertTrue(resultMessage.contains(expectedMessage));
     }
+
+    @Test
+    public void lcmParserTest() {
+        // Arrange
+        String[] operations = {"lcm(100,50)", "lcm(23,998)", "lcm(42, 921)"};
+        int[] expected = {100, 22954, 12894};
+        int[] results = new int[expected.length];
+        // Act
+        for (int i = 0; i < expected.length; i++) {
+            results[i] = num.lcmParser(operations[i]);
+        }
+        // Assert
+        MatcherAssert.assertThat("Greatest Common Divisor Test ", results, CoreMatchers.equalTo(expected));
+    }
 }

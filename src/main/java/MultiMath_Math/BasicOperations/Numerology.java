@@ -14,6 +14,7 @@ public class Numerology {
     public static final String INVALID_DECIMAL_PLACES_EXCEPTION_TEXT = "You can't operate this function with invalid decimal places! Number: ";
     private final String PATTERN_INT = "\\s*[-0-9]+\\s*";
     private final String PATTERN_DOUBLE = "\\s*[-0-9]{1,13}.{1}[0-9]{1,13}\\s*";
+    private final Pattern NUM_LCM_PATTERN_INT = Pattern.compile("lcm\\(" + PATTERN_INT + "\\s*,\\s*" + PATTERN_INT + "\\)\\s*");
     private final Pattern NUM_GCD_PATTERN_INT = Pattern.compile("gcd\\(" + PATTERN_INT + "\\s*,\\s*" + PATTERN_INT + "\\)\\s*");
     private final Pattern NUM_PRIMFACTORIZATION_PATTERN_INT = Pattern.compile("primefactorization\\(" + PATTERN_INT + "\\)\\s*");
     private final Pattern NUM_NEGATE_PATTERN_INT = Pattern.compile("negate\\(" + PATTERN_INT + "\\)\\s*");
@@ -185,4 +186,19 @@ public class Numerology {
     }
 
 
+    public int lcmParser(String operation) {
+        int result = 1;
+        Matcher patternMatcher = NUM_LCM_PATTERN_INT.matcher(operation);
+        if (patternMatcher.find()) {
+            String matchedOperation = patternMatcher.group();
+
+            matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
+            String[] splitOperationString = Format.splitOperationByDelimiter(matchedOperation, ",");
+            int[] intValues = Format.format2Integer(splitOperationString);
+
+            result = (intValues[0] * intValues[1]) / gcd(intValues[0] ,intValues[1] );
+            return result;
+        }
+        return result;
+    }
 }
