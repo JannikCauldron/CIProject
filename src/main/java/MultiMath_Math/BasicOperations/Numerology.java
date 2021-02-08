@@ -173,7 +173,7 @@ public class Numerology {
         }
     }
 
-    private int gcd(int a, int b) {
+    public static int gcd(int a, int b) {
         if (a == 0)
             return b;
         while (b != 0) {
@@ -196,9 +196,12 @@ public class Numerology {
             String[] splitOperationString = Format.splitOperationByDelimiter(matchedOperation, ",");
             int[] intValues = Format.format2Integer(splitOperationString);
 
-            result = (intValues[0] * intValues[1]) / gcd(intValues[0] ,intValues[1] );
-            return result;
+            return lcm(intValues[0], intValues[1]);
         }
         return result;
+    }
+
+    public static int lcm(int number1, int number2) {
+        return (number1 * number2) / gcd(number1, number2);
     }
 }
