@@ -163,12 +163,8 @@ public class Numerology {
             String matchedOperation = patternMatcher.group();
 
             matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
-            String[] splitOperationString = matchedOperation.split( ",");
-
-            int[] intValues = new int[splitOperationString.length];
-            for (int i = 0; i < splitOperationString.length; i++) {
-                intValues[i] = Format.getIntValue(splitOperationString[i]);
-            }
+            String[] splitOperationString = Format.splitOperationByDelimiter(matchedOperation, ",");
+            int[] intValues = Format.format2Integer(splitOperationString);
 
             result = gcd(intValues[0], intValues[1]);
         }

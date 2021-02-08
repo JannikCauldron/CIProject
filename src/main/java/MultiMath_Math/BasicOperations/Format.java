@@ -39,4 +39,16 @@ public class Format {
         }
         return results;
     }
+
+    public static int[] format2Integer(String[] valueStrings) {
+        int[] intValues = new int[valueStrings.length];
+        for (int i = 0; i < valueStrings.length; i++) {
+            intValues[i] = Format.getIntValue(valueStrings[i]);
+        }
+        return intValues;
+    }
+
+    public static String[] splitOperationByDelimiter(String operation, String delimiter) {
+        return operation.split(delimiter);
+    }
 }
