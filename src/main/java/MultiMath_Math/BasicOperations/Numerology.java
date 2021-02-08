@@ -1,4 +1,5 @@
 package MultiMath_Math.BasicOperations;
+
 import MultiMath_Math.BasicExceptions.ProcessDecimalPlacesException;
 
 import java.math.BigInteger;
@@ -7,6 +8,7 @@ import java.util.regex.Pattern;
 
 public class Numerology {
 
+    public static final String DECIMAL_PLACES_EXCEPTION_TEXT = "You can't operate this function with decimal places! Number: ";
     private final String PATTERN_INT = "\\s*[-0-9]+\\s*";
     private final String PATTERN_DOUBLE = "\\s*[-0-9]{1,13}.{1}[0-9]+\\s*";
     private final Pattern NUM_EVEN_PATTERN_INT = Pattern.compile("even\\(" + PATTERN_INT + "\\)\\s*");
@@ -32,7 +34,7 @@ public class Numerology {
             matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
 
             double doubleValue = Format.getDoubleValue(matchedOperation);
-            if (0.0 == (doubleValue % 1.0) ) {
+            if (0.0 == (doubleValue % 1.0)) {
                 return isPrime((int) doubleValue);
             }
         }
@@ -59,7 +61,7 @@ public class Numerology {
 
             double doubleValue = Format.getDoubleValue(matchedOperation);
             if (0.0 != (doubleValue % 1.0)) {
-                throw new ProcessDecimalPlacesException("You can't operate this function with decimal places! Number: " + doubleValue);
+                throw new ProcessDecimalPlacesException(DECIMAL_PLACES_EXCEPTION_TEXT + doubleValue);
             }
             return isEven((int) doubleValue);
         }
