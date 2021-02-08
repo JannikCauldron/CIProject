@@ -9,8 +9,9 @@ import java.util.regex.Pattern;
 public class Numerology {
 
     public static final String DECIMAL_PLACES_EXCEPTION_TEXT = "You can't operate this function with decimal places! Number: ";
+    public static final String INVALID_DECIMAL_PLACES_EXCEPTION_TEXT = "You can't operate this function with invalid decimal places! Number: ";
     private final String PATTERN_INT = "\\s*[-0-9]+\\s*";
-    private final String PATTERN_DOUBLE = "\\s*[-0-9]{1,13}.{1}[0-9]+\\s*";
+    private final String PATTERN_DOUBLE = "\\s*[-0-9]{1,13}.{1}[0-9]{1,13}\\s*";
     private final Pattern NUM_NEGATE_PATTERN_INT = Pattern.compile("negate\\(" + PATTERN_INT + "\\)\\s*");
     private final Pattern NUM_NEGATE_PATTERN_DOUBLE = Pattern.compile("negate\\(" + PATTERN_DOUBLE + "\\)\\s*");
     private final Pattern NUM_EVEN_PATTERN_INT = Pattern.compile("even\\(" + PATTERN_INT + "\\)\\s*");
@@ -84,8 +85,19 @@ public class Numerology {
         }
     }
 
-    public int negateIntegerParser(String operation) throws ProcessDecimalPlacesException {
+
+    public double negateParser(String operation) throws ProcessDecimalPlacesException {
         Matcher patternMatcher;
+        patternMatcher = NUM_NEGATE_PATTERN_DOUBLE.matcher(operation);
+        if (patternMatcher.find()) {
+            String matchedOperation = patternMatcher.group();
+
+            matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
+
+            double doubleValue = Format.getDoubleValue(matchedOperation);
+            return negate(doubleValue);
+        }
+
         patternMatcher = NUM_NEGATE_PATTERN_INT.matcher(operation);
         if (patternMatcher.find()) {
             String matchedOperation = patternMatcher.group();
@@ -96,27 +108,8 @@ public class Numerology {
             return negate(intValue);
         } else {
             String valueInOperation = Format.getValueBetweenBrackets(operation);
-            throw new ProcessDecimalPlacesException(DECIMAL_PLACES_EXCEPTION_TEXT + valueInOperation);
+            throw new ProcessDecimalPlacesException(INVALID_DECIMAL_PLACES_EXCEPTION_TEXT + valueInOperation);
         }
-    }
-
-    public double negateDoubleParser(String operation) {
-        Matcher patternMatcher;
-        patternMatcher = NUM_NEGATE_PATTERN_DOUBLE.matcher(operation);
-        if (patternMatcher.find()) {
-            String matchedOperation = patternMatcher.group();
-
-            matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
-
-            double doubleValue = Format.getDoubleValue(matchedOperation);
-            return negate(doubleValue);
-        } else {
-            return 0.0;
-        }
-    }
-
-    public static int negate(int intValue) {
-        return -1 * intValue;
     }
 
     private double negate(double doubleValue) {

@@ -110,35 +110,35 @@ public class NumerologyTest {
         int[] results = new int[expected.length];
         // Act
         for (int i = 0; i < expected.length; i++) {
-            results[i] = num.negateIntegerParser(operations[i]);
+            results[i] = (int) num.negateParser(operations[i]);
         }
         // Assert
         MatcherAssert.assertThat("Negate Numbers Integer Parser Test", results, CoreMatchers.equalTo(expected));
     }
 
     @Test
-    public void whenInNegateIntegerParserCannotProcessDoubleExceptionThrown_thenAssertionSucceeds() {
+    public void whenInNegateParserCannotProcessTooManyDecimalsExceptionThrown_thenAssertionSucceeds() {
         // Arrange
-        String operation = "negate(1.1)";
-        String expectedMessage = "You can't operate this function with decimal places! Number: 1.1";
+        String operation = "negate(1.11111111111111)";
+        String expectedMessage = "You can't operate this function with invalid decimal places! Number: 1.11111111111111";
         String resultMessage;
         ProcessDecimalPlacesException exception;
         // Act
-        exception = assertThrows(ProcessDecimalPlacesException.class, () -> num.negateIntegerParser(operation));
+        exception = assertThrows(ProcessDecimalPlacesException.class, () -> num.negateParser(operation));
         resultMessage = exception.getMessage();
         // Assert
         assertTrue(resultMessage.contains(expectedMessage));
     }
 
     @Test
-    public void negateDoubleParserTest() {
+    public void negateDoubleParserTest() throws ProcessDecimalPlacesException {
         // Arrange
         String[] operations = {"negate(1.0)", "negate(-3.1)"};
         double[] expected = {-1.0, 3.1};
         double[] results = new double[expected.length];
         // Act
         for (int i = 0; i < expected.length; i++) {
-            results[i] = num.negateDoubleParser(operations[i]);
+            results[i] = num.negateParser(operations[i]);
         }
         // Assert
         MatcherAssert.assertThat("Negate Numbers Double Parser Test", results, CoreMatchers.equalTo(expected));
