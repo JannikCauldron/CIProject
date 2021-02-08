@@ -1,4 +1,6 @@
 package MultiMath_Math.BasicOperations;
+import MultiMath_Math.BasicExceptions.ProcessDecimalPlacesException;
+
 import java.math.BigInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,7 +48,8 @@ public class Numerology {
         return false;
     }
 
-    public boolean isEvenParser(String operation) {
+    public boolean isEvenParser(String operation) throws ProcessDecimalPlacesException {
+
 
         Matcher patternMatcher = NUM_EVEN_PATTERN_DOUBLE.matcher(operation);
         if (patternMatcher.find()) {
@@ -55,9 +58,10 @@ public class Numerology {
             matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
 
             double doubleValue = Format.getDoubleValue(matchedOperation);
-            if (0.0 == (doubleValue % 1.0) ) {
-                return isEven((int) doubleValue);
+            if (0.0 != (doubleValue % 1.0)) {
+                throw new ProcessDecimalPlacesException("You can't operate this function with decimal places! Number: " + doubleValue);
             }
+            return isEven((int) doubleValue);
         }
         patternMatcher = NUM_EVEN_PATTERN_INT.matcher(operation);
         if (patternMatcher.find()) {
@@ -69,8 +73,5 @@ public class Numerology {
             return isEven(intValue);
         }
         return false;
-
-
-
     }
 }

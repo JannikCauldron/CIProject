@@ -1,9 +1,13 @@
 package MultiMath_Math.BasicOperations;
 
+import MultiMath_Math.BasicExceptions.ProcessDecimalPlacesException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class NumerologyTest {
 
@@ -57,7 +61,7 @@ public class NumerologyTest {
     }
 
     @Test
-    public void isEvenParserIntegerDoubleTest() {
+    public void isEvenParserIntegerDoubleTest() throws ProcessDecimalPlacesException {
         // Arrange
         String[] operations = {"even(0)", "even( 1)", "even(2 )", "even( 3 )", "even(4.0)"};
         boolean[] expected = {true, false, true, false, true};
@@ -68,6 +72,20 @@ public class NumerologyTest {
         }
         // Assert
         MatcherAssert.assertThat("Is Even Parser Test", results, CoreMatchers.equalTo(expected));
+    }
+
+    @Test
+    public void whenInEvenCannotProcessDoubleExceptionThrown_thenAssertionSucceeds() {
+        // Arrange
+        String operation = "even(10.0001)";
+        String expectedMessage = "You can't operate this function with decimal places! Number: 10.0001";
+        String resultMessage;
+        ProcessDecimalPlacesException exception;
+        // Act
+        exception = assertThrows(ProcessDecimalPlacesException.class, () -> num.isEvenParser(operation));
+        resultMessage = exception.getMessage();
+        // Assert
+        assertTrue(resultMessage.contains(expectedMessage));
     }
 
 }
