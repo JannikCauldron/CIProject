@@ -189,8 +189,8 @@ public class NumerologyTest {
     @Test
     public void whenInGcdParserTestCannotProcessDoubleExceptionThrown_thenAssertionSucceeds() {
         // Arrange
-        String operation = "gcd(10.1)";
-        String expectedMessage = "You can't operate this function with decimal places! Number: 10.1";
+        String operation = "gcd(10.1, 60)";
+        String expectedMessage = "You can't operate this function with decimal places! Values: 10.1,60";
         String resultMessage;
         ProcessDecimalPlacesException exception;
         // Act

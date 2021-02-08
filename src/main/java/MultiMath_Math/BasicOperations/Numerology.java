@@ -34,6 +34,22 @@ public class Numerology {
         return bigInt.isProbablePrime(100);
     }
 
+    public static int gcd(int a, int b) {
+        if (a == 0)
+            return b;
+        while (b != 0) {
+            if (a > b)
+                a = a - b;
+            else
+                b = b - a;
+        }
+        return a;
+    }
+
+    public static int lcm(int number1, int number2) {
+        return (number1 * number2) / gcd(number1, number2);
+    }
+
     public boolean isPrimeParser(String operation) throws ProcessDecimalPlacesException {
 
         Matcher patternMatcher = NUM_PRIME_PATTERN_DOUBLE.matcher(operation);
@@ -91,7 +107,6 @@ public class Numerology {
         }
     }
 
-
     public double negateParser(String operation) throws ProcessDecimalPlacesException {
         Matcher patternMatcher;
         patternMatcher = NUM_NEGATE_PATTERN_DOUBLE.matcher(operation);
@@ -140,7 +155,6 @@ public class Numerology {
         }
     }
 
-
     private int[] primefactorization(int number) {
         List<Integer> factors = new ArrayList<>();
         while (number % 2 == 0) {
@@ -170,22 +184,9 @@ public class Numerology {
             return gcd(intValues[0], intValues[1]);
         } else {
             String valueInOperation = Format.getValueBetweenBrackets(operation);
-            throw new ProcessDecimalPlacesException(DECIMAL_PLACES_EXCEPTION_TEXT + valueInOperation);
+            throw new ProcessDecimalPlacesException(DECIMAL_PLACES_EXCEPTION_MULTIPLE_VALUES_TEXT + valueInOperation);
         }
     }
-
-    public static int gcd(int a, int b) {
-        if (a == 0)
-            return b;
-        while (b != 0) {
-            if (a > b)
-                a = a - b;
-            else
-                b = b - a;
-        }
-        return a;
-    }
-
 
     public int lcmParser(String operation) throws ProcessDecimalPlacesException {
         Matcher patternMatcher = NUM_LCM_PATTERN_INT.matcher(operation);
@@ -201,9 +202,5 @@ public class Numerology {
             String valueInOperation = Format.getValueBetweenBrackets(operation);
             throw new ProcessDecimalPlacesException(DECIMAL_PLACES_EXCEPTION_MULTIPLE_VALUES_TEXT + valueInOperation);
         }
-    }
-
-    public static int lcm(int number1, int number2) {
-        return (number1 * number2) / gcd(number1, number2);
     }
 }
