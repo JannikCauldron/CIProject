@@ -5,7 +5,8 @@ public class OctalToDecimal {
     private static final int OCTAL_BASE = 8;
     private static final int DIVISION_MODULO_DIVISOR = 10;
 
-    public int convert(int oct) {
+    public int convert(int oct) throws Exception {
+        if (oct < 0) throw new Exception("No negative Values!");
         return calculateDecimalByOct(oct);
     }
 

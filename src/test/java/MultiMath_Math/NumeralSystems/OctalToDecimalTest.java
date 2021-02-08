@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OctalToDecimalTest {
     OctalToDecimal converter;
@@ -15,7 +17,7 @@ class OctalToDecimalTest {
     }
 
     @Test
-    void convert_oct7_to_dec() {
+    void convert_oct7_to_dec() throws Exception {
         //arrange
         int oct = 7;
         int expectedResult = 7;
@@ -28,7 +30,7 @@ class OctalToDecimalTest {
     }
 
     @Test
-    void convert_oct10_to_dec() {
+    void convert_oct10_to_dec() throws Exception {
         //arrange
         int oct = 10;
         int expectedResult = 8;
@@ -41,7 +43,7 @@ class OctalToDecimalTest {
     }
 
     @Test
-    void convert_oct12345_to_dec() {
+    void convert_oct12345_to_dec() throws Exception {
         //arrange
         int oct = 12345;
         int expectedResult = 5349;
@@ -51,5 +53,18 @@ class OctalToDecimalTest {
 
         //assert
         assertThat(actualResult, CoreMatchers.equalTo(expectedResult));
+    }
+
+    @Test
+    void convert_negativeValue() {
+        //arrange
+        int oct = -100;
+        String expectedMessage = "No negative Values!";
+
+        //act
+        String actualMessage = assertThrows(Exception.class, () -> converter.convert(oct)).getMessage();
+
+        // Assert
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 }
