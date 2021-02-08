@@ -152,10 +152,14 @@ public class Numerology {
         }
         if (number > 1) factors.add(number);
 
-        int[] results = new int[factors.size()];
+        return convertToIntArray(factors);
+    }
+
+    private int[] convertToIntArray(List<Integer> values) {
+        int[] results = new int[values.size()];
         int i = 0;
         for (Integer value :
-                factors) {
+                values) {
             results[i] = value;
             i++;
         }
