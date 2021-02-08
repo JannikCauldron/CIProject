@@ -99,4 +99,19 @@ public class Numerology {
             throw new ProcessDecimalPlacesException(DECIMAL_PLACES_EXCEPTION_TEXT + valueInOperation);
         }
     }
+
+    public double negateDoubleParser(String operation) {
+        Matcher patternMatcher;
+        patternMatcher = NUM_NEGATE_PATTERN_DOUBLE.matcher(operation);
+        if (patternMatcher.find()) {
+            String matchedOperation = patternMatcher.group();
+
+            matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
+
+            double doubleValue = Format.getDoubleValue(matchedOperation);
+            return (-1) * doubleValue;
+        } else {
+            return 0.0;
+        }
+    }
 }

@@ -129,4 +129,18 @@ public class NumerologyTest {
         // Assert
         assertTrue(resultMessage.contains(expectedMessage));
     }
+
+    @Test
+    public void negateDoubleParserTest() {
+        // Arrange
+        String[] operations = {"negate(1.0)", "negate(-3.1)"};
+        double[] expected = {-1.0, 3.1};
+        double[] results = new double[expected.length];
+        // Act
+        for (int i = 0; i < expected.length; i++) {
+            results[i] = num.negateDoubleParser(operations[i]);
+        }
+        // Assert
+        MatcherAssert.assertThat("Negate Numbers Double Parser Test", results, CoreMatchers.equalTo(expected));
+    }
 }
