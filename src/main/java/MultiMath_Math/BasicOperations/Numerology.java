@@ -119,7 +119,7 @@ public class Numerology {
         return -1.0 * doubleValue;
     }
 
-    public int[] primefactorizationParser(String operation) {
+    public int[] primefactorizationParser(String operation) throws ProcessDecimalPlacesException {
         int[] result;
         Matcher patternMatcher;
         patternMatcher = NUM_PRIMFACTORIZATION_PATTERN_INT.matcher(operation);
@@ -131,10 +131,10 @@ public class Numerology {
             int intValue = Format.getIntValue(matchedOperation);
             result = primefactorization(intValue);
             return result;
+        } else {
+            String valueInOperation = Format.getValueBetweenBrackets(operation);
+            throw new ProcessDecimalPlacesException(DECIMAL_PLACES_EXCEPTION_TEXT + valueInOperation);
         }
-        result = new int[1];
-        result[0] = Format.getIntValue(Format.getValueBetweenBrackets(operation));
-        return result;
     }
 
 

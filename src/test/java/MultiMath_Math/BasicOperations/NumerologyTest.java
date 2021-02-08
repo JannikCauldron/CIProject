@@ -145,7 +145,7 @@ public class NumerologyTest {
     }
 
     @Test
-    public void primefactorizationParserTest() {
+    public void primefactorizationParserTest() throws ProcessDecimalPlacesException {
         // Arrange
         String[] operations = {"primefactorization(100)", "primefactorization(23)"};
         int[][] expected = {{2, 2, 5, 5}, {23}};
@@ -156,5 +156,19 @@ public class NumerologyTest {
         }
         // Assert
         MatcherAssert.assertThat("Primefactorization Test", results, CoreMatchers.equalTo(expected));
+    }
+
+    @Test
+    public void whenInPrimefactorizationCannotProcessDoubleExceptionThrown_thenAssertionSucceeds() {
+        // Arrange
+        String operation = "primefactorization(3.1)";
+        String expectedMessage = "You can't operate this function with decimal places! Number: 3.1";
+        String resultMessage;
+        ProcessDecimalPlacesException exception;
+        // Act
+        exception = assertThrows(ProcessDecimalPlacesException.class, () -> num.primefactorizationParser(operation));
+        resultMessage = exception.getMessage();
+        // Assert
+        assertTrue(resultMessage.contains(expectedMessage));
     }
 }
