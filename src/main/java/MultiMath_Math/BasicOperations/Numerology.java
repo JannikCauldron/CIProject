@@ -34,11 +34,9 @@ public class Numerology {
             matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
 
             double doubleValue = Format.getDoubleValue(matchedOperation);
-            if (0.0 != (doubleValue % 1.0)) {
-                throw new ProcessDecimalPlacesException(DECIMAL_PLACES_EXCEPTION_TEXT + doubleValue);
-            }
-            return isPrime((int) doubleValue);
+            decimalProcessing(doubleValue);
 
+            return isPrime((int) doubleValue);
         }
         patternMatcher = NUM_PRIME_PATTERN_INT.matcher(operation);
         if (patternMatcher.find()) {
@@ -62,9 +60,8 @@ public class Numerology {
             matchedOperation = Format.getValueBetweenBrackets(matchedOperation);
 
             double doubleValue = Format.getDoubleValue(matchedOperation);
-            if (0.0 != (doubleValue % 1.0)) {
-                throw new ProcessDecimalPlacesException(DECIMAL_PLACES_EXCEPTION_TEXT + doubleValue);
-            }
+            decimalProcessing(doubleValue);
+
             return isEven((int) doubleValue);
         }
         patternMatcher = NUM_EVEN_PATTERN_INT.matcher(operation);
@@ -77,5 +74,11 @@ public class Numerology {
             return isEven(intValue);
         }
         return false;
+    }
+
+    private void decimalProcessing(double doubleValue) throws ProcessDecimalPlacesException {
+        if (0.0 != (doubleValue % 1.0)) {
+            throw new ProcessDecimalPlacesException(DECIMAL_PLACES_EXCEPTION_TEXT + doubleValue);
+        }
     }
 }
